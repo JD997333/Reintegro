@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <integer name="max_length_account_number">10</integer>
-    <integer name="max_length_curp">18</integer>
-    <integer name="max_length_nss">11</integer>
-    <integer name="max_length_cell_phone">10</integer>
-</resources>
