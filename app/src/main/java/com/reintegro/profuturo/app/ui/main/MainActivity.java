@@ -104,10 +104,6 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
         viewDataBinding.navigationViewPager.setVisibility(View.VISIBLE);
         viewDataBinding.parent.requestFocus();
         viewDataBinding.timelineView.setVisibility(View.GONE);
-        //viewDataBinding.actionBar.setVisibility(View.GONE);
-        //viewDataBinding.leftSidebar.setVisibility(View.GONE);
-
-        //viewDataBinding.title.setText("Reintegro de Semanas");
 
         MainContract.Interactor interactor = new MainInteractor(new RetrofitDataProviderFactory(this), new RealmRepositoryFactory());
         MainContract.Presenter presenter = new MainPresenter();
@@ -122,15 +118,7 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
         }
 
         presenter.load(agentDto);
-        //pushGreeting();
     }
-
-    /*@Override
-    public void showWelcomeMessage(String welcomeMessage) {
-        //viewDataBinding.title.setText(welcomeMessage);
-        pushFirstFragment();
-        onPageChangeListener.onPageSelected(0);
-    }*/
 
     @Override
     public void showAgentInformation(AgentDto agentDto) {
@@ -148,20 +136,6 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
     @Override
     public void showGetAgentInformationError() {
         pushGreeting();
-    }
-
-    @Override
-    public void pushFirstFragment() {
-        //FirstFragment firstFragment = new FirstFragment();
-        //firstFragment.setNavigationDelegate(this);
-        //navigationAdapter.pushFragment(firstFragment);
-    }
-
-    @Override
-    public void pushSecondFragment() {
-        //SecondPageFragment secondPageFragment = new SecondPageFragment();
-        //secondPageFragment.setNavigationDelegate(this);
-        //navigationAdapter.pushFragment(secondPageFragment);
     }
 
     @Override
