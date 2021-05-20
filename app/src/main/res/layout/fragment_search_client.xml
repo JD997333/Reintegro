@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <com.reintegro.profuturo.app.android.widget.HeaderView
+            android:id="@+id/header_view"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_width="0dp"
+            app:labelText="@string/search_of_client_1"
+            app:labelTextColor="@color/blue"
+            app:labelTextSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_height="wrap_content"
+            android:layout_width="600dp"
+            app:cardElevation="@dimen/card_view_elevation"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_view"
+            app:layout_constraintVertical_bias="0.3">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/title_search_client_1"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_width="320dp"
+                    android:orientation="vertical">
+
+                    <com.reintegro.profuturo.app.android.widget.EditText
+                        android:id="@+id/account_number_edit_text"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:maxLength="@integer/max_length_account_number"
+                        app:inputHint="@string/profuturo_account_number_1"
+                        app:inputTextColor="@color/gray_dark_2"
+                        app:inputTextSize="14sp"
+                        app:labelText="@string/profuturo_account_number_1"
+                        app:labelTextColor="@color/gray_dark_2"
+                        app:labelTextSize="14sp" />
+
+                    <com.reintegro.profuturo.app.android.widget.EditText
+                        android:id="@+id/nss_edit_text"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent"
+                        android:maxLength="@integer/max_length_nss"
+                        app:inputHint="@string/nss_1"
+                        app:inputTextColor="@color/gray_dark_2"
+                        app:inputTextSize="14sp"
+                        app:labelText="@string/nss_1"
+                        app:labelTextColor="@color/gray_dark_2"
+                        app:labelTextSize="14sp" />
+
+                    <com.reintegro.profuturo.app.android.widget.EditText
+                        android:id="@+id/curp_edit_text"
+                        android:imeOptions="actionDone"
+                        android:inputType="text|textCapCharacters"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent"
+                        android:maxLength="@integer/max_length_curp"
+                        app:inputHint="@string/curp_1"
+                        app:inputTextColor="@color/gray_dark_2"
+                        app:inputTextSize="14sp"
+                        app:labelText="@string/curp_1"
+                        app:labelTextColor="@color/gray_dark_2"
+                        app:labelTextSize="14sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/search_button"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/search_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/Button.Blue" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

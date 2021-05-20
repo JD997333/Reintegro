@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "Reintegro de Semanas"
+rootProject.name = "android-reintegro-semanas-app"
