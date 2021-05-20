@@ -36,6 +36,8 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
     private int currentFragmentPosition = -1;
     private boolean popPending;
 
+    public static final String EXTRA_AGENT_NUMBER = "agent_number";
+
 
     private androidx.viewpager.widget.ViewPager.OnPageChangeListener onPageChangeListener = new androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener(){
         @Override
@@ -114,7 +116,10 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
         interactor.setPresenter(presenter);
 
         AgentDto agentDto = new AgentDto();
-        agentDto.setAgentCode("112082");
+
+        if (getIntent() != null && getIntent().hasExtra(EXTRA_AGENT_NUMBER)) {
+            agentDto.setAgentCode(getIntent().getStringExtra(EXTRA_AGENT_NUMBER));
+        }
 
         presenter.load(agentDto);
         //pushGreeting();
