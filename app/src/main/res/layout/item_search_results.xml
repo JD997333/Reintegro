@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:background="@drawable/selector_background_simple"
+        android:gravity="center_vertical"
+        android:id="@+id/parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="7">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/account_number_text_view"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_weight="0.9"
+            android:layout_width="0dp"
+            tools:text="099998889" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name_text_view"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.3"
+            android:layout_width="0dp"
+            tools:text="Vannesa Pérez Ceballos" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/nss_text_view"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:layout_width="0dp"
+            tools:text="098765431" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/curp_text_view"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:layout_width="0dp"
+            tools:text="PECM670820HDFRRB03" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rfc_text_view"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:layout_width="0dp"
+            tools:text="PECCM670820" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7"
+            android:layout_width="0dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/selection_radio_button"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_width="wrap_content" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>
