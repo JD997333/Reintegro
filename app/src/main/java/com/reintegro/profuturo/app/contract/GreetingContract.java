@@ -14,9 +14,11 @@ public interface GreetingContract {
         void getDeviceLocation();
         void saveLogin();
         void validateAgentAssignedBranchOffice(List<BranchOfficeDto> branchOfficeDtos);
+        void updateAgentAssignedBranchOffice(BranchOfficeDto branchOfficeDto);
     }
 
     interface Presenter extends ContractBase.Presenter<Interactor, State, View>{
+        void onBranchOfficeSelected(BranchOfficeDto branchOfficeDto);
         void onGetAgentInformationSuccess(AgentDto agentDto);
         void onGetAgentAssignedBranchOfficeError();
         void onGetAgentAssignedBranchOfficeSuccess();
@@ -39,5 +41,10 @@ public interface GreetingContract {
         void showAgentAssignedBranchOffice(Integer position);
         void showAgentInformation(AgentDto agentDto);
         void showBranchOffices(List<BranchOfficeDto> branchOfficeDtos);
+        void showValidateAgentAssignedBranchOfficeError();
+        void showSaveLoginError();
+        void showGetDeviceLocationError();
+        void showGetBranchOfficesError();
+        void showGetAgentAssignedBranchOfficeError();
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,8 @@ import androidx.databinding.DataBindingUtil;
 
 import com.reintegro.profuturo.app.BuildConfig;
 import com.reintegro.profuturo.app.R;
+import com.reintegro.profuturo.app.android.ui.dialogs.SimpleAlertDialog;
+import com.reintegro.profuturo.app.android.widget.SnackBar;
 import com.reintegro.profuturo.app.api.factory.RetrofitDataProviderFactory;
 import com.reintegro.profuturo.app.contract.GreetingContract;
 import com.reintegro.profuturo.app.data.factory.GoogleLocationProviderFactory;
@@ -31,17 +34,30 @@ import java.util.List;
 
 public class GreetingFragment extends NavigationAdapter.Fragment implements GreetingContract.View {
     private static final int REQUEST_CODE_PERMISSIONS = 0;
-
     private ArrayAdapter<String> branchOfficeAdapter;
     private FragmentGreetingBinding viewDataBinding;
     private GreetingContract.Presenter presenter;
     private List<BranchOfficeDto> branchOffices;
     private String agentName;
     private String version;
+    private int agentAssignedBranchOfficePosition;
 
     View.OnClickListener searchClientOnClickListener = (view) -> navigationDelegate.pushSearchClient();
 
     View.OnClickListener getOutOnClickListener = (view) -> getActivity().finish();
+
+    private AdapterView.OnItemSelectedListener branchOfficesOnItemSelectedListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            agentAssignedBranchOfficePosition = position;
+            presenter.onBranchOfficeSelected(branchOffices.get(position));
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,7 +87,6 @@ public class GreetingFragment extends NavigationAdapter.Fragment implements Gree
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         viewDataBinding = DataBindingUtil.bind(view);
     }
 
@@ -82,6 +97,9 @@ public class GreetingFragment extends NavigationAdapter.Fragment implements Gree
         viewDataBinding.versionTextView.setText(version);
         viewDataBinding.getOutButton.setOnClickListener(getOutOnClickListener);
         viewDataBinding.searchOfClientButton.setOnClickListener(searchClientOnClickListener);
+        viewDataBinding.branchOfficesSpinner.setAdapter(branchOfficeAdapter);
+        viewDataBinding.branchOfficesSpinner.setOnItemSelectedListener(branchOfficesOnItemSelectedListener);
+        viewDataBinding.branchOfficesSpinner.setSelection(agentAssignedBranchOfficePosition);
     }
 
     @Override
@@ -139,7 +157,8 @@ public class GreetingFragment extends NavigationAdapter.Fragment implements Gree
 
     @Override
     public void showAgentAssignedBranchOffice(Integer position) {
-
+        agentAssignedBranchOfficePosition = position;
+        viewDataBinding.branchOfficesSpinner.setSelection(agentAssignedBranchOfficePosition);
     }
 
     @Override
@@ -153,5 +172,66 @@ public class GreetingFragment extends NavigationAdapter.Fragment implements Gree
 
         branchOfficeAdapter = new ArrayAdapter<>(getContext(),R.layout.item_simple_spinner,branchOfficeList);
         viewDataBinding.branchOfficesSpinner.setAdapter(branchOfficeAdapter);
+    }
+
+    @Override
+    public void showValidateAgentAssignedBranchOfficeError() {
+        SnackBar.show(getView(), getString(R.string.validate_agent_assigned_branch_office_error_1));
+    }
+
+    @Override
+    public void showSaveLoginError() {
+        SimpleAlertDialog simpleAlertDialog;
+        simpleAlertDialog = new SimpleAlertDialog();
+        simpleAlertDialog.setCancelable(false);
+        simpleAlertDialog.setMessage(getString(R.string.save_login_error_1));
+        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1), (view) -> {
+            simpleAlertDialog.dismiss();
+            getActivity().finish();
+        });
+        simpleAlertDialog.setTitle(getString(R.string.notice_1));
+        simpleAlertDialog.show(getFragmentManager(), null);
+    }
+
+    @Override
+    public void showGetDeviceLocationError() {
+        SimpleAlertDialog simpleAlertDialog;
+        simpleAlertDialog = new SimpleAlertDialog();
+        simpleAlertDialog.setCancelable(false);
+        simpleAlertDialog.setMessage(getString(R.string.get_device_location_error_1));
+        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1), (view) -> {
+            simpleAlertDialog.dismiss();
+            getActivity().finish();
+        });
+        simpleAlertDialog.setTitle(getString(R.string.notice_1));
+        simpleAlertDialog.show(getFragmentManager(), null);
+    }
+
+    @Override
+    public void showGetBranchOfficesError() {
+        SimpleAlertDialog simpleAlertDialog;
+        simpleAlertDialog = new SimpleAlertDialog();
+        simpleAlertDialog.setCancelable(false);
+        simpleAlertDialog.setMessage(getString(R.string.get_branch_offices_error_1));
+        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1), (view) -> {
+            simpleAlertDialog.dismiss();
+            getActivity().finish();
+        });
+        simpleAlertDialog.setTitle(getString(R.string.notice_1));
+        simpleAlertDialog.show(getFragmentManager(), null);
+    }
+
+    @Override
+    public void showGetAgentAssignedBranchOfficeError() {
+        SimpleAlertDialog simpleAlertDialog;
+        simpleAlertDialog = new SimpleAlertDialog();
+        simpleAlertDialog.setCancelable(false);
+        simpleAlertDialog.setMessage(getString(R.string.get_agent_assigned_branch_office_error_1));
+        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1), (view) -> {
+            simpleAlertDialog.dismiss();
+            getActivity().finish();
+        });
+        simpleAlertDialog.setTitle(getString(R.string.notice_1));
+        simpleAlertDialog.show(getFragmentManager(), null);
     }
 }

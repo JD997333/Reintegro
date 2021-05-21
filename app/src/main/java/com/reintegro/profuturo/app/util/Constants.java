@@ -23,4 +23,8 @@ public class Constants {
     public static final String URN_SAVE_LOGIN = "/iib/retiros/accesoRetiros/v1/guardarLogin";
 
     public static final int IDENTIFICATION_INDICATOR_STATUS_ACTIVE = 5;
+
+    public static final int LENGTH_ACCOUNT_NUMBER = 10;
+    public static final int LENGTH_CURP = 18;
+    public static final int LENGTH_NSS = 11;
 }

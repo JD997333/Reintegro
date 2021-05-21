@@ -102,7 +102,7 @@
     <string name="rfc_1">RFC</string>
     <string name="rfc_2">RFC:</string>
     <string name="save_1">Guardar</string>
-    <string name="save_login_error_1">Ocurrió un erro al guardar el login</string>
+    <string name="save_login_error_1">Ocurrió un error al guardar el login</string>
     <string name="save_procedure_1">Guardar tramite</string>
     <string name="save_procedure_error_1">No se logró completar él envió favor de reintentar</string>
     <string name="save_procedure_success_1">Se ha completado correctamente el proceso</string>

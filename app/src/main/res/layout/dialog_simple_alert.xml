@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="model"
+            type="com.reintegro.profuturo.app.android.ui.dialogs.SimpleAlertDialogViewModel" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:minWidth="480dp"
+            android:maxWidth="960dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:background="@color/blue"
+                android:id="@+id/title_linear_layout"
+                android:layout_height="48dp"
+                android:layout_width="0dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:gravity="center_vertical"
+                    android:id="@+id/title_text_view"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="16dp"
+                    android:text="@{model.title}"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="Guardar trámite" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/close_image_view"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_close_black"
+                    android:tint="@color/white"
+                    android:visibility="@{model.closeVisibility}"
+                    app:onClickListener="@{model.closeOnClickListener}"
+                    app:tintMode="src_in" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/message_text_view"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:layout_marginTop="40dp"
+                android:layout_width="wrap_content"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:textColor="@color/black"
+                android:text="@{model.message}"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/positive_button"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_linear_layout"
+                tools:text="Trámite finalizado con exito, la documentación te llegara al correo seleccionado" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/negative_button"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@{model.negativeButtonText}"
+                android:visibility="@{model.negativeButtonVisibility}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/positive_button"
+                app:onClickListener="@{model.negativeButtonOnClickListener}"
+                style="@style/Button.White" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/positive_button"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@{model.positiveButtonText}"
+                android:visibility="@{model.positiveButtonVisibility}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:onClickListener="@{model.positiveButtonOnClickListener}"
+                style="@style/Button.Blue" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

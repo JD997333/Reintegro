@@ -9,4 +9,17 @@ public class ClientUtils {
 
         return to;
     }
+
+    public static String cleanAccountNumber(String accountNumber) {
+        String cleanedAccountNumber = "";
+
+        for (int index = 0; index < accountNumber.length(); index++) {
+            if (accountNumber.charAt(index) != '0') {
+                cleanedAccountNumber = accountNumber.substring(index);
+                break;
+            }
+        }
+
+        return cleanedAccountNumber;
+    }
 }

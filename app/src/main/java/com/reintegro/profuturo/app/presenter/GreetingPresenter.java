@@ -12,7 +12,13 @@ public class GreetingPresenter extends PresenterBase<GreetingContract.Interactor
 
     @Override
     public void resume() {
+        view.showLoading();
         interactor.getAgentInformation();
+    }
+
+    @Override
+    public void onBranchOfficeSelected(BranchOfficeDto branchOfficeDto) {
+        interactor.updateAgentAssignedBranchOffice(branchOfficeDto);
     }
 
     @Override
@@ -23,7 +29,7 @@ public class GreetingPresenter extends PresenterBase<GreetingContract.Interactor
 
     @Override
     public void onGetAgentAssignedBranchOfficeError() {
-
+        view.showGetAgentAssignedBranchOfficeError();
     }
 
     @Override
@@ -39,7 +45,7 @@ public class GreetingPresenter extends PresenterBase<GreetingContract.Interactor
 
     @Override
     public void onGetBranchOfficesError() {
-
+        view.showGetBranchOfficesError();
     }
 
     @Override
@@ -49,7 +55,7 @@ public class GreetingPresenter extends PresenterBase<GreetingContract.Interactor
 
     @Override
     public void onGetDeviceLocationError() {
-        //interactor.getAgentAssignedBranchOffice();
+        view.showGetDeviceLocationError();
     }
 
     @Override
@@ -59,16 +65,18 @@ public class GreetingPresenter extends PresenterBase<GreetingContract.Interactor
 
     @Override
     public void onSaveLoginError() {
-
+        view.showSaveLoginError();
     }
 
     @Override
     public void onValidateAgentAssignedBranchOfficeSuccess(Integer position) {
         view.showAgentAssignedBranchOffice(position);
+        view.dismissLoading();
     }
 
     @Override
     public void onValidateAgentAssignedBranchOfficeError() {
-
+        view.dismissLoading();
+        view.showValidateAgentAssignedBranchOfficeError();
     }
 }

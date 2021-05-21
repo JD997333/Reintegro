@@ -288,4 +288,23 @@ public class GreetingInteractor extends InteractorBase<GreetingContract.Presente
                 }
             });
     }
+
+    @Override
+    public void updateAgentAssignedBranchOffice(BranchOfficeDto branchOfficeDto) {
+        Completable
+            .create((CompletableEmitter emitter) -> {
+                AgentRepository agentRepository;
+                agentRepository = repositoryFactory.createAgentRepository();
+
+                BranchOfficeEntity branchOfficeEntity;
+                branchOfficeEntity = BranchOfficeConverter.convertFromDto(branchOfficeDto);
+
+                AgentEntity agentEntity;
+                agentEntity = AgentUtils.mergeAgentAssignedBranchOffice(agentRepository.getFirst(), branchOfficeEntity);
+
+                agentRepository.update(agentEntity);
+            })
+            .subscribeOn(Schedulers.computation())
+            .subscribe();
+    }
 }

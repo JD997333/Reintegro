@@ -12,10 +12,12 @@ import android.widget.Toast;
 import com.reintegro.profuturo.app.BuildConfig;
 import com.reintegro.profuturo.app.R;
 import com.reintegro.profuturo.app.android.base.ActivityBase;
+import com.reintegro.profuturo.app.android.ui.dialogs.SimpleAlertDialog;
 import com.reintegro.profuturo.app.android.ui.fragments.ClientDataFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.GreetingFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.SearchClientFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.SearchResultsFragment;
+import com.reintegro.profuturo.app.android.widget.SnackBar;
 import com.reintegro.profuturo.app.android.widget.ViewPager;
 import com.reintegro.profuturo.app.api.factory.RetrofitDataProviderFactory;
 import com.reintegro.profuturo.app.contract.MainContract;
@@ -121,6 +123,20 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
     }
 
     @Override
+    public void showLoading() {
+        super.showLoading();
+        viewDataBinding.loading.setVisibility(View.VISIBLE);
+        viewDataBinding.navigationViewPager.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void dismissLoading() {
+        super.dismissLoading();
+        viewDataBinding.loading.setVisibility(View.INVISIBLE);
+        viewDataBinding.navigationViewPager.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void showAgentInformation(AgentDto agentDto) {
         agentName = agentDto.getFullName();
         version = BuildConfig.VERSION_NAME;
@@ -135,7 +151,13 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
 
     @Override
     public void showGetAgentInformationError() {
-        pushGreeting();
+        SimpleAlertDialog simpleAlertDialog;
+        simpleAlertDialog = new SimpleAlertDialog();
+        simpleAlertDialog.setCancelable(false);
+        simpleAlertDialog.setMessage(getString(R.string.get_agent_information_error_1));
+        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1), (view) -> simpleAlertDialog.dismiss());
+        simpleAlertDialog.setTitle(getString(R.string.notice_1));
+        simpleAlertDialog.show(getSupportFragmentManager(), null);
     }
 
     @Override

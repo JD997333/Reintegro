@@ -10,6 +10,7 @@ import com.reintegro.profuturo.app.data.provider.Provider;
 import com.reintegro.profuturo.app.data.repository.ClientRepository;
 import com.reintegro.profuturo.app.domain.converter.SearchClientConverter;
 import com.reintegro.profuturo.app.domain.dto.SearchClientDto;
+import com.reintegro.profuturo.app.util.ClientUtils;
 import com.reintegro.profuturo.app.util.Constants;
 
 import java.util.ArrayList;
@@ -85,5 +86,33 @@ public class SearchClientInteractor extends InteractorBase<SearchClientContract.
                     presenter.onSearchClientSuccess();
                 }
             });
+    }
+
+    @Override
+    public void validateAccountNumber(SearchClientDto searchClientDto) {
+        if (searchClientDto.getAccountNumber() != null &&  searchClientDto.getAccountNumber().length() <= Constants.LENGTH_ACCOUNT_NUMBER) {
+            searchClientDto.setAccountNumber(ClientUtils.cleanAccountNumber(searchClientDto.getAccountNumber()));
+            searchClient(searchClientDto);
+        }else{
+            presenter.onValidateAccountNumberError();
+        }
+    }
+
+    @Override
+    public void validateCurp(SearchClientDto searchClientDto) {
+        if (searchClientDto.getCurp() != null && searchClientDto.getCurp().length() == Constants.LENGTH_CURP) {
+            searchClient(searchClientDto);
+        } else{
+            presenter.onValidateCurpError();
+        }
+    }
+
+    @Override
+    public void validateNss(SearchClientDto searchClientDto) {
+        if (searchClientDto.getNss() != null && searchClientDto.getNss().length() == Constants.LENGTH_NSS) {
+            searchClient(searchClientDto);
+        } else{
+            presenter.onValidateNssError();
+        }
     }
 }
