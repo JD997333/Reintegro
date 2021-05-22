@@ -189,7 +189,6 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
 
     @Override
     public void pushSearchResults() {
-        //Toast.makeText(this,"Resultado clientes", Toast.LENGTH_SHORT).show();
         SearchResultsFragment fragment = new SearchResultsFragment();
         fragment.setNavigationDelegate(this);
 

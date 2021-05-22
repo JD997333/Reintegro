@@ -52,8 +52,6 @@ public class SearchResultsFragment extends NavigationAdapter.Fragment implements
         searchResultsAdapter.setRadioButtonOnItemSelectedListener(searchResultsRadioButtonOnItemSelectedListener);
 
         presenter.resume();
-
-
     }
 
     @Nullable

@@ -16,10 +16,14 @@ import com.reintegro.profuturo.app.util.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.CompletableEmitter;
+import io.reactivex.CompletableObserver;
 import io.reactivex.Single;
 import io.reactivex.SingleEmitter;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -35,8 +39,8 @@ public class SearchClientInteractor extends InteractorBase<SearchClientContract.
 
     @Override
     public void searchClient(SearchClientDto searchClientDto) {
-        Single
-            .create((SingleEmitter<Object> emitter) -> {
+        Completable
+            .create( (CompletableEmitter emitter) -> {
                 ClientRepository clientRepository;
                 clientRepository = repositoryFactory.createClientRepository();
                 clientRepository.clear();
@@ -63,27 +67,27 @@ public class SearchClientInteractor extends InteractorBase<SearchClientContract.
                             }
                         }
 
-                        filteredResults = clientRepository.addAll(filteredResults);
-                        emitter.onSuccess(filteredResults);
+                        clientRepository.addAll(filteredResults);
+                        emitter.onComplete();
                     }
                 });
             })
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.computation())
-            .subscribe(new SingleObserver<Object>() {
+            .subscribe(new CompletableObserver() {
                 @Override
-                public void onError(Throwable e) {
-                    presenter.onSearchClientError();
-                }
-
-                @Override
-                public void onSubscribe(Disposable d) {
+                public void onSubscribe(@NonNull Disposable d) {
 
                 }
 
                 @Override
-                public void onSuccess(Object object) {
+                public void onComplete() {
                     presenter.onSearchClientSuccess();
+                }
+
+                @Override
+                public void onError(@NonNull Throwable e) {
+                    presenter.onSearchClientError();
                 }
             });
     }

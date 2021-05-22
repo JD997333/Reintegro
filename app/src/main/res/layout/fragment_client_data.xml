@@ -596,6 +596,64 @@
                             </androidx.appcompat.widget.LinearLayoutCompat>
 
                         </androidx.appcompat.widget.LinearLayoutCompat>
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_height="match_parent"
+                            android:layout_width="0dp"
+                            android:layout_weight="1">
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="16dp"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.LinearLayoutCompat
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3"
+                                    android:layout_width="0dp"
+                                    android:orientation="vertical">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:gravity="center_vertical"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="16dp"
+                                        android:layout_width="match_parent"
+                                        android:text="@string/identification_biometric_file"
+                                        android:textSize="14sp" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/biometric_indicator_text_view"
+                                        android:gravity="center_vertical"
+                                        android:layout_height="wrap_content"
+                                        android:layout_width="match_parent"
+                                        android:textSize="12sp"
+                                        tools:text="Se requiere capturar el expediente Biométrico" />
+
+                                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                                <androidx.appcompat.widget.LinearLayoutCompat
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.5"
+                                    android:layout_width="0dp">
+
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:id="@+id/biometric_indicator_icon_image_view"
+                                        android:layout_height="20dp"
+                                        android:layout_marginTop="16dp"
+                                        android:layout_width="20dp"
+                                        android:scaleType="centerInside"
+                                        android:tint="@color/gray_dark_2"
+                                        android:tintMode="src_in"
+                                        tools:src="@drawable/ic_close_black" />
+
+                                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -68,6 +68,7 @@
     <string name="get_out_1">Salir</string>
     <string name="greeting_1">¡Bienvenido!</string>
     <string name="identification_file_1">-Expediente de identificación</string>
+    <string name="identification_biometric_file">-Expediente biométrico</string>
     <string name="invalid_clabe_bank_error_1">La CLABE no corresponde al banco seleccionado</string>
     <string name="invalid_clabe_format_error_1">La CLABE es incorrecta</string>
     <string name="last_status_date_1">Fecha de último estatus</string>

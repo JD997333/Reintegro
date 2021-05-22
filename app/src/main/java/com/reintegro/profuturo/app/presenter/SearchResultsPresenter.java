@@ -11,6 +11,7 @@ public class SearchResultsPresenter extends PresenterBase<SearchResultsContract.
 
     @Override
     public void resume() {
+        view.showLoading();
         interactor.getSearchResults();
     }
 
@@ -33,6 +34,7 @@ public class SearchResultsPresenter extends PresenterBase<SearchResultsContract.
     @Override
     public void onGetSearchResultsSuccess(List<ClientDto> clientDtos) {
         view.showSearchResults(clientDtos);
+        view.dismissLoading();
     }
 
     @Override
