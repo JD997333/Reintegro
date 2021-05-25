@@ -171,11 +171,34 @@ public class ClientDataFragment extends NavigationAdapter.Fragment implements Cl
 
     @Override
     public void showIdentificationIndicatorActive() {
+        identificationIndicator = getString(R.string.message_identification_permanent_1);
+        identificationIndicatorIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_gray);
 
+        viewDataBinding.identificationIndicatorIconImageView.setImageBitmap(identificationIndicatorIcon);
+        viewDataBinding.identificationIndicatorTextView.setText(identificationIndicator);
     }
 
     @Override
     public void showIdentificationIndicatorDisabled() {
+        identificationIndicator = getString(R.string.message_identification_capture_required_1);
+        identificationIndicatorIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_close_black);
 
+        viewDataBinding.identificationIndicatorIconImageView.setImageBitmap(identificationIndicatorIcon);
+        viewDataBinding.identificationIndicatorTextView.setText(identificationIndicator);
+    }
+
+    @Override
+    public void showBiometricIndicatorActive() {
+
+    }
+
+    @Override
+    public void showBiometricIndicatorDisabled() {
+
+    }
+
+    @Override
+    public void showBiometricIndicatorInTransit() {
+        
     }
 }

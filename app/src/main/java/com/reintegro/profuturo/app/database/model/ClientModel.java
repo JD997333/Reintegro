@@ -52,7 +52,7 @@ public class ClientModel extends RealmObject {
     private boolean phoneValid;
     private boolean selected;
     private long agreementId;
-    private long biometricIndicatorValue;
+    private int biometricIndicatorValue;
     private long clientTypeIndicatorValue;
     private long identificationIndicatorValue;
     private long imageId;
@@ -403,11 +403,11 @@ public class ClientModel extends RealmObject {
         this.agreementId = agreementId;
     }
 
-    public long getBiometricIndicatorValue() {
+    public int getBiometricIndicatorValue() {
         return biometricIndicatorValue;
     }
 
-    public void setBiometricIndicatorValue(long biometricIndicatorValue) {
+    public void setBiometricIndicatorValue(int biometricIndicatorValue) {
         this.biometricIndicatorValue = biometricIndicatorValue;
     }
 

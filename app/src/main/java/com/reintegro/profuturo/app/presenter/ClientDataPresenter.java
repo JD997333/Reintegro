@@ -32,6 +32,18 @@ public class ClientDataPresenter extends PresenterBase<ClientDataContract.Intera
             view.showIdentificationIndicatorDisabled();
         }
 
+        switch (clientDto.getBiometricIndicatorValue()) {
+            case Constants.BIOMETRIC_INDICATOR_STATUS_EXIST:
+                view.showBiometricIndicatorActive();
+                break;
+            case Constants.BIOMETRIC_INDICATOR_STATUS_NOT_EXIST:
+                view.showBiometricIndicatorDisabled();
+                break;
+            case Constants.BIOMETRIC_INDICATOR_STATUS_IN_TRANSIT:
+                view.showBiometricIndicatorInTransit();
+                break;
+        }
+
         view.showClient(clientDto);
     }
 }

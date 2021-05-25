@@ -26,6 +26,9 @@
     <string name="beneficiary_type_1">Tipo beneficiario</string>
     <string name="beneficiary_type_2">Tipo beneficiario*</string>
     <string name="biometric_record_1">Expediente biométrico</string>
+    <string name="biometric_record_not_exist">No existe enrolamiento</string>
+    <string name="biometric_record_exist">Existe enrolamiento</string>
+    <string name="biometric_record_in_transit">Existe enrolamiento en tránsito</string>
     <string name="birthday_1">Fecha de nacimiento:</string>
     <string name="build_document_error_1">Ocurrió un error al generar el documento</string>
     <string name="cancel_1">Cancelar</string>

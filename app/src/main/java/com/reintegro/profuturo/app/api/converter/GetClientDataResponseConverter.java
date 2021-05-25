@@ -26,6 +26,9 @@ public class GetClientDataResponseConverter extends ResponseConverter<GetClientD
             clientEntity.setAffiliationRegime(TypeUtils.getValueOrDefault(client.getAffiliationRegime()));
             clientEntity.setAgreementId(TypeUtils.getValueOrDefault(Long.parseLong(client.getAgreementId())));
             clientEntity.setBirthday(DateResponseConverter.convertFromResponse(client.getBirthday(), Constants.DATE_FORMAT_2));
+            clientEntity.setBiometricIndicatorDescription(TypeUtils.getValueOrDefault(client.getBiometricIndicatorDescription()));
+            clientEntity.setBiometricIndicatorStatus(TypeUtils.getValueOrDefault(client.getBiometricIndicatorStatus()));
+            clientEntity.setBiometricIndicatorValue(TypeUtils.getValueOrDefault(client.getBiometricIndicatorValue()));
             clientEntity.setClientTypeIndicatorDescription(TypeUtils.getValueOrDefault(client.getClientTypeIndicatorDescription()));
             clientEntity.setClientTypeIndicatorValue(TypeUtils.getValueOrDefault(client.getClientTypeIndicatorValue()));
             clientEntity.setClientTypeStatus(TypeUtils.getValueOrDefault(client.getClientTypeStatus()));

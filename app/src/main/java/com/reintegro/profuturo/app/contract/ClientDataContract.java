@@ -26,5 +26,8 @@ public interface ClientDataContract {
         void showGetClientImageError();
         void showIdentificationIndicatorActive();
         void showIdentificationIndicatorDisabled();
+        void showBiometricIndicatorActive();
+        void showBiometricIndicatorDisabled();
+        void showBiometricIndicatorInTransit();
     }
 }

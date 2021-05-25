@@ -36,7 +36,7 @@ public class GetClientDataResponse {
         @SerializedName("rfc") private String rfc;
         @SerializedName("sexo") private String sex;
         @SerializedName("telefonos") private List<ClientPhone> phones;
-        @SerializedName("valorIndicadorBiometrico") private Long biometricIndicatorValue;
+        @SerializedName("valorIndicadorBiometrico") private Integer biometricIndicatorValue;
         @SerializedName("valorIndicadorExpediente") private Long identificationIndicatorValue;
         @SerializedName("valorIndicadorTipoCliente") private Long clientTypeIndicatorValue;
 
@@ -160,7 +160,7 @@ public class GetClientDataResponse {
             return phones;
         }
 
-        public Long getBiometricIndicatorValue() {
+        public Integer getBiometricIndicatorValue() {
             return biometricIndicatorValue;
         }
 
