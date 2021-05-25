@@ -135,4 +135,20 @@
     <string name="validate_nss_error_1">Ingrese un NSS válido</string>
     <string name="validate_required_documents_error_1">No se han capturado los documentos requeridos.</string>
     <string name="validate_selected_notification_channel_error_1">Medio de notificación inválido. Favor de capturar uno nuevo</string>
+
+    <string name="initial_capture_header">Captura inicial</string>
+    <string name="initial_capture_title">Eventos de retiro por desempleo</string>
+    <string name="name_label">Nombre</string>
+    <string name="last_name_label">Apellido paterno</string>
+    <string name="mother_last_name_label">Apellido materno</string>
+    <string name="event_number">No. de evento</string>
+    <string name="trd_date">Fecha TRD</string>
+    <string name="discounted_weeks">Semanas descontadas</string>
+    <string name="pre_repayment_weeks">Semanas previamente reintegradas</string>
+    <string name="trd_amount">Monto TRD</string>
+    <string name="pre_repayment_amount">Monto previamente reintegrado</string>
+    <string name="select">Seleccionar</string>
+    <string name="account_number_label">Número de cuenta</string>
+    <string name="nss_label">NSS</string>
+    <string name="rfc_label">RFC</string>
 </resources>

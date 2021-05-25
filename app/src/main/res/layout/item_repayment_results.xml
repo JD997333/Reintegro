@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/parent"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/selector_background_simple"
+        android:weightSum="10">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/repayment_number_text_view"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1.2"
+            android:layout_width="0dp"
+            android:gravity="center"
+            tools:text="1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/trd_date_text_view"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:layout_width="0dp"
+            android:gravity="center"
+            tools:text="17/10/2007"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/discounted_weeks_text_view"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.7"
+            android:layout_width="0dp"
+            android:gravity="center"
+            tools:text="4"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pre_repayment_weeks_text_view"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.3"
+            android:layout_width="0dp"
+            android:gravity="center"
+            tools:text="0"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/trd_amount"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:layout_width="0dp"
+            android:gravity="center"
+            tools:text="$52,100.00"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pre_repayment_amount_text_view"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.8"
+            android:layout_width="0dp"
+            android:gravity="center"
+            tools:text="$0,000.00" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:layout_width="0dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/select_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>
