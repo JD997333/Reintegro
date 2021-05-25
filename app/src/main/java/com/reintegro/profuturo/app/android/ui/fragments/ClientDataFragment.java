@@ -47,6 +47,8 @@ public class ClientDataFragment extends NavigationAdapter.Fragment implements Cl
     private String sex;
     private String street;
     private String town;
+    private String biometricIndicator;
+    private Bitmap biometricIndicatorIcon;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,7 +115,7 @@ public class ClientDataFragment extends NavigationAdapter.Fragment implements Cl
     @Override
     public void showClient(ClientDto clientDto) {
         accountNumber = clientDto.getAccountNumber();
-        birthday = clientDto.getBirthday().toDateExtended();
+        birthday = clientDto.getBirthday().toDate();
         cellPhone = clientDto.getCellPhone();
         curp = clientDto.getCurp();
         fatherLastName = clientDto.getFatherLastName();
@@ -189,16 +191,28 @@ public class ClientDataFragment extends NavigationAdapter.Fragment implements Cl
 
     @Override
     public void showBiometricIndicatorActive() {
+        biometricIndicator = getString(R.string.biometric_record_exist);
+        biometricIndicatorIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_gray);
 
+        viewDataBinding.biometricIndicatorIconImageView.setImageBitmap(biometricIndicatorIcon);
+        viewDataBinding.biometricIndicatorTextView.setText(biometricIndicator);
     }
 
     @Override
     public void showBiometricIndicatorDisabled() {
+        biometricIndicator = getString(R.string.biometric_record_not_exist);
+        biometricIndicatorIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_close_black);
 
+        viewDataBinding.biometricIndicatorIconImageView.setImageBitmap(biometricIndicatorIcon);
+        viewDataBinding.biometricIndicatorTextView.setText(biometricIndicator);
     }
 
     @Override
     public void showBiometricIndicatorInTransit() {
-        
+        biometricIndicator = getString(R.string.biometric_record_in_transit);
+        biometricIndicatorIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_close_black);
+
+        viewDataBinding.biometricIndicatorIconImageView.setImageBitmap(biometricIndicatorIcon);
+        viewDataBinding.biometricIndicatorTextView.setText(biometricIndicator);
     }
 }

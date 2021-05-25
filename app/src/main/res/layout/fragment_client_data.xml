@@ -359,7 +359,7 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:background="@color/gray_light_2"
+                    android:background="@color/white"
                     android:layout_height="match_parent"
                     android:layout_marginRight="8dp"
                     android:layout_weight="1"
@@ -371,7 +371,6 @@
                         android:layout_height="32dp"
                         android:layout_marginLeft="8dp"
                         android:layout_width="match_parent"
-                        android:text="@string/associated_minors_1"
                         android:textSize="12sp" />
 
                     <androidx.appcompat.widget.LinearLayoutCompat
