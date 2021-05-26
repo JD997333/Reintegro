@@ -30,7 +30,8 @@ public class InitialCaptureFragment extends NavigationAdapter.Fragment implement
         presenter.setInteractor(interactor);
         presenter.setView(this);
         interactor.setPresenter(presenter);
-        
+
+        presenter.resume();
     }
 
     @Nullable
