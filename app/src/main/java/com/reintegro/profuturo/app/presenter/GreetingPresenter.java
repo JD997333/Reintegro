@@ -35,6 +35,8 @@ public class GreetingPresenter extends PresenterBase<GreetingContract.Interactor
     @Override
     public void onGetAgentAssignedBranchOfficeSuccess() {
         interactor.saveLogin();
+
+        //view.dismissLoading();
     }
 
     @Override

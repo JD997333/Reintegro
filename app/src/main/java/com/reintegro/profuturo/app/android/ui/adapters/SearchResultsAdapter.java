@@ -90,7 +90,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemSearchResultsBinding viewDataBinding;
+        public ItemSearchResultsBinding viewDataBinding;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
