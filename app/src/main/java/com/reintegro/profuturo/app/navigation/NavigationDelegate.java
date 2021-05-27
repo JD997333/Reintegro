@@ -7,4 +7,5 @@ public interface NavigationDelegate<T> {
     void pushSearchClient();
     void pushSearchResults();
     void pushClientDataImmediately();
+    void pushRepaymentEvents();
 }

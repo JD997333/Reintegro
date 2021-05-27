@@ -28,5 +28,6 @@ public interface SearchResultsContract {
         void popToSearchClient();
         void pushClientDataImmediately();
         void showSearchResults(List<ClientDto> clientDtos);
+        void pushRepaymentEvents();
     }
 }

@@ -91,6 +91,11 @@ public class SearchResultsFragment extends NavigationAdapter.Fragment implements
     }
 
     @Override
+    public void pushRepaymentEvents() {
+        navigationDelegate.pushRepaymentEvents();
+    }
+
+    @Override
     public void showSearchResults(List<ClientDto> searchResults) {
         this.searchResults = searchResults;
         searchResultsAdapter.setSearchResults(searchResults);

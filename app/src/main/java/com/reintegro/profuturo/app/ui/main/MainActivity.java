@@ -15,6 +15,7 @@ import com.reintegro.profuturo.app.android.base.ActivityBase;
 import com.reintegro.profuturo.app.android.ui.dialogs.SimpleAlertDialog;
 import com.reintegro.profuturo.app.android.ui.fragments.ClientDataFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.GreetingFragment;
+import com.reintegro.profuturo.app.android.ui.fragments.InitialCaptureFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.SearchClientFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.SearchResultsFragment;
 import com.reintegro.profuturo.app.android.widget.SnackBar;
@@ -230,6 +231,18 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
         int fragmentPosition;
         fragmentPosition = navigationAdapter.pushFragment(fragment);
         navigationState.putState(NavigationState.PAGE_CLIENT_DATA, fragmentPosition);
+        viewDataBinding.navigationViewPager.setCurrentItem(fragmentPosition);
+    }
+
+    @Override
+    public void pushRepaymentEvents() {
+        InitialCaptureFragment fragment = new InitialCaptureFragment();
+        fragment.setNavigationDelegate(this);
+
+        int fragmentPosition;
+        fragmentPosition = navigationAdapter.pushFragment(fragment);
+
+        navigationState.putState(NavigationState.PAGE_REPAYMENT_EVENTS, fragmentPosition);
         viewDataBinding.navigationViewPager.setCurrentItem(fragmentPosition);
     }
 }

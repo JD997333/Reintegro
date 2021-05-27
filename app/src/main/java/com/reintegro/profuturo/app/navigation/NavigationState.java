@@ -12,6 +12,7 @@ public class NavigationState<T> {
     public static final String PAGE_SAVE_PROCEDURE = "PAGE_SAVE_PROCEDURE";
     public static final String PAGE_SEARCH_CLIENT = "PAGE_SEARCH_CLIENT";
     public static final String PAGE_SEARCH_RESULTS = "PAGE_SEARCH_RESULTS";
+    public static final String PAGE_REPAYMENT_EVENTS = "PAGE_REPAYMENT_EVENTS";
 
     private HashMap<String, T> state = new HashMap<>();
 

@@ -4,8 +4,8 @@ public class RepaymentDto {
     private int eventNumber;
     private int discountedWeeks;
     private int preDiscountedWeeks;
-    private Double trdAmount;
-    private Double preRepaymentAmount;
+    private String trdAmount;
+    private String preRepaymentAmount;
     private String trdDate;
 
     public int getEventNumber() {
@@ -32,19 +32,19 @@ public class RepaymentDto {
         this.preDiscountedWeeks = preDiscountedWeeks;
     }
 
-    public Double getTrdAmount() {
+    public String getTrdAmount() {
         return trdAmount;
     }
 
-    public void setTrdAmount(Double trdAmount) {
+    public void setTrdAmount(String trdAmount) {
         this.trdAmount = trdAmount;
     }
 
-    public Double getPreRepaymentAmount() {
+    public String getPreRepaymentAmount() {
         return preRepaymentAmount;
     }
 
-    public void setPreRepaymentAmount(Double preRepaymentAmount) {
+    public void setPreRepaymentAmount(String preRepaymentAmount) {
         this.preRepaymentAmount = preRepaymentAmount;
     }
 
