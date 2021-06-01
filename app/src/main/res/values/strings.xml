@@ -151,4 +151,28 @@
     <string name="account_number_label">Número de cuenta</string>
     <string name="nss_label">NSS</string>
     <string name="rfc_label">RFC</string>
+
+    <!--    IRR Changes     -->
+    <string name="select_applicant_header">Envio de consulta de retiros por desempleo</string>
+    <string name="select_applicant_title">Posible capturar trámites, se cumplen las siguientes validaciones</string>
+    <string name="button_confirm">Confirmar</string>
+    <string name="text_biometric_record">- Expediente Biométrico</string>
+    <string name="text_biometric_record_status">Expediente biométrico permanente</string>
+    <string name="text_identification_record">- Expediente de identificación</string>
+    <string name="text_identification_record_status">Se requiere capturar el expediente de identificación</string>
+    <string name="text_applicant_type_select">Selecciona tipo de solicitante:</string>
+    <string name="text_applicant_curp">CURP del titular:</string>
+    <string name="text_third_applicant_curp">CURP del tercero:</string>
+    <string name="text_applicant_type_spinner">Titular de la cuenta</string>
+    <string name="text_third_applicant_edittext">Ingrese la CURP</string>
+    <!--    PlaceHolders    -->
+    <string name="ph_name_and_account_number">Vannesa Pérez Ceballos • Número de cuenta 099998889</string>
+    <string name="ph_curp">AAAA000000AAAAA00</string>
+    <string name="lorem">Lorem Ipsum</string>
+
 </resources>
+<!--
+Tools
+
+<string name="lorem_ipsum">lorem</string>
+-->
