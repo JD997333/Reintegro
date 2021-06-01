@@ -2,7 +2,9 @@ package com.reintegro.profuturo.app.presenter;
 
 import com.reintegro.profuturo.app.base.PresenterBase;
 import com.reintegro.profuturo.app.contract.InitialCaptureContract;
+import com.reintegro.profuturo.app.domain.dto.ClientDto;
 import com.reintegro.profuturo.app.domain.dto.RepaymentDto;
+import com.reintegro.profuturo.app.util.Utils;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ public class InitialCapturePresenter
     @Override
     public void resume() {
         view.showLoading();
-        interactor.getRepaymentEvents();
+        interactor.getClientData();
     }
 
     @Override
@@ -24,6 +26,18 @@ public class InitialCapturePresenter
 
     @Override
     public void onGetRepaymentEventsError() {
+
+    }
+
+    @Override
+    public void onGetClientDataSuccess(ClientDto clientDto) {
+        String nameHeader = clientDto.getFullName() + " • " + Utils.formatClientAccountNumber(clientDto.getAccountNumber());
+        view.showClientData(clientDto, nameHeader);
+        interactor.getRepaymentEvents();
+    }
+
+    @Override
+    public void onGetClientDataError() {
 
     }
 }

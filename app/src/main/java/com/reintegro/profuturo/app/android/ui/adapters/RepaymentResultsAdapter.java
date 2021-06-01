@@ -66,10 +66,10 @@ public class RepaymentResultsAdapter extends RecyclerView.Adapter<RepaymentResul
             radioButtons.add(holder.viewDataBinding.selectRadioButton);
         }
 
-        holder.viewDataBinding.repaymentNumberTextView.setText(repaymentDto.getEventNumber());
+        holder.viewDataBinding.repaymentNumberTextView.setText(String.valueOf(repaymentDto.getEventNumber()));
         holder.viewDataBinding.trdDateTextView.setText(repaymentDto.getTrdDate());
-        holder.viewDataBinding.discountedWeeksTextView.setText(repaymentDto.getDiscountedWeeks());
-        holder.viewDataBinding.preRepaymentWeeksTextView.setText(repaymentDto.getPreDiscountedWeeks());
+        holder.viewDataBinding.discountedWeeksTextView.setText(String.valueOf(repaymentDto.getDiscountedWeeks()));
+        holder.viewDataBinding.preRepaymentWeeksTextView.setText(String.valueOf(repaymentDto.getPreDiscountedWeeks()));
         holder.viewDataBinding.trdAmount.setText(repaymentDto.getTrdAmount());
         holder.viewDataBinding.preRepaymentAmountTextView.setText(repaymentDto.getPreRepaymentAmount());
         holder.viewDataBinding.selectRadioButton.setChecked(position == selectedItemPosition);
@@ -87,7 +87,7 @@ public class RepaymentResultsAdapter extends RecyclerView.Adapter<RepaymentResul
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private ItemRepaymentResultsBinding viewDataBinding;
+        public ItemRepaymentResultsBinding viewDataBinding;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

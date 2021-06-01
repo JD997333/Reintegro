@@ -10,6 +10,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="@drawable/selector_background_simple"
+        android:layout_marginBottom="8dp"
         android:weightSum="10">
 
         <androidx.appcompat.widget.AppCompatTextView

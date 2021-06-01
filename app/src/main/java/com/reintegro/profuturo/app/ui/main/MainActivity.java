@@ -245,4 +245,9 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
         navigationState.putState(NavigationState.PAGE_REPAYMENT_EVENTS, fragmentPosition);
         viewDataBinding.navigationViewPager.setCurrentItem(fragmentPosition);
     }
+
+    @Override
+    public void pushSelectApplicant() {
+
+    }
 }

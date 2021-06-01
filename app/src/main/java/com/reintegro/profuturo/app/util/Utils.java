@@ -36,4 +36,20 @@ public class Utils {
 
         return repaymentEvents;
     }
+
+    public static String formatClientAccountNumber(String clientAccountNumber) {
+        StringBuilder formatedClientAccountNumber;
+        formatedClientAccountNumber = new StringBuilder();
+
+        int missingZeros;
+        missingZeros = 10 - clientAccountNumber.length();
+
+        for (int index = 0; index < missingZeros; index++) {
+            formatedClientAccountNumber.append(0);
+        }
+
+        formatedClientAccountNumber.append(clientAccountNumber);
+
+        return formatedClientAccountNumber.toString();
+    }
 }
