@@ -67,7 +67,7 @@ public class RepaymentResultsAdapter extends RecyclerView.Adapter<RepaymentResul
         }
 
         holder.viewDataBinding.repaymentNumberTextView.setText(String.valueOf(repaymentDto.getEventNumber()));
-        holder.viewDataBinding.trdDateTextView.setText(repaymentDto.getTrdDate());
+        holder.viewDataBinding.trdDateTextView.setText(repaymentDto.getTrdDate().toDate());
         holder.viewDataBinding.discountedWeeksTextView.setText(String.valueOf(repaymentDto.getDiscountedWeeks()));
         holder.viewDataBinding.preRepaymentWeeksTextView.setText(String.valueOf(repaymentDto.getPreDiscountedWeeks()));
         holder.viewDataBinding.trdAmount.setText(repaymentDto.getTrdAmount());
