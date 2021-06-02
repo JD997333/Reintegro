@@ -96,6 +96,11 @@ public class SearchResultsFragment extends NavigationAdapter.Fragment implements
     }
 
     @Override
+    public void pushSelectApplicant() {
+        navigationDelegate.pushSelectApplicant();
+    }
+
+    @Override
     public void showSearchResults(List<ClientDto> searchResults) {
         this.searchResults = searchResults;
         searchResultsAdapter.setSearchResults(searchResults);

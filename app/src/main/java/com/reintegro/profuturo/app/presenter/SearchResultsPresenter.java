@@ -43,7 +43,7 @@ public class SearchResultsPresenter extends PresenterBase<SearchResultsContract.
             view.pushClientDataImmediately();
         } else{
             //TODO: replace this for the correct fragment SELECT APPLICANT
-            view.pushRepaymentEvents();
+            view.pushSelectApplicant();
         }
     }
 }

@@ -18,6 +18,7 @@ import com.reintegro.profuturo.app.android.ui.fragments.GreetingFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.InitialCaptureFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.SearchClientFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.SearchResultsFragment;
+import com.reintegro.profuturo.app.android.ui.fragments.SelectApplicantFragment;
 import com.reintegro.profuturo.app.android.widget.SnackBar;
 import com.reintegro.profuturo.app.android.widget.ViewPager;
 import com.reintegro.profuturo.app.api.factory.RetrofitDataProviderFactory;
@@ -248,6 +249,13 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
 
     @Override
     public void pushSelectApplicant() {
+        SelectApplicantFragment fragment = new SelectApplicantFragment();
+
+        int fragmentPosition;
+        fragmentPosition = navigationAdapter.pushFragment(fragment);
+
+        navigationState.putState(NavigationState.PAGE_SELECT_APPLICANTS, fragmentPosition);
+        viewDataBinding.navigationViewPager.setCurrentItem(fragmentPosition);
 
     }
 }
