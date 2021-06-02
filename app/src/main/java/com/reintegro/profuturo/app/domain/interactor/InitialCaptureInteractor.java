@@ -6,8 +6,12 @@ import com.reintegro.profuturo.app.data.entity.ClientEntity;
 import com.reintegro.profuturo.app.data.factory.RepositoryFactory;
 import com.reintegro.profuturo.app.data.repository.ClientRepository;
 import com.reintegro.profuturo.app.domain.converter.ClientConverter;
+import com.reintegro.profuturo.app.domain.converter.RepaymentConverter;
 import com.reintegro.profuturo.app.domain.dto.ClientDto;
+import com.reintegro.profuturo.app.domain.dto.RepaymentDto;
 import com.reintegro.profuturo.app.util.Utils;
+
+import java.util.List;
 
 import io.reactivex.Single;
 import io.reactivex.SingleEmitter;
@@ -55,8 +59,15 @@ public class InitialCaptureInteractor extends InteractorBase<InitialCaptureContr
     }
 
     @Override
-    public void getRepaymentEvents() {
-        //TODO: Create dummy structure for simulate data
-        presenter.onGetRepaymentEventsSuccess(Utils.getMockRepaymentEvents());
+    public void getRepaymentEvents(ClientDto clientDto) {
+        //TODO: Create dummy structure for simulate data, replace this for web service
+        //presenter.onGetRepaymentEventsSuccess(Utils.getMockRepaymentEvents());
+        List<RepaymentDto> repaymentEvents = RepaymentConverter.convertFromEntities(Utils.getMockRepaymentEvents());
+        saveRepaymentEvents(repaymentEvents);
+    }
+
+    @Override
+    public void saveRepaymentEvents(List<RepaymentDto> repaymentEvents) {
+
     }
 }

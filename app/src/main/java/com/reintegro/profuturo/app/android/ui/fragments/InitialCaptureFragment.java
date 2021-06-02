@@ -32,7 +32,7 @@ public class InitialCaptureFragment extends NavigationAdapter.Fragment implement
     private List<RepaymentDto> repaymentEventsResult;
 
     private RecyclerView.Adapter.OnItemSelectedListener repaymentEventRadioButtonOnItemSelectedListener = position -> {
-
+        presenter.onRepaymentEventSelected(repaymentEventsResult.get(position));
     };
 
     private View.OnClickListener cancelButtonOnClickListener = v -> {

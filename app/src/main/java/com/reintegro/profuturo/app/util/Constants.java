@@ -6,6 +6,7 @@ public class Constants {
     public static final String DATE_FORMAT_1 = "dd/MM/yyyy";
     public static final String DATE_FORMAT_2 = "yyyy-MM-dd'T'HH:mm:ss";
     public static final String DATE_FORMAT_3 = "yyyy-MM-dd HH:mm:ss";
+    public static final String DATE_FORMAT_4 = "yyyy/MM/dd";
 
     public static final String URL_BASE = "https://www.proinversion.mx";
 

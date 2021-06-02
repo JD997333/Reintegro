@@ -1,9 +1,19 @@
-package com.reintegro.profuturo.app.domain.dto;
+package com.reintegro.profuturo.app.database.model;
 
-public class RepaymentDto {
+import com.reintegro.profuturo.app.data.entity.DateEntity;
+
+import java.util.UUID;
+
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class RepaymentModel extends RealmObject {
+    @PrimaryKey
+    private String id = UUID.randomUUID().toString();
+
     private String aforeKey;
     private String diagnoseProcess;
-    private DateDto trdDate;
+    private DateModel trdDate;
     private String trdAmount;
     private String nss;
     private String resolutionNumber;
@@ -15,6 +25,14 @@ public class RepaymentDto {
     private Integer eventNumber;
     private Integer preDiscountedWeeks;
     private boolean selected;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getAforeKey() {
         return aforeKey;
@@ -32,11 +50,11 @@ public class RepaymentDto {
         this.diagnoseProcess = diagnoseProcess;
     }
 
-    public DateDto getTrdDate() {
+    public DateModel getTrdDate() {
         return trdDate;
     }
 
-    public void setTrdDate(DateDto trdDate) {
+    public void setTrdDate(DateModel trdDate) {
         this.trdDate = trdDate;
     }
 
