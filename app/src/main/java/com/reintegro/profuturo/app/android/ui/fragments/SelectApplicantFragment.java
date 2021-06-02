@@ -16,6 +16,7 @@ import com.reintegro.profuturo.app.contract.InitialCaptureContract;
 import com.reintegro.profuturo.app.contract.SelectApplicantContract;
 import com.reintegro.profuturo.app.database.factory.RealmRepositoryFactory;
 import com.reintegro.profuturo.app.databinding.FragmentInitialCaptureBinding;
+import com.reintegro.profuturo.app.databinding.FragmentSelectApplicantBinding;
 import com.reintegro.profuturo.app.domain.dto.RepaymentDto;
 import com.reintegro.profuturo.app.domain.interactor.InitialCaptureInteractor;
 import com.reintegro.profuturo.app.domain.interactor.SelectApplicantInteractor;
@@ -26,7 +27,7 @@ import com.reintegro.profuturo.app.ui.main.NavigationAdapter;
 import java.util.List;
 
 public class SelectApplicantFragment extends NavigationAdapter.Fragment implements SelectApplicantContract.View {
-    private FragmentInitialCaptureBinding viewDataBinding;
+    private FragmentSelectApplicantBinding viewDataBinding;
     private SelectApplicantContract.Presenter presenter;
 
     private View.OnClickListener cancelButtonOnClickListener = v -> {
