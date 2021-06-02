@@ -9,7 +9,8 @@ import java.util.List;
 public interface InitialCaptureContract {
     interface Interactor extends ContractBase.Interactor<Presenter>{
         void getClientData();
-        void getRepaymentEvents();
+        void getRepaymentEvents(ClientDto clientDto);
+        void saveRepaymentEvents(List<RepaymentDto> repaymentDtos);
     }
 
     interface Presenter extends ContractBase.Presenter<Interactor, State, View>{
@@ -17,6 +18,8 @@ public interface InitialCaptureContract {
         void onGetRepaymentEventsError();
         void onGetClientDataSuccess(ClientDto clientDto);
         void onGetClientDataError();
+        void onRepaymentEventSelected(RepaymentDto repaymentDto);
+        void onSaveRepaymentEventsSuccess(List<RepaymentDto> repaymentEventsResult);
     }
 
     interface State extends ContractBase.State {

@@ -1,9 +1,9 @@
-package com.reintegro.profuturo.app.domain.dto;
+package com.reintegro.profuturo.app.data.entity;
 
-public class RepaymentDto {
+public class RepaymentEntity {
     private String aforeKey;
     private String diagnoseProcess;
-    private DateDto trdDate;
+    private DateEntity trdDate;
     private String trdAmount;
     private String nss;
     private String resolutionNumber;
@@ -32,11 +32,11 @@ public class RepaymentDto {
         this.diagnoseProcess = diagnoseProcess;
     }
 
-    public DateDto getTrdDate() {
+    public DateEntity getTrdDate() {
         return trdDate;
     }
 
-    public void setTrdDate(DateDto trdDate) {
+    public void setTrdDate(DateEntity trdDate) {
         this.trdDate = trdDate;
     }
 

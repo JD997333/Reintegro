@@ -33,11 +33,16 @@ public class InitialCapturePresenter
     public void onGetClientDataSuccess(ClientDto clientDto) {
         String nameHeader = clientDto.getFullName() + " • " + Utils.formatClientAccountNumber(clientDto.getAccountNumber());
         view.showClientData(clientDto, nameHeader);
-        interactor.getRepaymentEvents();
+        interactor.getRepaymentEvents(clientDto);
     }
 
     @Override
     public void onGetClientDataError() {
+
+    }
+
+    @Override
+    public void onRepaymentEventSelected(RepaymentDto repaymentDto) {
 
     }
 }
