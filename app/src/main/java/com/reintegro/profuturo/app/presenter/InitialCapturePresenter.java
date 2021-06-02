@@ -45,4 +45,9 @@ public class InitialCapturePresenter
     public void onRepaymentEventSelected(RepaymentDto repaymentDto) {
 
     }
+
+    @Override
+    public void onSaveRepaymentEventsSuccess(List<RepaymentDto> repaymentEventsResult) {
+        
+    }
 }
