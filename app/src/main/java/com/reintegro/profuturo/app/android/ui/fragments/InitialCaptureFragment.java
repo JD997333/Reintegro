@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.reintegro.profuturo.app.R;
 import com.reintegro.profuturo.app.android.ui.adapters.RepaymentResultsAdapter;
 import com.reintegro.profuturo.app.android.widget.RecyclerView;
+import com.reintegro.profuturo.app.android.widget.SnackBar;
 import com.reintegro.profuturo.app.contract.InitialCaptureContract;
 import com.reintegro.profuturo.app.database.factory.RealmRepositoryFactory;
 import com.reintegro.profuturo.app.databinding.FragmentInitialCaptureBinding;
@@ -92,5 +93,10 @@ public class InitialCaptureFragment extends NavigationAdapter.Fragment implement
         viewDataBinding.accountNumberTextView.setText(Utils.formatClientAccountNumber(clientDto.getAccountNumber()));
         viewDataBinding.nssTextView.setText(clientDto.getNss());
         viewDataBinding.rfcTextView.setText(clientDto.getRfc());
+    }
+
+    @Override
+    public void showMsg() {
+        SnackBar.show(getView(),"Selección exitosa");
     }
 }

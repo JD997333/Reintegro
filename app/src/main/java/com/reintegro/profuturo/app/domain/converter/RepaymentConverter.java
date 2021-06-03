@@ -9,6 +9,7 @@ import java.util.List;
 public class RepaymentConverter {
     public static RepaymentDto convertFromEntity(RepaymentEntity repaymentEntity){
         RepaymentDto repaymentDto = new RepaymentDto();
+        repaymentDto.setId(repaymentEntity.getId());
         repaymentDto.setAforeKey(repaymentEntity.getAforeKey());
         repaymentDto.setBenefitType(repaymentEntity.getBenefitType());
         repaymentDto.setDiagnoseProcess(repaymentEntity.getDiagnoseProcess());
@@ -29,6 +30,7 @@ public class RepaymentConverter {
 
     public static RepaymentEntity convertFromDto(RepaymentDto repaymentDto){
         RepaymentEntity repaymentEntity = new RepaymentEntity();
+        repaymentEntity.setId(repaymentDto.getId());
         repaymentEntity.setAforeKey(repaymentDto.getAforeKey());
         repaymentEntity.setBenefitType(repaymentDto.getBenefitType());
         repaymentEntity.setDiagnoseProcess(repaymentDto.getDiagnoseProcess());
@@ -55,5 +57,15 @@ public class RepaymentConverter {
         }
 
         return repaymentDtos;
+    }
+
+    public static List<RepaymentEntity> convertFromDtos(List<RepaymentDto> repaymentDtos){
+        List<RepaymentEntity> repaymentEntities = new ArrayList<>();
+
+        for(RepaymentDto repaymentDto : repaymentDtos){
+            repaymentEntities.add(convertFromDto(repaymentDto));
+        }
+
+        return repaymentEntities;
     }
 }

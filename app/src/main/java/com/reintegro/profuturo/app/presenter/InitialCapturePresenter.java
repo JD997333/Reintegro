@@ -20,8 +20,8 @@ public class InitialCapturePresenter
 
     @Override
     public void onGetRepaymentEventsSuccess(List<RepaymentDto> repaymentEventsResult) {
-        view.showRepaymentEvents(repaymentEventsResult);
-        view.dismissLoading();
+        //view.showRepaymentEvents(repaymentEventsResult);
+        //view.dismissLoading();
     }
 
     @Override
@@ -43,11 +43,17 @@ public class InitialCapturePresenter
 
     @Override
     public void onRepaymentEventSelected(RepaymentDto repaymentDto) {
-
+        interactor.setSelectedRepaymentEvent(repaymentDto);
     }
 
     @Override
     public void onSaveRepaymentEventsSuccess(List<RepaymentDto> repaymentEventsResult) {
-        
+        view.showRepaymentEvents(repaymentEventsResult);
+        view.dismissLoading();
+    }
+
+    @Override
+    public void onSetSelectedRepaymentEventSuccess() {
+        view.showMsg();
     }
 }

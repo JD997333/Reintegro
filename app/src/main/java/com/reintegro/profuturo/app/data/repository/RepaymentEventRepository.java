@@ -8,6 +8,7 @@ public interface RepaymentEventRepository {
     List<RepaymentEntity> addAll(List<RepaymentEntity> repaymentEntities);
     RepaymentEntity update(RepaymentEntity repaymentEntity);
     RepaymentEntity getSelected();
+    void setSelected(RepaymentEntity repaymentEntity);
     List<RepaymentEntity> getAll();
     void clear();
 }

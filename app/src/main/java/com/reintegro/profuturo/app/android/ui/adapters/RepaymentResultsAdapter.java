@@ -62,7 +62,7 @@ public class RepaymentResultsAdapter extends RecyclerView.Adapter<RepaymentResul
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         RepaymentDto repaymentDto = repaymentEvents.get(position);
 
-        if (position < radioButtons.size()){
+        if (position >= radioButtons.size()){
             radioButtons.add(holder.viewDataBinding.selectRadioButton);
         }
 

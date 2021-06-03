@@ -1,6 +1,7 @@
 package com.reintegro.profuturo.app.contract;
 
 import com.reintegro.profuturo.app.base.ContractBase;
+import com.reintegro.profuturo.app.data.entity.RepaymentEntity;
 import com.reintegro.profuturo.app.domain.dto.ClientDto;
 import com.reintegro.profuturo.app.domain.dto.RepaymentDto;
 
@@ -10,7 +11,8 @@ public interface InitialCaptureContract {
     interface Interactor extends ContractBase.Interactor<Presenter>{
         void getClientData();
         void getRepaymentEvents(ClientDto clientDto);
-        void saveRepaymentEvents(List<RepaymentDto> repaymentDtos);
+        void saveRepaymentEvents(List<RepaymentEntity> repaymentDtos);
+        void setSelectedRepaymentEvent(RepaymentDto repaymentDto);
     }
 
     interface Presenter extends ContractBase.Presenter<Interactor, State, View>{
@@ -20,6 +22,7 @@ public interface InitialCaptureContract {
         void onGetClientDataError();
         void onRepaymentEventSelected(RepaymentDto repaymentDto);
         void onSaveRepaymentEventsSuccess(List<RepaymentDto> repaymentEventsResult);
+        void onSetSelectedRepaymentEventSuccess();
     }
 
     interface State extends ContractBase.State {
@@ -29,5 +32,6 @@ public interface InitialCaptureContract {
     interface View extends ContractBase.View{
         void showClientData(ClientDto clientDto, String nameHeader);
         void showRepaymentEvents(List<RepaymentDto> repaymentEventsResult);
+        void showMsg();
     }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 public class RepaymentModelConverter {
     public static RepaymentEntity convertFromModel(RepaymentModel repaymentModel){
         RepaymentEntity repaymentEntity = new RepaymentEntity();
+        repaymentEntity.setId(repaymentModel.getId());
         repaymentEntity.setAforeKey(repaymentModel.getAforeKey());
         repaymentEntity.setBenefitType(repaymentModel.getBenefitType());
         repaymentEntity.setDiagnoseProcess(repaymentModel.getDiagnoseProcess());
@@ -43,6 +44,13 @@ public class RepaymentModelConverter {
         repaymentModel.setTrdAmount(repaymentEntity.getTrdAmount());
         repaymentModel.setTrdDate(DateConverter.convertFromEntity(repaymentEntity.getTrdDate()));
         repaymentModel.setSelected(repaymentEntity.isSelected());
+
+        boolean hasId;
+        hasId = repaymentEntity.getId() != null;
+
+        if (hasId){
+            repaymentModel.setId(repaymentEntity.getId());
+        }
 
         return repaymentModel;
     }

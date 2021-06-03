@@ -21,7 +21,8 @@ public class RepaymentEventDAO implements RepaymentEventRepository {
         realm.beginTransaction();
 
         List<RepaymentModel> models;
-        models = realm.copyToRealm(RepaymentModelConverter.convertFromEntities(repaymentEntities));
+        models = RepaymentModelConverter.convertFromEntities(repaymentEntities);
+        realm.copyToRealm(models);
 
         List<RepaymentEntity> entities;
         entities = RepaymentModelConverter.convertFromModels(models);
@@ -37,7 +38,9 @@ public class RepaymentEventDAO implements RepaymentEventRepository {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
 
-        RepaymentModel model = realm.copyToRealmOrUpdate(RepaymentModelConverter.convertFromEntity(repaymentEntity));
+        RepaymentModel model = RepaymentModelConverter.convertFromEntity(repaymentEntity);
+
+        model = realm.copyToRealmOrUpdate(model);
 
         RepaymentEntity entity = RepaymentModelConverter.convertFromModel(model);
 
@@ -68,6 +71,30 @@ public class RepaymentEventDAO implements RepaymentEventRepository {
         realm.close();
 
         return entity;
+    }
+
+    @Override
+    public void setSelected(RepaymentEntity repaymentEntity) {
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+
+        RealmResults<RepaymentModel> results;
+        results = realm.where(RepaymentModel.class).findAll();
+
+        List<RepaymentModel> models;
+        models = realm.copyFromRealm(results);
+
+        for (RepaymentModel model : models){
+            if (model.getId().equals(repaymentEntity.getId())){
+                model.setSelected(true);
+            } else{
+                model.setSelected(false);
+            }
+            realm.copyToRealmOrUpdate(model);
+        }
+
+        realm.commitTransaction();
+        realm.close();
     }
 
     @Override

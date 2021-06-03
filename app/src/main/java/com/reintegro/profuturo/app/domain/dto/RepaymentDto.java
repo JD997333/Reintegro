@@ -1,6 +1,7 @@
 package com.reintegro.profuturo.app.domain.dto;
 
 public class RepaymentDto {
+    private String id;
     private String aforeKey;
     private String diagnoseProcess;
     private DateDto trdDate;
@@ -15,6 +16,14 @@ public class RepaymentDto {
     private Integer eventNumber;
     private Integer preDiscountedWeeks;
     private boolean selected;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getAforeKey() {
         return aforeKey;
