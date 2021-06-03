@@ -19,6 +19,11 @@ public class InitialCapturePresenter
     }
 
     @Override
+    public void onCancelButtonClicked() {
+        view.showCancelDialog();
+    }
+
+    @Override
     public void onGetRepaymentEventsSuccess(List<RepaymentDto> repaymentEventsResult) {
         //view.showRepaymentEvents(repaymentEventsResult);
         //view.dismissLoading();
@@ -54,6 +59,6 @@ public class InitialCapturePresenter
 
     @Override
     public void onSetSelectedRepaymentEventSuccess() {
-        view.showMsg();
+
     }
 }

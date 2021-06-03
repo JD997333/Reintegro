@@ -151,6 +151,8 @@
     <string name="account_number_label">Número de cuenta</string>
     <string name="nss_label">NSS</string>
     <string name="rfc_label">RFC</string>
+    <string name="cancel_message_ask">¿Está seguro que desea cancelar el trámite?</string>
+    <string name="cancel_message_title">Cancelar trámite</string>
 
     <!--    IRR Changes     -->
     <string name="select_applicant_header">Envio de consulta de retiros por desempleo</string>

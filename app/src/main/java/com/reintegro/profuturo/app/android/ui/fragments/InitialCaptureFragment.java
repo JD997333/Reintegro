@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.reintegro.profuturo.app.R;
 import com.reintegro.profuturo.app.android.ui.adapters.RepaymentResultsAdapter;
+import com.reintegro.profuturo.app.android.ui.dialogs.SimpleAlertDialog;
 import com.reintegro.profuturo.app.android.widget.RecyclerView;
 import com.reintegro.profuturo.app.android.widget.SnackBar;
 import com.reintegro.profuturo.app.contract.InitialCaptureContract;
@@ -36,9 +37,7 @@ public class InitialCaptureFragment extends NavigationAdapter.Fragment implement
         presenter.onRepaymentEventSelected(repaymentEventsResult.get(position));
     };
 
-    private View.OnClickListener cancelButtonOnClickListener = v -> {
-
-    };
+    private View.OnClickListener cancelButtonOnClickListener = v -> presenter.onCancelButtonClicked();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,7 +95,17 @@ public class InitialCaptureFragment extends NavigationAdapter.Fragment implement
     }
 
     @Override
-    public void showMsg() {
-        SnackBar.show(getView(),"Selección exitosa");
+    public void showCancelDialog() {
+        SimpleAlertDialog simpleAlertDialog = new SimpleAlertDialog();
+        simpleAlertDialog.setCancelable(false);
+        simpleAlertDialog.setTitle(getString(R.string.cancel_message_title));
+        simpleAlertDialog.setMessage(getString(R.string.cancel_message_ask));
+        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1),(view) -> {
+            simpleAlertDialog.dismiss();
+            navigationDelegate.popToSearchClient();
+        });
+        simpleAlertDialog.setCloseButton((view) -> simpleAlertDialog.dismiss());
+        simpleAlertDialog.setNegativeButton(getString(R.string.cancel_1), (view) -> simpleAlertDialog.dismiss());
+        simpleAlertDialog.show(getFragmentManager(), null);
     }
 }

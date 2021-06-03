@@ -16,6 +16,7 @@ public interface InitialCaptureContract {
     }
 
     interface Presenter extends ContractBase.Presenter<Interactor, State, View>{
+        void onCancelButtonClicked();
         void onGetRepaymentEventsSuccess(List<RepaymentDto> repaymentEventsResult);
         void onGetRepaymentEventsError();
         void onGetClientDataSuccess(ClientDto clientDto);
@@ -32,6 +33,6 @@ public interface InitialCaptureContract {
     interface View extends ContractBase.View{
         void showClientData(ClientDto clientDto, String nameHeader);
         void showRepaymentEvents(List<RepaymentDto> repaymentEventsResult);
-        void showMsg();
+        void showCancelDialog();
     }
 }
