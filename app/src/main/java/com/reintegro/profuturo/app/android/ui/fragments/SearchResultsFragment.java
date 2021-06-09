@@ -92,6 +92,7 @@ public class SearchResultsFragment extends NavigationAdapter.Fragment implements
 
     @Override
     public void pushRepaymentEvents() {
+        setBackEnabled(false);
         navigationDelegate.pushRepaymentEvents();
     }
 

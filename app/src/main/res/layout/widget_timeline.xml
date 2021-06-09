@@ -24,7 +24,7 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/register_capture_image_view"
+                android:id="@+id/initial_capture_image_view"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 tools:src="@drawable/ic_navigation_indicator_completed" />
@@ -32,7 +32,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="@string/record_capture_1"
+                android:text="@string/initial_capture"
                 android:textSize="12sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -51,7 +51,7 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/capture_summary_image_view"
+                android:id="@+id/repayment_amount_image_view"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 tools:src="@drawable/ic_navigation_indicator_completed" />
@@ -59,7 +59,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="@string/capture_summary_1"
+                android:text="@string/repayment_amount_1"
                 android:textSize="12sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -78,7 +78,7 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ccb_request_image_view"
+                android:id="@+id/documents_capture_image_view"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 tools:src="@drawable/ic_navigation_indicator_current" />
@@ -86,7 +86,34 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="@string/ccb_request_1"
+                android:text="@string/documents_capture"
+                android:textSize="12sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:background="@color/gray_light_3"
+            android:layout_height="2dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:gravity="center"
+            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/biometric_capture_image_view"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                tools:src="@drawable/ic_navigation_indicator_next" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/biometric_capture"
                 android:textSize="12sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

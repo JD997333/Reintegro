@@ -42,12 +42,14 @@ public class RepaymentResultsAdapter extends RecyclerView.Adapter<RepaymentResul
 
         for (int index = 0; index < repaymentEvents.size(); index++) {
             AppCompatRadioButton radioButton;
-            radioButton = radioButtons.get(index);
+            if (index < radioButtons.size()){
+                radioButton = radioButtons.get(index);
 
-            if (index == position) {
-                radioButton.setChecked(true);
-            } else {
-                radioButton.setChecked(false);
+                if (index == position) {
+                    radioButton.setChecked(true);
+                } else {
+                    radioButton.setChecked(false);
+                }
             }
         }
     }

@@ -5,6 +5,12 @@
     android:layout_width="match_parent"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:gravity="center_vertical"
+        android:id="@+id/label"
+        android:layout_height="24dp"
+        android:layout_width="match_parent" />
+
     <androidx.appcompat.widget.AppCompatEditText
         android:background="@drawable/selector_background_simple"
         android:id="@+id/input"

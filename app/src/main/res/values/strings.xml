@@ -180,6 +180,10 @@
     <string name="weeks_requested">*Número de semanas que solicita reintegrar</string>
     <string name="repayment_amount">Monto a Reintegrar</string>
     <string name="back">REGRESAR</string>
+    <string name="initial_capture">Captura inicial</string>
+    <string name="repayment_amount_1">Monto a reintegrar</string>
+    <string name="documents_capture">Captura de documentos</string>
+    <string name="biometric_capture">Captura de biométricos</string>
 
 </resources>
 <!--

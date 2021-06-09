@@ -16,10 +16,12 @@ import com.reintegro.profuturo.app.android.ui.dialogs.SimpleAlertDialog;
 import com.reintegro.profuturo.app.android.ui.fragments.ClientDataFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.GreetingFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.InitialCaptureFragment;
+import com.reintegro.profuturo.app.android.ui.fragments.RepaymentDetailFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.SearchClientFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.SearchResultsFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.SelectApplicantFragment;
 import com.reintegro.profuturo.app.android.widget.SnackBar;
+import com.reintegro.profuturo.app.android.widget.TimelineView;
 import com.reintegro.profuturo.app.android.widget.ViewPager;
 import com.reintegro.profuturo.app.api.factory.RetrofitDataProviderFactory;
 import com.reintegro.profuturo.app.contract.MainContract;
@@ -39,6 +41,7 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
     private String version;
     private int currentFragmentPosition = -1;
     private boolean popPending;
+    private boolean showTimelinePending;
 
     public static final String EXTRA_AGENT_NUMBER = "agent_number";
 
@@ -77,6 +80,7 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
         public void onPageScrollStateChanged(int state) {
             if (popPending && state == ViewPager.SCROLL_STATE_IDLE) {
                 navigationAdapter.popUpTo(currentFragmentPosition);
+                viewDataBinding.timelineView.setVisibility(View.GONE);
                 popPending = false;
 
                 NavigationAdapter.Fragment fragment;
@@ -85,6 +89,9 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
                 if (fragment.isResettable()) {
                     fragment.reset();
                 }
+            } else if (showTimelinePending && state == ViewPager.SCROLL_STATE_IDLE) {
+                viewDataBinding.timelineView.setVisibility(View.VISIBLE);
+                showTimelinePending = false;
             }
         }
     };
@@ -244,12 +251,16 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
         fragmentPosition = navigationAdapter.pushFragment(fragment);
 
         navigationState.putState(NavigationState.PAGE_REPAYMENT_EVENTS, fragmentPosition);
-        viewDataBinding.navigationViewPager.setCurrentItem(fragmentPosition);
+        viewDataBinding.navigationViewPager.setCurrentItem(fragmentPosition, false);
+
+        viewDataBinding.timelineView.setVisibility(View.VISIBLE);
+        viewDataBinding.timelineView.setCurrentPosition(TimelineView.POSITION_INITIAL_CAPTURE);
     }
 
     @Override
     public void pushSelectApplicant() {
         SelectApplicantFragment fragment = new SelectApplicantFragment();
+        fragment.setNavigationDelegate(this);
 
         int fragmentPosition;
         fragmentPosition = navigationAdapter.pushFragment(fragment);
@@ -261,7 +272,13 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
 
     @Override
     public void pushRepaymentEventsDetail() {
+        RepaymentDetailFragment fragment = new RepaymentDetailFragment();
 
+        navigationAdapter.popUpTo(navigationState.getState(NavigationState.PAGE_REPAYMENT_EVENTS));
+        int fragmentPosition = navigationAdapter.pushFragment(fragment);
 
+        navigationState.putState(NavigationState.PAGE_REPAYMENT_EVENT_DETAIL, fragmentPosition);
+        viewDataBinding.navigationViewPager.setCurrentItem(fragmentPosition);
+        viewDataBinding.timelineView.setCurrentPosition(TimelineView.POSITION_REPAYMENT_EVENTS);
     }
 }

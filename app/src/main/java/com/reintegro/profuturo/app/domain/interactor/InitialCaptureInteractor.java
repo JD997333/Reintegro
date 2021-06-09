@@ -76,6 +76,7 @@ public class InitialCaptureInteractor extends InteractorBase<InitialCaptureContr
         Single.
             create((SingleEmitter<List<RepaymentDto>> emitter) -> {
                 RepaymentEventRepository repaymentEventRepository = repositoryFactory.createRepaymentEventRepository();
+                repaymentEventRepository.clear();
                 repaymentEventRepository.addAll(repaymentEvents);
 
                 List<RepaymentEntity> repaymentEntities;

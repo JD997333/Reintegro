@@ -72,12 +72,11 @@ public class InitialCaptureFragment extends NavigationAdapter.Fragment implement
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        viewDataBinding.nextButton.setVisibility(View.GONE);
+        viewDataBinding.nextButton.setVisibility(View.INVISIBLE);
         viewDataBinding.cancelButton.setOnClickListener(cancelButtonOnClickListener);
         viewDataBinding.nextButton.setOnClickListener(nextButtonOnClickListener);
         viewDataBinding.repaymentResultsRecyclerView.setAdapter(repaymentResultsAdapter);
         viewDataBinding.repaymentResultsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), androidx.recyclerview.widget.RecyclerView.VERTICAL, false));
-
     }
 
     @Override

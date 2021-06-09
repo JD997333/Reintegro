@@ -11,14 +11,16 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.reintegro.profuturo.app.R;
 
 public class TimelineView extends ConstraintLayout {
-    public static final int POSITION_CAPTURE_SUMMARY = 0;
-    public static final int POSITION_CCB_REQUEST = 1;
-    public static final int POSITION_REGISTER_CAPTURE = 2;
-    public static final int POSITION_SAVE_PROCEDURE = 3;
+    public static final int POSITION_INITIAL_CAPTURE = 0;
+    public static final int POSITION_REPAYMENT_EVENTS = 1;
+    public static final int POSITION_DOCUMENTS_CAPTURE = 2;
+    public static final int POSITION_BIOMETRICS_CAPTURE = 3;
+    public static final int POSITION_SAVE_PROCEDURE = 4;
 
-    private AppCompatImageView captureSummaryImageView;
-    private AppCompatImageView ccbRequestImageView;
-    private AppCompatImageView registerCaptureImageView;
+    private AppCompatImageView initialCaptureImageView;
+    private AppCompatImageView repaymentAmountImageView;
+    private AppCompatImageView documentsCaptureImageView;
+    private AppCompatImageView biometricCaptureImageView;
     private AppCompatImageView saveProcedureImageView;
 
     public TimelineView(Context context) {
@@ -38,34 +40,47 @@ public class TimelineView extends ConstraintLayout {
 
     public void setCurrentPosition(int position) {
         switch (position) {
-            case POSITION_CAPTURE_SUMMARY:
-                captureSummaryImageView.setImageResource(R.drawable.ic_navigation_indicator_current);
-                ccbRequestImageView.setImageResource(R.drawable.ic_navigation_indicator_next);
-                registerCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_completed);
+            case POSITION_INITIAL_CAPTURE:
+                initialCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_current);
+                repaymentAmountImageView.setImageResource(R.drawable.ic_navigation_indicator_next);
+                documentsCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_next);
+                biometricCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_next);
                 saveProcedureImageView.setImageResource(R.drawable.ic_navigation_indicator_next);
 
                 break;
 
-            case POSITION_CCB_REQUEST:
-                captureSummaryImageView.setImageResource(R.drawable.ic_navigation_indicator_completed);
-                ccbRequestImageView.setImageResource(R.drawable.ic_navigation_indicator_current);
-                registerCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_completed);
+            case POSITION_REPAYMENT_EVENTS:
+                initialCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_completed);
+                repaymentAmountImageView.setImageResource(R.drawable.ic_navigation_indicator_current);
+                documentsCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_next);
+                biometricCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_next);
                 saveProcedureImageView.setImageResource(R.drawable.ic_navigation_indicator_next);
 
                 break;
 
-            case POSITION_REGISTER_CAPTURE:
-                captureSummaryImageView.setImageResource(R.drawable.ic_navigation_indicator_next);
-                ccbRequestImageView.setImageResource(R.drawable.ic_navigation_indicator_next);
-                registerCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_current);
+            case POSITION_DOCUMENTS_CAPTURE:
+                initialCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_completed);
+                repaymentAmountImageView.setImageResource(R.drawable.ic_navigation_indicator_completed);
+                documentsCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_current);
+                biometricCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_next);
+                saveProcedureImageView.setImageResource(R.drawable.ic_navigation_indicator_next);
+
+                break;
+
+            case POSITION_BIOMETRICS_CAPTURE:
+                initialCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_completed);
+                repaymentAmountImageView.setImageResource(R.drawable.ic_navigation_indicator_completed);
+                documentsCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_completed);
+                biometricCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_current);
                 saveProcedureImageView.setImageResource(R.drawable.ic_navigation_indicator_next);
 
                 break;
 
             case POSITION_SAVE_PROCEDURE:
-                captureSummaryImageView.setImageResource(R.drawable.ic_navigation_indicator_completed);
-                ccbRequestImageView.setImageResource(R.drawable.ic_navigation_indicator_completed);
-                registerCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_completed);
+                initialCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_completed);
+                repaymentAmountImageView.setImageResource(R.drawable.ic_navigation_indicator_completed);
+                documentsCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_completed);
+                biometricCaptureImageView.setImageResource(R.drawable.ic_navigation_indicator_completed);
                 saveProcedureImageView.setImageResource(R.drawable.ic_navigation_indicator_current);
 
                 break;
@@ -79,9 +94,10 @@ public class TimelineView extends ConstraintLayout {
         View view;
         view = layoutInflater.inflate(R.layout.widget_timeline, this, true);
 
-        captureSummaryImageView = view.findViewById(R.id.capture_summary_image_view);
-        ccbRequestImageView = view.findViewById(R.id.ccb_request_image_view);
-        registerCaptureImageView = view.findViewById(R.id.register_capture_image_view);
+        initialCaptureImageView = view.findViewById(R.id.initial_capture_image_view);
+        repaymentAmountImageView = view.findViewById(R.id.repayment_amount_image_view);
+        documentsCaptureImageView = view.findViewById(R.id.documents_capture_image_view);
+        biometricCaptureImageView = view.findViewById(R.id.biometric_capture_image_view);
         saveProcedureImageView = view.findViewById(R.id.save_procedure_image_view);
     }
 }
