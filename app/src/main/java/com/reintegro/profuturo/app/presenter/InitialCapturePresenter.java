@@ -59,6 +59,6 @@ public class InitialCapturePresenter
 
     @Override
     public void onSetSelectedRepaymentEventSuccess() {
-
+        view.enableNextButton();
     }
 }

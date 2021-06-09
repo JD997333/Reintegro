@@ -258,4 +258,10 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
         viewDataBinding.navigationViewPager.setCurrentItem(fragmentPosition);
 
     }
+
+    @Override
+    public void pushRepaymentEventsDetail() {
+
+
+    }
 }

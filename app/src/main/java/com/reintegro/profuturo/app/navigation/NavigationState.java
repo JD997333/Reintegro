@@ -14,6 +14,7 @@ public class NavigationState<T> {
     public static final String PAGE_SEARCH_RESULTS = "PAGE_SEARCH_RESULTS";
     public static final String PAGE_REPAYMENT_EVENTS = "PAGE_REPAYMENT_EVENTS";
     public static final String PAGE_SELECT_APPLICANTS = "PAGE_SELECT_APPLICANTS";
+    public static final String PAGE_REPAYMENT_EVENT_DETAIL = "PAGE_REPAYMENT_EVENT_DETAIL";
 
     private HashMap<String, T> state = new HashMap<>();
 

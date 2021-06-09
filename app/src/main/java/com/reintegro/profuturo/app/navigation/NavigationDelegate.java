@@ -9,4 +9,5 @@ public interface NavigationDelegate<T> {
     void pushClientDataImmediately();
     void pushRepaymentEvents();
     void pushSelectApplicant();
+    void pushRepaymentEventsDetail();
 }

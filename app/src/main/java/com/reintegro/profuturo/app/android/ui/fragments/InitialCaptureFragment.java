@@ -33,11 +33,12 @@ public class InitialCaptureFragment extends NavigationAdapter.Fragment implement
     private RepaymentResultsAdapter repaymentResultsAdapter;
     private List<RepaymentDto> repaymentEventsResult;
 
-    private RecyclerView.Adapter.OnItemSelectedListener repaymentEventRadioButtonOnItemSelectedListener = position -> {
-        presenter.onRepaymentEventSelected(repaymentEventsResult.get(position));
-    };
+    private RecyclerView.Adapter.OnItemSelectedListener repaymentEventRadioButtonOnItemSelectedListener =
+        position -> presenter.onRepaymentEventSelected(repaymentEventsResult.get(position));
 
     private View.OnClickListener cancelButtonOnClickListener = v -> presenter.onCancelButtonClicked();
+
+    private View.OnClickListener nextButtonOnClickListener = v -> navigationDelegate.pushRepaymentEventsDetail();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,7 +72,9 @@ public class InitialCaptureFragment extends NavigationAdapter.Fragment implement
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
+        viewDataBinding.nextButton.setVisibility(View.GONE);
         viewDataBinding.cancelButton.setOnClickListener(cancelButtonOnClickListener);
+        viewDataBinding.nextButton.setOnClickListener(nextButtonOnClickListener);
         viewDataBinding.repaymentResultsRecyclerView.setAdapter(repaymentResultsAdapter);
         viewDataBinding.repaymentResultsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), androidx.recyclerview.widget.RecyclerView.VERTICAL, false));
 
@@ -107,5 +110,10 @@ public class InitialCaptureFragment extends NavigationAdapter.Fragment implement
         simpleAlertDialog.setCloseButton((view) -> simpleAlertDialog.dismiss());
         simpleAlertDialog.setNegativeButton(getString(R.string.cancel_1), (view) -> simpleAlertDialog.dismiss());
         simpleAlertDialog.show(getFragmentManager(), null);
+    }
+
+    @Override
+    public void enableNextButton() {
+        viewDataBinding.nextButton.setVisibility(View.VISIBLE);
     }
 }

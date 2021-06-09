@@ -153,6 +153,8 @@
     <string name="rfc_label">RFC</string>
     <string name="cancel_message_ask">¿Está seguro que desea cancelar el trámite?</string>
     <string name="cancel_message_title">Cancelar trámite</string>
+    <string name="next">Siguiente</string>
+    <string name="repayment_events_detail">Detalle de evento de retiro</string>
 
     <!--    IRR Changes     -->
     <string name="select_applicant_header">Envio de consulta de retiros por desempleo</string>
@@ -171,6 +173,13 @@
     <string name="ph_name_and_account_number">Vannesa Pérez Ceballos • Número de cuenta 099998889</string>
     <string name="ph_curp">AAAA000000AAAAA00</string>
     <string name="lorem">Lorem Ipsum</string>
+    <string name="repayment_event_date">Fecha evento retiro:</string>
+    <string name="total_weeks_available">Total de semanas disponibles a reintegrar:</string>
+    <string name="amount_withdrawal_event">Monto pagado por evento de retiro</string>
+    <string name="day_value">Valor día:</string>
+    <string name="weeks_requested">*Número de semanas que solicita reintegrar</string>
+    <string name="repayment_amount">Monto a Reintegrar</string>
+    <string name="back">REGRESAR</string>
 
 </resources>
 <!--

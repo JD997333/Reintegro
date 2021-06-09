@@ -34,5 +34,6 @@ public interface InitialCaptureContract {
         void showClientData(ClientDto clientDto, String nameHeader);
         void showRepaymentEvents(List<RepaymentDto> repaymentEventsResult);
         void showCancelDialog();
+        void enableNextButton();
     }
 }
