@@ -112,4 +112,6 @@ public class Constants {
     public static final String ID_TYPE_PROFESSIONAL = "Cédula profesional";
     public static final String ID_TYPE_MIGRATION_DOC = "Documento migratorio (FM2/FM3)";
 
+
+    
 }
