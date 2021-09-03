@@ -5,16 +5,20 @@ public class RepaymentEntity {
     private String aforeKey;
     private String diagnoseProcess;
     private DateEntity trdDate;
-    private String trdAmount;
+    private Double trdAmount;
     private String nss;
     private String resolutionNumber;
     private String operationResult;
-    private String discountedWeeks;
+    private Integer discountedWeeks;
     private String benefitType;
-    private String repaymentValueDay;
-    private String preRepaymentAmount;
+    private Double repaymentValueDay;
+    private Double preRepaymentAmount;
     private Integer eventNumber;
     private Integer preDiscountedWeeks;
+    private Integer requestedWeeks;
+    private Double calculatedAmount;
+    private Double weekAmountValue;
+    private Integer maxWeeksRepayment;
     private boolean selected;
 
     public String getId() {
@@ -49,11 +53,11 @@ public class RepaymentEntity {
         this.trdDate = trdDate;
     }
 
-    public String getTrdAmount() {
+    public Double getTrdAmount() {
         return trdAmount;
     }
 
-    public void setTrdAmount(String trdAmount) {
+    public void setTrdAmount(Double trdAmount) {
         this.trdAmount = trdAmount;
     }
 
@@ -81,11 +85,11 @@ public class RepaymentEntity {
         this.operationResult = operationResult;
     }
 
-    public String getDiscountedWeeks() {
+    public Integer getDiscountedWeeks() {
         return discountedWeeks;
     }
 
-    public void setDiscountedWeeks(String discountedWeeks) {
+    public void setDiscountedWeeks(Integer discountedWeeks) {
         this.discountedWeeks = discountedWeeks;
     }
 
@@ -97,19 +101,19 @@ public class RepaymentEntity {
         this.benefitType = benefitType;
     }
 
-    public String getRepaymentValueDay() {
+    public Double getRepaymentValueDay() {
         return repaymentValueDay;
     }
 
-    public void setRepaymentValueDay(String repaymentValueDay) {
+    public void setRepaymentValueDay(Double repaymentValueDay) {
         this.repaymentValueDay = repaymentValueDay;
     }
 
-    public String getPreRepaymentAmount() {
+    public Double getPreRepaymentAmount() {
         return preRepaymentAmount;
     }
 
-    public void setPreRepaymentAmount(String preRepaymentAmount) {
+    public void setPreRepaymentAmount(Double preRepaymentAmount) {
         this.preRepaymentAmount = preRepaymentAmount;
     }
 
@@ -127,6 +131,38 @@ public class RepaymentEntity {
 
     public void setPreDiscountedWeeks(Integer preDiscountedWeeks) {
         this.preDiscountedWeeks = preDiscountedWeeks;
+    }
+
+    public Integer getRequestedWeeks() {
+        return requestedWeeks;
+    }
+
+    public void setRequestedWeeks(Integer requestedWeeks) {
+        this.requestedWeeks = requestedWeeks;
+    }
+
+    public Double getCalculatedAmount() {
+        return calculatedAmount;
+    }
+
+    public void setCalculatedAmount(Double calculatedAmount) {
+        this.calculatedAmount = calculatedAmount;
+    }
+
+    public Double getWeekAmountValue() {
+        return weekAmountValue;
+    }
+
+    public void setWeekAmountValue(Double weekAmountValue) {
+        this.weekAmountValue = weekAmountValue;
+    }
+
+    public Integer getMaxWeeksRepayment() {
+        return maxWeeksRepayment;
+    }
+
+    public void setMaxWeeksRepayment(Integer maxWeeksRepayment) {
+        this.maxWeeksRepayment = maxWeeksRepayment;
     }
 
     public boolean isSelected() {

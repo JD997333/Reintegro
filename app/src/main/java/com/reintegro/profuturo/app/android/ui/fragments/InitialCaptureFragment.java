@@ -15,6 +15,7 @@ import com.reintegro.profuturo.app.android.ui.adapters.RepaymentResultsAdapter;
 import com.reintegro.profuturo.app.android.ui.dialogs.SimpleAlertDialog;
 import com.reintegro.profuturo.app.android.widget.RecyclerView;
 import com.reintegro.profuturo.app.android.widget.SnackBar;
+import com.reintegro.profuturo.app.api.factory.RetrofitDataProviderFactory;
 import com.reintegro.profuturo.app.contract.InitialCaptureContract;
 import com.reintegro.profuturo.app.database.factory.RealmRepositoryFactory;
 import com.reintegro.profuturo.app.databinding.FragmentInitialCaptureBinding;
@@ -25,6 +26,7 @@ import com.reintegro.profuturo.app.presenter.InitialCapturePresenter;
 import com.reintegro.profuturo.app.ui.main.NavigationAdapter;
 import com.reintegro.profuturo.app.util.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InitialCaptureFragment extends NavigationAdapter.Fragment implements InitialCaptureContract.View {
@@ -38,23 +40,29 @@ public class InitialCaptureFragment extends NavigationAdapter.Fragment implement
 
     private View.OnClickListener cancelButtonOnClickListener = v -> presenter.onCancelButtonClicked();
 
-    private View.OnClickListener nextButtonOnClickListener = v -> navigationDelegate.pushRepaymentEventsDetail();
+    private View.OnClickListener nextButtonOnClickListener = v -> {
+        setBackEnabled(false);
+        navigationDelegate.pushRepaymentEventsDetail();
+    };
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         InitialCaptureContract.Interactor interactor;
-        interactor = new InitialCaptureInteractor(new RealmRepositoryFactory());
+        interactor = new InitialCaptureInteractor(new RealmRepositoryFactory(), new RetrofitDataProviderFactory(getContext()));
         presenter = new InitialCapturePresenter();
         presenter.setInteractor(interactor);
         presenter.setView(this);
         interactor.setPresenter(presenter);
+        setResettable(true);
 
         repaymentResultsAdapter = new RepaymentResultsAdapter(getLayoutInflater());
         repaymentResultsAdapter.setRadioButtonOnItemSelectedListener(repaymentEventRadioButtonOnItemSelectedListener);
 
         presenter.resume();
+
     }
 
     @Nullable
@@ -72,11 +80,17 @@ public class InitialCaptureFragment extends NavigationAdapter.Fragment implement
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        viewDataBinding.nextButton.setVisibility(View.INVISIBLE);
+        viewDataBinding.nextButton.setEnabled(false);
         viewDataBinding.cancelButton.setOnClickListener(cancelButtonOnClickListener);
         viewDataBinding.nextButton.setOnClickListener(nextButtonOnClickListener);
         viewDataBinding.repaymentResultsRecyclerView.setAdapter(repaymentResultsAdapter);
         viewDataBinding.repaymentResultsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), androidx.recyclerview.widget.RecyclerView.VERTICAL, false));
+    }
+
+    @Override
+    public void reset() {
+        repaymentResultsAdapter.clearRadioButtons();
+        viewDataBinding.nextButton.setEnabled(false);
     }
 
     @Override
@@ -113,6 +127,20 @@ public class InitialCaptureFragment extends NavigationAdapter.Fragment implement
 
     @Override
     public void enableNextButton() {
-        viewDataBinding.nextButton.setVisibility(View.VISIBLE);
+        viewDataBinding.nextButton.setEnabled(true);
+    }
+
+    @Override
+    public void showNoEventsDialog() {
+        SimpleAlertDialog simpleAlertDialog = new SimpleAlertDialog();
+        simpleAlertDialog.setCancelable(false);
+        simpleAlertDialog.setTitle(getString(R.string.no_events_title));
+        simpleAlertDialog.setMessage(getString(R.string.no_events_message));
+        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1),(view) -> {
+            simpleAlertDialog.dismiss();
+        });
+        simpleAlertDialog.setCloseButton((view) -> simpleAlertDialog.dismiss());
+        simpleAlertDialog.setNegativeButton(getString(R.string.cancel_1), (view) -> simpleAlertDialog.dismiss());
+        simpleAlertDialog.show(getFragmentManager(), null);
     }
 }

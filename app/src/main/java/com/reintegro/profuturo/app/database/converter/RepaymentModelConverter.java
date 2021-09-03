@@ -23,7 +23,11 @@ public class RepaymentModelConverter {
         repaymentEntity.setResolutionNumber(repaymentModel.getResolutionNumber());
         repaymentEntity.setTrdAmount(repaymentModel.getTrdAmount());
         repaymentEntity.setTrdDate(DateConverter.convertFromModel(repaymentModel.getTrdDate()));
+        repaymentEntity.setRequestedWeeks(repaymentModel.getRequestedWeeks());
+        repaymentEntity.setCalculatedAmount(repaymentModel.getCalculatedAmount());
         repaymentEntity.setSelected(repaymentModel.isSelected());
+        repaymentEntity.setWeekAmountValue(repaymentModel.getWeekAmountValue());
+        repaymentEntity.setMaxWeeksRepayment(repaymentModel.getMaxWeeksRepayment());
 
         return repaymentEntity;
     }
@@ -43,7 +47,11 @@ public class RepaymentModelConverter {
         repaymentModel.setResolutionNumber(repaymentEntity.getResolutionNumber());
         repaymentModel.setTrdAmount(repaymentEntity.getTrdAmount());
         repaymentModel.setTrdDate(DateConverter.convertFromEntity(repaymentEntity.getTrdDate()));
+        repaymentModel.setRequestedWeeks(repaymentEntity.getRequestedWeeks());
+        repaymentModel.setCalculatedAmount(repaymentEntity.getCalculatedAmount());
         repaymentModel.setSelected(repaymentEntity.isSelected());
+        repaymentModel.setWeekAmountValue(repaymentEntity.getWeekAmountValue());
+        repaymentModel.setMaxWeeksRepayment(repaymentEntity.getMaxWeeksRepayment());
 
         boolean hasId;
         hasId = repaymentEntity.getId() != null;

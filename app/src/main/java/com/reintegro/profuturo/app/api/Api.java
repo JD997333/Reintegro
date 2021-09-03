@@ -22,6 +22,8 @@ public class Api {
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .addInterceptor(httpLoggingInterceptor)
                     .connectTimeout(120, TimeUnit.SECONDS)
+                    .writeTimeout(120, TimeUnit.SECONDS)
+                    .readTimeout(120, TimeUnit.SECONDS)
                     .build();
 
             retrofit = new Retrofit.Builder()

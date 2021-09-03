@@ -13,7 +13,9 @@ import com.reintegro.profuturo.app.BuildConfig;
 import com.reintegro.profuturo.app.R;
 import com.reintegro.profuturo.app.android.base.ActivityBase;
 import com.reintegro.profuturo.app.android.ui.dialogs.SimpleAlertDialog;
+import com.reintegro.profuturo.app.android.ui.fragments.BiometricCaptureFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.ClientDataFragment;
+import com.reintegro.profuturo.app.android.ui.fragments.DocumentsCaptureFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.GreetingFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.InitialCaptureFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.RepaymentDetailFragment;
@@ -42,6 +44,7 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
     private int currentFragmentPosition = -1;
     private boolean popPending;
     private boolean showTimelinePending;
+    private boolean isPopInitialCapture;
 
     public static final String EXTRA_AGENT_NUMBER = "agent_number";
 
@@ -80,7 +83,11 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
         public void onPageScrollStateChanged(int state) {
             if (popPending && state == ViewPager.SCROLL_STATE_IDLE) {
                 navigationAdapter.popUpTo(currentFragmentPosition);
-                viewDataBinding.timelineView.setVisibility(View.GONE);
+                if (!isPopInitialCapture){
+                    viewDataBinding.timelineView.setVisibility(View.GONE);
+                }else {
+                    isPopInitialCapture = false;
+                }
                 popPending = false;
 
                 NavigationAdapter.Fragment fragment;
@@ -230,6 +237,19 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
     }
 
     @Override
+    public void popToInitialCapture() {
+        int fragmentPosition;
+        fragmentPosition = navigationState.getState(NavigationState.PAGE_INITIAL_CAPTURE);
+
+        currentFragmentPosition = fragmentPosition;
+        popPending = true;
+        isPopInitialCapture = true;
+        viewDataBinding.navigationViewPager.setCurrentItem(fragmentPosition, true);
+
+        viewDataBinding.timelineView.setCurrentPosition(TimelineView.POSITION_INITIAL_CAPTURE);
+    }
+
+    @Override
     public void pushClientDataImmediately() {
         ClientDataFragment fragment = new ClientDataFragment();
         fragment.setNavigationDelegate(this);
@@ -243,14 +263,16 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
     }
 
     @Override
-    public void pushRepaymentEvents() {
+    public void pushInitialCapture() {
         InitialCaptureFragment fragment = new InitialCaptureFragment();
         fragment.setNavigationDelegate(this);
 
         int fragmentPosition;
         fragmentPosition = navigationAdapter.pushFragment(fragment);
 
-        navigationState.putState(NavigationState.PAGE_REPAYMENT_EVENTS, fragmentPosition);
+        showTimelinePending = true;
+
+        navigationState.putState(NavigationState.PAGE_INITIAL_CAPTURE, fragmentPosition);
         viewDataBinding.navigationViewPager.setCurrentItem(fragmentPosition, false);
 
         viewDataBinding.timelineView.setVisibility(View.VISIBLE);
@@ -258,9 +280,26 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
     }
 
     @Override
+    public void pushRepaymentEventsDetail() {
+        RepaymentDetailFragment fragment = new RepaymentDetailFragment();
+        fragment.setNavigationDelegate(this);
+
+        //navigationAdapter.popUpTo(navigationState.getState(NavigationState.PAGE_INITIAL_CAPTURE));
+        int fragmentPosition = navigationAdapter.pushFragment(fragment);
+
+        navigationState.putState(NavigationState.PAGE_REPAYMENT_EVENT_DETAIL, fragmentPosition);
+        viewDataBinding.navigationViewPager.setCurrentItem(fragmentPosition);
+
+        viewDataBinding.timelineView.setCurrentPosition(TimelineView.POSITION_REPAYMENT_EVENTS);
+    }
+
+
+    @Override
     public void pushSelectApplicant() {
         SelectApplicantFragment fragment = new SelectApplicantFragment();
         fragment.setNavigationDelegate(this);
+
+        navigationAdapter.popUpTo(navigationState.getState(NavigationState.PAGE_SEARCH_RESULTS));
 
         int fragmentPosition;
         fragmentPosition = navigationAdapter.pushFragment(fragment);
@@ -271,14 +310,42 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
     }
 
     @Override
-    public void pushRepaymentEventsDetail() {
-        RepaymentDetailFragment fragment = new RepaymentDetailFragment();
+    public void pushSelectApplicantNoGone() {
+        SelectApplicantFragment fragment = new SelectApplicantFragment();
+        fragment.setNavigationDelegate(this);
 
-        navigationAdapter.popUpTo(navigationState.getState(NavigationState.PAGE_REPAYMENT_EVENTS));
-        int fragmentPosition = navigationAdapter.pushFragment(fragment);
+        int fragmentPosition;
+        fragmentPosition = navigationAdapter.pushFragment(fragment);
 
-        navigationState.putState(NavigationState.PAGE_REPAYMENT_EVENT_DETAIL, fragmentPosition);
+        navigationState.putState(NavigationState.PAGE_SELECT_APPLICANTS, fragmentPosition);
+    }
+
+    @Override
+    public void pushDocumentsCapture() {
+        DocumentsCaptureFragment fragment = new DocumentsCaptureFragment();
+        fragment.setNavigationDelegate(this);
+
+        int fragmentPosition;
+        fragmentPosition = navigationAdapter.pushFragment(fragment);
+
+        navigationState.putState(NavigationState.PAGE_DOCUMENTS_CAPTURE, fragmentPosition);
         viewDataBinding.navigationViewPager.setCurrentItem(fragmentPosition);
-        viewDataBinding.timelineView.setCurrentPosition(TimelineView.POSITION_REPAYMENT_EVENTS);
+
+        viewDataBinding.timelineView.setCurrentPosition(TimelineView.POSITION_DOCUMENTS_CAPTURE);
+
+    }
+
+    @Override
+    public void pushBiometricCapture() {
+        BiometricCaptureFragment fragment = new BiometricCaptureFragment();
+        fragment.setNavigationDelegate(this);
+
+        int fragmentPosition;
+        fragmentPosition = navigationAdapter.pushFragment(fragment);
+
+        navigationState.putState(NavigationState.PAGE_BIOMETRIC_CAPTURE, fragmentPosition);
+        viewDataBinding.navigationViewPager.setCurrentItem(fragmentPosition);
+
+        viewDataBinding.timelineView.setCurrentPosition(TimelineView.POSITION_BIOMETRICS_CAPTURE);
     }
 }

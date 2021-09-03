@@ -22,7 +22,7 @@ public class PresenterBase<TInteractor extends ContractBase.Interactor, TState e
 
     @Override
     public void setState(TState state) {
-
+        this.state = state;
     }
 
     @Override

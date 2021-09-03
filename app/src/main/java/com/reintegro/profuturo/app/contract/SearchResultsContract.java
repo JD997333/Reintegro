@@ -30,5 +30,6 @@ public interface SearchResultsContract {
         void showSearchResults(List<ClientDto> clientDtos);
         void pushRepaymentEvents();
         void pushSelectApplicant();
+        void pushSelectApplicantNoGone();
     }
 }

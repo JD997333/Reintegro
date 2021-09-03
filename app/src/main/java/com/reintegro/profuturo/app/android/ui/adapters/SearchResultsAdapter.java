@@ -81,12 +81,16 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         });
         holder.viewDataBinding.rfcTextView.setText(clientDto.getRfc());
         holder.viewDataBinding.selectionRadioButton.setChecked(position == selectedItemPosition);
-        holder.viewDataBinding.selectionRadioButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        holder.viewDataBinding.selectionRadioButton.setOnClickListener((view) -> {
+            toggleRadiobutton(position);
+            radioButtonOnItemSelectedListener.onItemSelected(position);
+        });
+        /*holder.viewDataBinding.selectionRadioButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 toggleRadiobutton(position);
                 radioButtonOnItemSelectedListener.onItemSelected(position);
             }
-        });
+        });*/
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

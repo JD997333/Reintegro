@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.reintegro.profuturo.app.database.local.AgentDAO;
 import com.reintegro.profuturo.app.database.local.ClientDAO;
+import com.reintegro.profuturo.app.database.local.ProcedureDAO;
 import com.reintegro.profuturo.app.database.local.RepaymentEventDAO;
 
 import io.realm.Realm;
@@ -29,5 +30,8 @@ public class DataBase {
 
         RepaymentEventDAO repaymentEventDAO = new RepaymentEventDAO();
         repaymentEventDAO.clear();
+
+        ProcedureDAO procedureDAO = new ProcedureDAO();
+        procedureDAO.clear();
     }
 }

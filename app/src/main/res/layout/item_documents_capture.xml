@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:background="@drawable/selector_background_simple"
+        android:gravity="center_vertical"
+        android:id="@+id/preview"
+        android:layout_height="48dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_width="48dp">
+
+            <ImageView
+                android:id="@+id/status_image_view"
+                android:layout_height="48dp"
+                android:layout_width="48dp"
+                android:padding="8dp"
+                tools:src="@drawable/ic_close_red" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:background="@color/orange"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="2dp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:layout_width="0dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/document_name"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_width="match_parent"
+                tools:text="Solicitud de CCB"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:background="@color/orange"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="2dp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_width="48dp">
+
+            <ImageView
+                android:id="@+id/sign"
+                android:layout_height="48dp"
+                android:layout_width="48dp"
+                android:padding="8dp"
+                tools:src="@drawable/ic_pencil" />
+
+            <ImageView
+                android:id="@+id/photo"
+                android:layout_height="48dp"
+                android:layout_width="48dp"
+                android:padding="8dp"
+                tools:src="@drawable/ic_pencil" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

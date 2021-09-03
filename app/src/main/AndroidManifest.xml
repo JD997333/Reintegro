@@ -19,6 +19,7 @@
         <activity
             android:configChanges="keyboardHidden"
             android:name=".android.base.ActivityBase"/>
+
         <activity
             android:name=".ui.main.MainActivity"
             android:windowSoftInputMode="adjustPan">
@@ -27,6 +28,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".android.ui.activity.SignatureActivity"/>
+
     </application>
 
 </manifest>

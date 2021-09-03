@@ -35,7 +35,6 @@
     <string name="capture_document_1">Documentos capturados</string>
     <string name="capture_required_1">Se requiere capturar el expediente de identificación</string>
     <string name="capture_summary_1">Resumen de captura</string>
-    <string name="ccb_request_1">Solicitud CCB</string>
     <string name="cell_phone_1">Teléfono celular:</string>
     <string name="cell_phone_2">Celular*</string>
     <string name="certified_accounts_1">Cuentas certificadas</string>
@@ -50,7 +49,7 @@
     <string name="debit_card_account_number_length_error_1">El número de la tarjeta debe tener 16 dígitos</string>
     <string name="document_capture_1">Captura de documentos</string>
     <string name="document_not_captured_error_1">El documento no ha sido capturado</string>
-    <string name="electronic_signature_of_1">Firma electrónica de %s</string>
+    <string name="electronic_signature_of_1">Firma autógrafa digitalizada de %s</string>
     <string name="email_1">Correo electrónico:</string>
     <string name="email_2">Correo electrónico*</string>
     <string name="empty_search_client_data_error_1">Ingrese al menos un criterio de búsqueda válido</string>
@@ -101,7 +100,7 @@
     <string name="profuturo_account_number_1">Número de cuenta Profuturo</string>
     <string name="record_capture_1">Registrar captura</string>
     <string name="request_key_1">Cve solicitud</string>
-    <string name="required_fields_1">Los campos con * son documentos obligatorios</string>
+    <string name="required_fields_1">Los campos con * son documentos obligatorios.</string>
     <string name="required_fields_2">Los campos con * son obligatorios</string>
     <string name="rfc_1">RFC</string>
     <string name="rfc_2">RFC:</string>
@@ -119,7 +118,7 @@
     <string name="states_1">Estado:</string>
     <string name="status_1">Estatus</string>
     <string name="street_1">Calle:</string>
-    <string name="term_signature">Firma para aceptar los términos y condiciones.</string>
+    <string name="term_signature">Firma autógrafa digitalizada</string>
     <string name="throw_class_cast_msg">Debe implementar</string>
     <string name="title_search_client_1">Ingrese por lo menos un dato del cliente para iniciar la búsqueda</string>
     <string name="town_1">Alcaldía/Municipio:</string>
@@ -135,6 +134,9 @@
     <string name="validate_nss_error_1">Ingrese un NSS válido</string>
     <string name="validate_required_documents_error_1">No se han capturado los documentos requeridos.</string>
     <string name="validate_selected_notification_channel_error_1">Medio de notificación inválido. Favor de capturar uno nuevo</string>
+    <string name="signature_needed">No se han capturado todas las firmas necesarias.</string>
+    <string name="four_finger_stamp_message">Para generar la firma biométrica se deberá capturar 4 huellas del trabajador y 1 del asesor.</string>
+    <string name="four_finger_stamp_note">Nota: Recuerda colocar y mantener el dedo sobre el lector al oprimir CAPTURAR</string>
 
     <string name="initial_capture_header">Captura inicial</string>
     <string name="initial_capture_title">Eventos de retiro por desempleo</string>
@@ -155,6 +157,34 @@
     <string name="cancel_message_title">Cancelar trámite</string>
     <string name="next">Siguiente</string>
     <string name="repayment_events_detail">Detalle de evento de retiro</string>
+    <string name="calculate_button">CALCULAR</string>
+    <string name="insert_data_error">Ingrese un número de semanas válido</string>
+    <string name="confirm_message_title">Confirmar</string>
+    <string name="confirm_message_text">Al continuar con la selección actual, no será posible regresar a modificar la opción elegida</string>
+    <string name="modify_text1">MODIFICAR</string>
+    <string name="request_procesar_title">Consulta de expediente</string>
+    <string name="request_procesar_message">No es posible capturar el trámite, es necesario consultar el estatus de los expedientes en PROCESAR ¿Desea realizar la consulta?</string>
+    <string name="send_procesar_title">Consulta a PROCESAR</string>
+    <string name="send_procesar_message">¿Está seguro que desea enviar la consulta?</string>
+    <string name="no_events_title">Sin eventos</string>
+    <string name="no_events_message">No se detectaron eventos de retiro por desempleo</string>
+    <string name="no_coexistence_title">Convivencia con otro proceso operativo</string>
+    <string name="no_coexistence_message">No convive, </string>
+    <string name="no_coexistence_error">Ocurrió un error al consultar la matriz de convivencia</string>
+    <string name="retry">REINTENTAR</string>
+    <string name="invalid_curp">La CURP no es válida</string>
+    <string name="no_expedient_found_msg">No se encontró el expediente en la base de datos de PROCESAR. Imposible capturar el trámite</string>
+    <string name="select_applicant_necesary">Seleccione un tipo de solicitante</string>
+    <string name="select_applicant_title_error">Imposible capturar trámites, no se cumplen las siguientes validaciones:</string>
+    <string name="introduce_folio">Ingresar folio</string>
+    <string name="introduce_folio_incorrect">Ingrese un folio válido</string>
+    <string name="superior_weeks_msg">El número de semanas ingresado es mayor al número de semanas disponibles</string>
+    <string name="no_available_weeks_msg">No se logró calcular el monto a reintegrar. Servicio calcularMontoReintegrar de PROCESAR</string>
+    <string name="finish_procedure_provisional">Continúa a la pantalla captura de documentos.. Módulo en construcción</string>
+    <string name="client_data_error">Ocurrió un error al guardar los datos del cliente</string>
+    <string name="insert_valid_weeks">Ingrese un número de semanas a reintegrar válido</string>
+    <string name="procedure_saved_successful">Guardado de trámite exitoso</string>.
+    <string name="save_initial_capture_error">Ocurrió un error en el servicio guardar captura inicial</string>
 
     <!--    IRR Changes     -->
     <string name="select_applicant_header">Envio de consulta de retiros por desempleo</string>
@@ -168,14 +198,14 @@
     <string name="text_applicant_curp">CURP del titular:</string>
     <string name="text_third_applicant_curp">CURP del tercero:</string>
     <string name="text_applicant_type_spinner">Titular de la cuenta</string>
-    <string name="text_third_applicant_edittext">Ingrese la CURP</string>
+    <string name="text_third_applicant_edittext">Ingresar la CURP</string>
     <!--    PlaceHolders    -->
     <string name="ph_name_and_account_number">Vannesa Pérez Ceballos • Número de cuenta 099998889</string>
     <string name="ph_curp">AAAA000000AAAAA00</string>
     <string name="lorem">Lorem Ipsum</string>
     <string name="repayment_event_date">Fecha evento retiro:</string>
     <string name="total_weeks_available">Total de semanas disponibles a reintegrar:</string>
-    <string name="amount_withdrawal_event">Monto pagado por evento de retiro</string>
+    <string name="amount_withdrawal_event">Monto pagado por evento de retiro:</string>
     <string name="day_value">Valor día:</string>
     <string name="weeks_requested">*Número de semanas que solicita reintegrar</string>
     <string name="repayment_amount">Monto a Reintegrar</string>
@@ -184,6 +214,13 @@
     <string name="repayment_amount_1">Monto a reintegrar</string>
     <string name="documents_capture">Captura de documentos</string>
     <string name="biometric_capture">Captura de biométricos</string>
+    <string name="auth_folio_title">Folio de autenticación</string>
+    <string name="auth_folio_expired">No se obtuvo folio vigente con esos datos.</string>
+    <string name="auth_folio_correct">El folio ingresado es correcto.</string>
+    <string name="auth_folio_service_error">Ocurrió un problema en el servicio validarFolioAutenticación.</string>
+    <string name="select_identification_text">Selecciona tipo identificación oficial:</string>
+    <string name="start_biometric">Iniciar captura de huella</string>
+    <string name="end_procedure">Terminar solicitud</string>
 
 </resources>
 <!--

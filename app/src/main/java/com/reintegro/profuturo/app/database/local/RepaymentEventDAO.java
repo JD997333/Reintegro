@@ -3,6 +3,7 @@ package com.reintegro.profuturo.app.database.local;
 import com.reintegro.profuturo.app.data.entity.RepaymentEntity;
 import com.reintegro.profuturo.app.data.repository.RepaymentEventRepository;
 import com.reintegro.profuturo.app.database.converter.RepaymentModelConverter;
+import com.reintegro.profuturo.app.database.model.AgentModel;
 import com.reintegro.profuturo.app.database.model.RepaymentModel;
 
 import java.util.ArrayList;
@@ -122,7 +123,12 @@ public class RepaymentEventDAO implements RepaymentEventRepository {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
 
-        realm.deleteAll();
+        RealmResults<RepaymentModel> results;
+        results = realm.where(RepaymentModel.class).findAll();
+
+        if (!results.isEmpty()) {
+            results.deleteAllFromRealm();
+        }
 
         realm.commitTransaction();
         realm.close();

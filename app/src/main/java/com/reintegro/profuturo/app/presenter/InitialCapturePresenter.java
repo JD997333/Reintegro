@@ -31,14 +31,20 @@ public class InitialCapturePresenter
 
     @Override
     public void onGetRepaymentEventsError() {
-
+        view.dismissLoading();
+        view.showNoEventsDialog();
     }
 
     @Override
     public void onGetClientDataSuccess(ClientDto clientDto) {
         String nameHeader = clientDto.getFullName() + " • " + Utils.formatClientAccountNumber(clientDto.getAccountNumber());
         view.showClientData(clientDto, nameHeader);
+        //TODO implement service for TEST
+        //interactor.getRepaymentEventsDummy(clientDto);
         interactor.getRepaymentEvents(clientDto);
+
+        //view.dismissLoading();
+        //view.showNoEventsDialog();
     }
 
     @Override

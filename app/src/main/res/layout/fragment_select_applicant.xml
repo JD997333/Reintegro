@@ -235,7 +235,7 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="200dp"
+                android:layout_width="260dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
@@ -263,6 +263,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:paddingStart="8dp"
                         android:text="@string/ph_curp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -280,10 +281,13 @@
                         android:layout_height="match_parent"
                         android:imeOptions="actionDone"
                         android:inputType="text|textCapCharacters"
+                        android:paddingStart="8dp"
                         android:maxLength="@integer/max_length_curp"
-                        app:inputHint="@string/text_third_applicant_edittext"
+                        android:textAlignment="textStart"
+                        android:hint="@string/text_third_applicant_edittext"
                         app:inputTextColor="@color/gray_dark_2"
-                        app:inputTextSize="14sp" />
+                        android:textSize="16sp"
+                        android:background="@drawable/edit_text_shape"/>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -298,11 +302,11 @@
             android:layout_marginEnd="16dp"
             android:text="@string/cancel_1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/new_search_button"
+            app:layout_constraintEnd_toStartOf="@id/confirm_button"
             style="@style/Button.White" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/new_search_button"
+            android:id="@+id/confirm_button"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
             android:text="@string/button_confirm"

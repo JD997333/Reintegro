@@ -48,5 +48,13 @@ public class DateUtils {
 
         return stringBuilder.toString();
     }
+
+    public static String getFormatedTodayDate(String format){
+        Date date = new Date();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format, LocaleUtils.MEXICO);
+
+        return dateFormat.format(date);
+    }
 }
 

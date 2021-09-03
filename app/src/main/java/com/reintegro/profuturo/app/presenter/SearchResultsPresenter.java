@@ -41,10 +41,9 @@ public class SearchResultsPresenter extends PresenterBase<SearchResultsContract.
     public void onSetSelectedSearchResultSuccess(ClientDto clientDto) {
         if (isSelectedSearchResultParent){
             view.pushClientDataImmediately();
+            //view.pushSelectApplicantNoGone();
         } else{
-            //TODO: replace this for the correct fragment SELECT APPLICANT
-            //view.pushSelectApplicant();
-            view.pushRepaymentEvents();
+            view.pushSelectApplicant();
         }
     }
 }

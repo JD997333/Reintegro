@@ -1,20 +1,26 @@
 package com.reintegro.profuturo.app.domain.dto;
 
+import java.text.DecimalFormat;
+
 public class RepaymentDto {
     private String id;
     private String aforeKey;
     private String diagnoseProcess;
     private DateDto trdDate;
-    private String trdAmount;
+    private Double trdAmount;
     private String nss;
     private String resolutionNumber;
     private String operationResult;
-    private String discountedWeeks;
+    private Integer discountedWeeks;
     private String benefitType;
-    private String repaymentValueDay;
-    private String preRepaymentAmount;
+    private Double repaymentValueDay;
+    private Double preRepaymentAmount;
     private Integer eventNumber;
     private Integer preDiscountedWeeks;
+    private Integer requestedWeeks;
+    private Double calculatedAmount;
+    private Double weekAmountValue;
+    private Integer maxWeeksRepayment;
     private boolean selected;
 
     public String getId() {
@@ -49,11 +55,11 @@ public class RepaymentDto {
         this.trdDate = trdDate;
     }
 
-    public String getTrdAmount() {
+    public Double getTrdAmount() {
         return trdAmount;
     }
 
-    public void setTrdAmount(String trdAmount) {
+    public void setTrdAmount(Double trdAmount) {
         this.trdAmount = trdAmount;
     }
 
@@ -81,11 +87,11 @@ public class RepaymentDto {
         this.operationResult = operationResult;
     }
 
-    public String getDiscountedWeeks() {
+    public Integer getDiscountedWeeks() {
         return discountedWeeks;
     }
 
-    public void setDiscountedWeeks(String discountedWeeks) {
+    public void setDiscountedWeeks(Integer discountedWeeks) {
         this.discountedWeeks = discountedWeeks;
     }
 
@@ -97,19 +103,19 @@ public class RepaymentDto {
         this.benefitType = benefitType;
     }
 
-    public String getRepaymentValueDay() {
+    public Double getRepaymentValueDay() {
         return repaymentValueDay;
     }
 
-    public void setRepaymentValueDay(String repaymentValueDay) {
+    public void setRepaymentValueDay(Double repaymentValueDay) {
         this.repaymentValueDay = repaymentValueDay;
     }
 
-    public String getPreRepaymentAmount() {
+    public Double getPreRepaymentAmount() {
         return preRepaymentAmount;
     }
 
-    public void setPreRepaymentAmount(String preRepaymentAmount) {
+    public void setPreRepaymentAmount(Double preRepaymentAmount) {
         this.preRepaymentAmount = preRepaymentAmount;
     }
 
@@ -129,11 +135,60 @@ public class RepaymentDto {
         this.preDiscountedWeeks = preDiscountedWeeks;
     }
 
+    public Integer getRequestedWeeks() {
+        return requestedWeeks;
+    }
+
+    public void setRequestedWeeks(Integer requestedWeeks) {
+        this.requestedWeeks = requestedWeeks;
+    }
+
+    public Double getCalculatedAmount() {
+        return calculatedAmount;
+    }
+
+    public void setCalculatedAmount(Double calculatedAmount) {
+        this.calculatedAmount = calculatedAmount;
+    }
+
     public boolean isSelected() {
         return selected;
     }
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    public String getFormatAmountTrd(){
+        DecimalFormat amountFormat = new DecimalFormat("#,###.00");
+
+        return "$" + amountFormat.format(trdAmount);
+    }
+
+    public String getPreRepaymentAmountFormat(){
+        DecimalFormat amountFormat = new DecimalFormat("#,###.00");
+        DecimalFormat preAmountFormat = new DecimalFormat("0,000.00");
+
+        if (preRepaymentAmount == 0.0){
+            return "$" + preAmountFormat.format(preRepaymentAmount);
+        }else{
+            return "$" + amountFormat.format(preRepaymentAmount);
+        }
+    }
+
+    public Double getWeekAmountValue() {
+        return weekAmountValue;
+    }
+
+    public void setWeekAmountValue(Double weekAmountValue) {
+        this.weekAmountValue = weekAmountValue;
+    }
+
+    public Integer getMaxWeeksRepayment() {
+        return maxWeeksRepayment;
+    }
+
+    public void setMaxWeeksRepayment(Integer maxWeeksRepayment) {
+        this.maxWeeksRepayment = maxWeeksRepayment;
     }
 }

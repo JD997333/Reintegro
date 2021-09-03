@@ -23,7 +23,11 @@ public class RepaymentConverter {
         repaymentDto.setResolutionNumber(repaymentEntity.getResolutionNumber());
         repaymentDto.setTrdAmount(repaymentEntity.getTrdAmount());
         repaymentDto.setTrdDate(DateConverter.convertFromEntity(repaymentEntity.getTrdDate()));
+        repaymentDto.setRequestedWeeks(repaymentEntity.getRequestedWeeks());
+        repaymentDto.setCalculatedAmount(repaymentEntity.getCalculatedAmount());
         repaymentDto.setSelected(repaymentEntity.isSelected());
+        repaymentDto.setWeekAmountValue(repaymentEntity.getWeekAmountValue());
+        repaymentDto.setMaxWeeksRepayment(repaymentEntity.getMaxWeeksRepayment());
 
         return repaymentDto;
     }
@@ -44,7 +48,11 @@ public class RepaymentConverter {
         repaymentEntity.setResolutionNumber(repaymentDto.getResolutionNumber());
         repaymentEntity.setTrdAmount(repaymentDto.getTrdAmount());
         repaymentEntity.setTrdDate(DateConverter.convertFromDto(repaymentDto.getTrdDate()));
+        repaymentEntity.setRequestedWeeks(repaymentEntity.getRequestedWeeks());
+        repaymentEntity.setCalculatedAmount(repaymentEntity.getCalculatedAmount());
         repaymentEntity.setSelected(repaymentDto.isSelected());
+        repaymentEntity.setWeekAmountValue(repaymentDto.getWeekAmountValue());
+        repaymentEntity.setMaxWeeksRepayment(repaymentDto.getMaxWeeksRepayment());
 
         return repaymentEntity;
     }

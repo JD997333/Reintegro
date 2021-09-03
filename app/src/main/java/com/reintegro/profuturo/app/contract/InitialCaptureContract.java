@@ -13,6 +13,8 @@ public interface InitialCaptureContract {
         void getRepaymentEvents(ClientDto clientDto);
         void saveRepaymentEvents(List<RepaymentEntity> repaymentDtos);
         void setSelectedRepaymentEvent(RepaymentDto repaymentDto);
+        void validateRepaymentEvents(List<RepaymentEntity> repaymentEntities);
+        void getRepaymentEventsDummy(ClientDto clientDto);
     }
 
     interface Presenter extends ContractBase.Presenter<Interactor, State, View>{
@@ -35,5 +37,6 @@ public interface InitialCaptureContract {
         void showRepaymentEvents(List<RepaymentDto> repaymentEventsResult);
         void showCancelDialog();
         void enableNextButton();
+        void showNoEventsDialog();
     }
 }

@@ -4,4 +4,5 @@
     <integer name="max_length_curp">18</integer>
     <integer name="max_length_nss">11</integer>
     <integer name="max_length_cell_phone">10</integer>
+    <integer name="max_length_auth_folio">11</integer>
 </resources>

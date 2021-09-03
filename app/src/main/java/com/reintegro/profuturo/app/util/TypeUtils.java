@@ -31,6 +31,18 @@ public class TypeUtils {
         }
     }
 
+    public static Double getDoubleValueOrDefault(String value){
+        if (value != null){
+            try {
+                return Double.parseDouble(value);
+            }catch (NumberFormatException e){
+                return DEFAULT_DOUBLE;
+            }
+        }else{
+            return DEFAULT_DOUBLE;
+        }
+    }
+
     public static Integer getIntValueOrDefault(String value) {
         if (value != null) {
             try {

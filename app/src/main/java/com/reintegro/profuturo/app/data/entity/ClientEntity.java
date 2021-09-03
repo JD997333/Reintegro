@@ -444,4 +444,16 @@ public class ClientEntity {
     public void setPostalCode(long postalCode) {
         this.postalCode = postalCode;
     }
+
+    public String getPreferentialEmail(){
+        String email = "";
+        for (ClientEmailEntity emailEntity : getEmails()){
+            if (emailEntity.isPreferential()){
+                email = emailEntity.getEmail();
+                break;
+            }
+        }
+
+        return email;
+    }
 }

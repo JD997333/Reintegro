@@ -54,6 +54,19 @@ public class RepaymentResultsAdapter extends RecyclerView.Adapter<RepaymentResul
         }
     }
 
+    public void clearRadioButtons(){
+        if (repaymentEvents != null && repaymentEvents.size() > 0){
+            for (int index = 0; index < repaymentEvents.size(); index++) {
+                AppCompatRadioButton radioButton;
+                if (index < radioButtons.size()){
+                    radioButton = radioButtons.get(index);
+
+                    radioButton.setChecked(false);
+                }
+            }
+        }
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -72,8 +85,8 @@ public class RepaymentResultsAdapter extends RecyclerView.Adapter<RepaymentResul
         holder.viewDataBinding.trdDateTextView.setText(repaymentDto.getTrdDate().toDate());
         holder.viewDataBinding.discountedWeeksTextView.setText(String.valueOf(repaymentDto.getDiscountedWeeks()));
         holder.viewDataBinding.preRepaymentWeeksTextView.setText(String.valueOf(repaymentDto.getPreDiscountedWeeks()));
-        holder.viewDataBinding.trdAmount.setText(repaymentDto.getTrdAmount());
-        holder.viewDataBinding.preRepaymentAmountTextView.setText(repaymentDto.getPreRepaymentAmount());
+        holder.viewDataBinding.trdAmount.setText(repaymentDto.getFormatAmountTrd());
+        holder.viewDataBinding.preRepaymentAmountTextView.setText(repaymentDto.getPreRepaymentAmountFormat());
         holder.viewDataBinding.selectRadioButton.setChecked(position == selectedItemPosition);
         holder.viewDataBinding.selectRadioButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked){
