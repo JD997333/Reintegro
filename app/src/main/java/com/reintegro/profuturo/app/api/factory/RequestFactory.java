@@ -7,6 +7,7 @@ import com.reintegro.profuturo.app.api.vo.GetAgentInformationRequest;
 import com.reintegro.profuturo.app.api.vo.GetClientData360Request;
 import com.reintegro.profuturo.app.api.vo.GetClientImageRequest;
 import com.reintegro.profuturo.app.api.vo.GetLetterRepaymentDocRequest;
+import com.reintegro.profuturo.app.api.vo.GetRecommendedFingersRequest;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentEventsRequest;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentSolicitudeDocRequest;
 import com.reintegro.profuturo.app.api.vo.InsertClientRequest;
@@ -284,6 +285,15 @@ public class RequestFactory {
         request.setNumCuenta(clientEntity.getAccountNumber());
         request.setReferencia(clientEntity.getAccountNumber());
         request.setSemanasaReintegrar(repaymentEntity.getRequestedWeeks().toString());
+
+        return request;
+    }
+
+    public GetRecommendedFingersRequest createGetRecommendedFingersRequest(ClientEntity clientEntity){
+        GetRecommendedFingersRequest request = new GetRecommendedFingersRequest();
+        GetRecommendedFingersRequest.Req req = new GetRecommendedFingersRequest.Req();
+        req.setCurp(clientEntity.getCurp());
+        request.setReq(req);
 
         return request;
     }

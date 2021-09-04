@@ -13,6 +13,7 @@ import com.reintegro.profuturo.app.api.converter.GetClientDataResponseConverter;
 import com.reintegro.profuturo.app.api.converter.GetClientImageResponseConverter;
 import com.reintegro.profuturo.app.api.converter.GetDocumentsResponseConverter;
 import com.reintegro.profuturo.app.api.converter.GetLetterRepaymentResponseConverter;
+import com.reintegro.profuturo.app.api.converter.GetRecommendedFingersResponseConverter;
 import com.reintegro.profuturo.app.api.converter.GetRepaymentEventsResponseConverter;
 import com.reintegro.profuturo.app.api.converter.GetRepaymentSolicitudeDocResponseConverter;
 import com.reintegro.profuturo.app.api.converter.InsertClientResponseConverter;
@@ -31,6 +32,7 @@ import com.reintegro.profuturo.app.api.validator.GetClientDataResponseValidator;
 import com.reintegro.profuturo.app.api.validator.GetClientImageResponseValidator;
 import com.reintegro.profuturo.app.api.validator.GetDocumentsResponseValidator;
 import com.reintegro.profuturo.app.api.validator.GetLetterRepaymentResponseValidator;
+import com.reintegro.profuturo.app.api.validator.GetRecommendedFingersResponseValidator;
 import com.reintegro.profuturo.app.api.validator.GetRepaymentEventsResponseValidator;
 import com.reintegro.profuturo.app.api.validator.GetRepaymentSolicitudeDocResponseValidator;
 import com.reintegro.profuturo.app.api.validator.InsertClientResponseValidator;
@@ -217,6 +219,15 @@ public class RetrofitDataProviderFactory extends DataProviderFactory {
             Api.getClient().getLetterRepaymentDocument(requestFactory.createGetLetterRepaymentRequest(clientEntity, procedureEntity, repaymentEntity)),
             new GetLetterRepaymentResponseConverter(),
             new GetLetterRepaymentResponseValidator()
+        );
+    }
+
+    @Override
+    public Provider<String> createGetRecommendedFingersProvider(ClientEntity clientEntity) {
+        return new RetrofitWebServiceDataProvider<>(
+            Api.getClient().getRecommendedFingers(requestFactory.createGetRecommendedFingersRequest(clientEntity)),
+            new GetRecommendedFingersResponseConverter(),
+            new GetRecommendedFingersResponseValidator()
         );
     }
 }

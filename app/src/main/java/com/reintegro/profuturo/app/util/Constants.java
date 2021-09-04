@@ -9,6 +9,7 @@ public class Constants {
     public static final String DATE_FORMAT_4 = "yyyy/MM/dd";
     public static final String DATE_FORMAT_5 = "yyyyMMdd";
     public static final String DATE_FORMAT_6 = "yyyy-MM-dd";
+    public static final String DATE_FORMAT_7 = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
 
     public static final String URL_BASE = "https://www.proinversion.mx";
     public static final String HTTP_HEADER_AUTHORIZATION = "Authorization: Basic cndzcHJheGlzcDpQcjR4MXMjdTVS";
@@ -27,6 +28,28 @@ public class Constants {
     public static final String EXTRA_IMAGE_ENGINE_PATH = "rutaDestino";
     public static final String EXTRA_IMAGE_ENGINE_RESULT = "rutaImagen";
 
+    public static final String EXTRA_BIOMETRIC_PACKAGE_NAME = "com.profuturo.biometria";
+    public static final String EXTRA_BIOMETRIC_CLASS_NAME = "com.profuturo.biometria.HuellaDigital";
+    public static final String EXTRA_BIOMETRIC_AGENT_ID = "idEmpleadoProfuturo";
+    public static final String EXTRA_BIOMETRIC_PACKAGE_TAG = "packageName";
+    public static final String EXTRA_BIOMETRIC_OPERATION_TAG = "operacion";
+    public static final String EXTRA_BIOMETRIC_OP_FOUR_FINGERS = "sello-cuatro-dedos";
+    public static final String EXTRA_BIOMETRIC_TAG = "tag";
+    public static final String EXTRA_BIOMETRIC_FINGER_EVALUATION = "fingerEval";
+    public static final String EXTRA_BIOMETRIC_LEFT_FINGER_INDEX = "2";
+    public static final String EXTRA_BIOMETRIC_EMPLOYEE_ID_TAG = "idTrabajador";
+    public static final String EXTRA_BIOMETRIC_JSON_TAG = "json";
+
+    public static final String CONTRACT_BIO_ENGINE_QUALITY = "calidad_huella";
+    public static final String CONTRACT_BIO_ENGINE_IMAGE = "imagen_huella";
+    public static final String CONTRACT_BIO_ENGINE_FINGER_POSITION = "posicion_dedo";
+    public static final String CONTRACT_BIO_ENGINE_ABSENCE_REASON = "motivo_ausencia";
+    public static final String CONTRACT_BIO_ENGINE_ENCRYPTED_WSQ = "encrypted_wsq";
+    public static final String CONTRACT_BIO_ENGINE_CAPTURE_DATE = "fecha_captura";
+    public static final String CONTRACT_BIO_ENGINE_SERIAL_NUMBER = "numero_serie_dispositivo";
+    public static final int CONTRACT_BIO_ENGINE_EMPLOYEE_ID = 7;
+
+
     public static final String URN_GET_AGENT_ASSIGNED_BRANCH_OFFICE = "/mb/appMovil/rest/cuo/consultaDatosSucursal";
     public static final String URN_GET_AGENT_INFORMATION ="/mb/cusp/rest/consultaInformacionUsuario";
     public static final String URN_GET_BRANCH_OFFICES = "/iib/retiros/utilerias/v1/buscarSucursales";
@@ -44,6 +67,7 @@ public class Constants {
     public static final String URN_GET_DOCUMENTS = "/iib/retiros/reglasRetiros/v1/consultarDocumentoTramite";
     public static final String URN_GET_REPAYMENT_SOLICITUDE_DOC = "/iib/nci/ReintegroSemanas/DocumentosReintegro/v1/consultarSolicitudReintegro";
     public static final String URN_GET_LETTER_REPAYMENT_DOC = "/iib/nci/ReintegroSemanas/DocumentosReintegro/v1/consultarCartaReintegro";
+    public static final String URN_GET_RECOMMENDED_FINGERS = "/mb/selloNHuellas/obtenerSugerenciaHuellas";
 
     public static final int IDENTIFICATION_INDICATOR_STATUS_ACTIVE = 5;
     public static final int BIOMETRIC_INDICATOR_STATUS_NOT_EXIST = 0;

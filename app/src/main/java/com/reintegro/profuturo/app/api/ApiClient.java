@@ -18,6 +18,8 @@ import com.reintegro.profuturo.app.api.vo.GetClientImageResponse;
 import com.reintegro.profuturo.app.api.vo.GetDocumentsResponse;
 import com.reintegro.profuturo.app.api.vo.GetLetterRepaymentDocRequest;
 import com.reintegro.profuturo.app.api.vo.GetLetterRepaymentDocResponse;
+import com.reintegro.profuturo.app.api.vo.GetRecommendedFingersRequest;
+import com.reintegro.profuturo.app.api.vo.GetRecommendedFingersResponse;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentEventsRequest;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentEventsResponse;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentSolicitudeDocRequest;
@@ -129,4 +131,9 @@ public interface ApiClient {
     @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
     @POST(Constants.URL_BASE + BuildConfig.PORT_3 + Constants.URN_GET_LETTER_REPAYMENT_DOC)
     Call<GetLetterRepaymentDocResponse> getLetterRepaymentDocument(@Body GetLetterRepaymentDocRequest request);
+
+    @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
+    @POST(Constants.URL_BASE + BuildConfig.PORT_4 + Constants.URN_GET_RECOMMENDED_FINGERS)
+    Call<GetRecommendedFingersResponse> getRecommendedFingers(@Body GetRecommendedFingersRequest request);
+
 }

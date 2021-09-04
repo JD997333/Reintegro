@@ -137,6 +137,8 @@
     <string name="signature_needed">No se han capturado todas las firmas necesarias.</string>
     <string name="four_finger_stamp_message">Para generar la firma biométrica se deberá capturar 4 huellas del trabajador y 1 del asesor.</string>
     <string name="four_finger_stamp_note">Nota: Recuerda colocar y mantener el dedo sobre el lector al oprimir CAPTURAR</string>
+    <string name="biometric_engine_failed">El motor biométrico falló</string>
+    <string name="recommended_fingers_error">Ocurrió un error en el servicio consultar huellas recomendadas</string>
 
     <string name="initial_capture_header">Captura inicial</string>
     <string name="initial_capture_title">Eventos de retiro por desempleo</string>
