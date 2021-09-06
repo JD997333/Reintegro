@@ -20,6 +20,7 @@ import com.reintegro.profuturo.app.api.converter.GetVoluntarySealResponseConvert
 import com.reintegro.profuturo.app.api.converter.InsertClientResponseConverter;
 import com.reintegro.profuturo.app.api.converter.SaveInitialCaptureResponseConverter;
 import com.reintegro.profuturo.app.api.converter.SaveLoginResponseConverter;
+import com.reintegro.profuturo.app.api.converter.SaveVoluntarySealResponseConverter;
 import com.reintegro.profuturo.app.api.converter.ValCoexistenceNciResponseConverter;
 import com.reintegro.profuturo.app.api.converter.ValidateAuthFolioResponseConverter;
 import com.reintegro.profuturo.app.api.provider.RetrofitWebServiceDataProvider;
@@ -40,6 +41,7 @@ import com.reintegro.profuturo.app.api.validator.GetVoluntarySealResponseValidat
 import com.reintegro.profuturo.app.api.validator.InsertClientResponseValidator;
 import com.reintegro.profuturo.app.api.validator.SaveInitialCaptureResponseValidator;
 import com.reintegro.profuturo.app.api.validator.SaveLoginResponseValidator;
+import com.reintegro.profuturo.app.api.validator.SaveVoluntarySealResponseValidator;
 import com.reintegro.profuturo.app.api.validator.ValCoexistenceNciResponseValidator;
 import com.reintegro.profuturo.app.api.validator.ValidateAuthFolioResponseValidator;
 import com.reintegro.profuturo.app.api.vo.GetAgentAssignedBranchOfficeRequest;
@@ -240,6 +242,15 @@ public class RetrofitDataProviderFactory extends DataProviderFactory {
             Api.getClient().getVoluntarySeal(requestFactory.createGetVoluntarySealRequest(clientEntity, agentEntity, procedureEntity, fingerPrintEntities)),
             new GetVoluntarySealResponseConverter(),
             new GetVoluntarySealResponseValidator()
+        );
+    }
+
+    @Override
+    public Provider<Boolean> createSaveVoluntarySealProvider(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity) {
+        return new RetrofitWebServiceDataProvider<>(
+            Api.getClient().saveVoluntarySeal(requestFactory.createSaveVoluntarySealRequest(clientEntity, agentEntity, procedureEntity)),
+            new SaveVoluntarySealResponseConverter(),
+            new SaveVoluntarySealResponseValidator()
         );
     }
 }

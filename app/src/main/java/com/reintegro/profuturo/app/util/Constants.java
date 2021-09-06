@@ -78,6 +78,8 @@ public class Constants {
     public static final String URN_GET_LETTER_REPAYMENT_DOC = "/iib/nci/ReintegroSemanas/DocumentosReintegro/v1/consultarCartaReintegro";
     public static final String URN_GET_RECOMMENDED_FINGERS = "/mb/selloNHuellas/obtenerSugerenciaHuellas";
     public static final String URN_GET_VOLUNTARY_SEAL = "/mb/selloNHuellas/obtenerSelloNHuellas";
+    public static final String URN_SAVE_VOLUNTARY_SEAL = "/iib/api/BiometriaSello/BiometriaSelloService/v1/guardarSelloProceSAR";
+
 
     public static final int IDENTIFICATION_INDICATOR_STATUS_ACTIVE = 5;
     public static final int BIOMETRIC_INDICATOR_STATUS_NOT_EXIST = 0;

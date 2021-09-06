@@ -5,16 +5,21 @@ import com.reintegro.profuturo.app.api.vo.GetRecommendedFingersResponse;
 import com.reintegro.profuturo.app.vo.BiometricEngineStartRequest;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class GetRecommendedFingersResponseConverter extends ResponseConverter<GetRecommendedFingersResponse, String>{
     @Override
     public String convert(GetRecommendedFingersResponse response) {
+        List<GetRecommendedFingersResponse.Finger> fingerList = response.getFingers();
         BiometricEngineStartRequest request = new BiometricEngineStartRequest();
         List<BiometricEngineStartRequest.FingerEngine> fingerEngineList = new ArrayList<>();
         BiometricEngineStartRequest.FingerEngine fingerEngine;
 
-        for (GetRecommendedFingersResponse.Finger fingerResp : response.getFingers()){
+        fingerList = getSortedArray(fingerList);
+
+        for (GetRecommendedFingersResponse.Finger fingerResp : fingerList){
             fingerEngine = new BiometricEngineStartRequest.FingerEngine();
 
             switch (fingerResp.getId()){
@@ -77,7 +82,7 @@ public class GetRecommendedFingersResponseConverter extends ResponseConverter<Ge
         }
 
         request.setEnroledProfuturo(response.isEnroladoProfuturo());
-        //request.setEnroledProfuturo(false);//TODO delete this line, just for TEST
+        request.setEnroledProfuturo(false);//TODO delete this line, just for TEST
         request.setFingerEngines(fingerEngineList);
         request.setForcedCapture(false);
         request.setManoDerecha(response.isRightHand());
@@ -86,5 +91,19 @@ public class GetRecommendedFingersResponseConverter extends ResponseConverter<Ge
         Gson gson = new Gson();
 
         return gson.toJson(request);
+    }
+
+    private static List<GetRecommendedFingersResponse.Finger> getSortedArray(List<GetRecommendedFingersResponse.Finger> list) {
+        List<GetRecommendedFingersResponse.Finger> fingersSorted;
+        fingersSorted = list;
+        Collections.sort(fingersSorted, new SortById());
+        return fingersSorted;
+    }
+
+    public static class SortById implements Comparator<GetRecommendedFingersResponse.Finger> {
+        @Override
+        public int compare(GetRecommendedFingersResponse.Finger x, GetRecommendedFingersResponse.Finger y) {
+            return Integer.compare(x.getId(), y.getId());
+        }
     }
 }

@@ -14,6 +14,7 @@ import com.reintegro.profuturo.app.api.vo.GetVoluntarySealRequest;
 import com.reintegro.profuturo.app.api.vo.InsertClientRequest;
 import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureRequest;
 import com.reintegro.profuturo.app.api.vo.SaveLoginRequest;
+import com.reintegro.profuturo.app.api.vo.SaveVoluntarySealRequest;
 import com.reintegro.profuturo.app.api.vo.ValCoexistenceNCIRequest;
 import com.reintegro.profuturo.app.api.vo.ValidateAuthFolioRequest;
 import com.reintegro.profuturo.app.data.entity.AgentEntity;
@@ -361,6 +362,27 @@ public class RequestFactory {
 
         GetVoluntarySealRequest request = new GetVoluntarySealRequest();
         request.setSealRequest(sealRequest);
+
+        return request;
+    }
+
+    public SaveVoluntarySealRequest createSaveVoluntarySealRequest(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity){
+        SaveVoluntarySealRequest request = new SaveVoluntarySealRequest();
+        SaveVoluntarySealRequest.SaveVoluntarySealBody body = new SaveVoluntarySealRequest.SaveVoluntarySealBody();
+        body.setClaveAfore(Constants.ID_PROFUTURO_AFORE_KEY.toString());
+        body.setClaveConsar(String.valueOf(agentEntity.getConsarKey()));
+        body.setCurpEmpleado(agentEntity.getCurp());
+        body.setCurpTrabajador(clientEntity.getCurp());
+        body.setFechaGeneracion(DateUtils.getFormatedTodayDate(Constants.DATE_FORMAT_7));
+        body.setFechaVigencia(DateUtils.parseDateToString(DateUtils.getTomorrowDate(), Constants.DATE_FORMAT_7));
+        body.setIdTramite(procedureEntity.getProcedureFolio());
+        body.setNumeroEmpleado(agentEntity.getAgentCode());
+        body.setIdEstatusSello(procedureEntity.getIdStatusVoluntarySeal());
+        body.setResultadoVerificacion(procedureEntity.getVerificationResultSeal());
+        body.setSelloVerificacion(procedureEntity.getVoluntarySeal());
+        body.setIdTipoSello(Constants.REQUEST_BIOMETRIC_SEAL_TYPE);
+
+        request.setSaveVoluntarySealBody(body);
 
         return request;
     }

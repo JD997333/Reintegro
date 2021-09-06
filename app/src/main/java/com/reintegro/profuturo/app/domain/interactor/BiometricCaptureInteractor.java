@@ -34,6 +34,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.CompletableEmitter;
+import io.reactivex.CompletableObserver;
 import io.reactivex.Single;
 import io.reactivex.SingleEmitter;
 import io.reactivex.SingleObserver;
@@ -143,6 +146,7 @@ public class BiometricCaptureInteractor extends InteractorBase<BiometricCaptureC
                         fingerPrintList.add(fingerPrintEntity);
                     }while (cursor.moveToNext());
 
+                    context.getContentResolver().delete(uri, null, null);
                     cursor.close();
 
                     emitter.onSuccess(fingerPrintList);
@@ -226,6 +230,43 @@ public class BiometricCaptureInteractor extends InteractorBase<BiometricCaptureC
 
     @Override
     public void saveVoluntarySeal(ProcedureDto procedureDto) {
-        presenter.onSaveVoluntarySealSuccess();
+        Completable
+            .create((CompletableEmitter emitter) -> {
+                ClientRepository clientRepository = repositoryFactory.createClientRepository();
+                AgentRepository agentRepository = repositoryFactory.createAgentRepository();
+                ProcedureEntity procedureEntity = ProcedureConverter.convertFromDto(procedureDto);
+
+                Provider<Boolean> saveVoluntarySealProvider;
+                saveVoluntarySealProvider = dataProviderFactory.createSaveVoluntarySealProvider(clientRepository.getSelected(), agentRepository.getFirst(), procedureEntity);
+                saveVoluntarySealProvider.subscribe(new Provider.Subscriber<Boolean>() {
+                    @Override
+                    public void onError(Throwable exception) {
+                        emitter.onError(exception);
+                    }
+
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        emitter.onComplete();
+                    }
+                });
+            })
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.computation())
+            .subscribe(new CompletableObserver() {
+                @Override
+                public void onSubscribe(@NonNull Disposable d) {
+
+                }
+
+                @Override
+                public void onComplete() {
+                    presenter.onSaveVoluntarySealSuccess();
+                }
+
+                @Override
+                public void onError(@NonNull Throwable e) {
+                    presenter.onSaveVoluntarySealError();
+                }
+            });
     }
 }

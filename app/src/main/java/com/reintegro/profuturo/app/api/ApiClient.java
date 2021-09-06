@@ -32,6 +32,8 @@ import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureRequest;
 import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureResponse;
 import com.reintegro.profuturo.app.api.vo.SaveLoginRequest;
 import com.reintegro.profuturo.app.api.vo.SaveLoginResponse;
+import com.reintegro.profuturo.app.api.vo.SaveVoluntarySealRequest;
+import com.reintegro.profuturo.app.api.vo.SaveVoluntarySealResponse;
 import com.reintegro.profuturo.app.api.vo.ValCoexistenceNCIRequest;
 import com.reintegro.profuturo.app.api.vo.ValCoexistenceNCIResponse;
 import com.reintegro.profuturo.app.api.vo.ValidateAuthFolioRequest;
@@ -141,5 +143,9 @@ public interface ApiClient {
     @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
     @POST(Constants.URL_BASE + BuildConfig.PORT_4 + Constants.URN_GET_VOLUNTARY_SEAL)
     Call<GetVoluntarySealResponse> getVoluntarySeal(@Body GetVoluntarySealRequest request);
+
+    @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
+    @POST(Constants.URL_BASE + BuildConfig.PORT_1 + Constants.URN_SAVE_VOLUNTARY_SEAL)
+    Call<SaveVoluntarySealResponse> saveVoluntarySeal(@Body SaveVoluntarySealRequest request);
 
 }
