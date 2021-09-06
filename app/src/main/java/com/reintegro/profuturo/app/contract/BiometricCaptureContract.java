@@ -13,7 +13,7 @@ public interface BiometricCaptureContract {
         void getClientData();
         void getAgentData();
         void readFingerPrints();
-
+        void getVoluntarySeal(List<FingerPrintDto> fingerPrintDtoList);
     }
 
     interface Presenter extends ContractBase.Presenter<Interactor, State, View>{

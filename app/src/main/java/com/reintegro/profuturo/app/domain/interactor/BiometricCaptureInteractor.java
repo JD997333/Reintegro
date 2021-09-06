@@ -20,6 +20,7 @@ import com.reintegro.profuturo.app.data.repository.ClientRepository;
 import com.reintegro.profuturo.app.domain.converter.AgentConverter;
 import com.reintegro.profuturo.app.domain.converter.ClientConverter;
 import com.reintegro.profuturo.app.domain.converter.FingerPrintConverter;
+import com.reintegro.profuturo.app.domain.dto.FingerPrintDto;
 import com.reintegro.profuturo.app.util.BiometricEngineUtils;
 import com.reintegro.profuturo.app.util.Constants;
 import com.reintegro.profuturo.app.util.DateUtils;
@@ -161,6 +162,32 @@ public class BiometricCaptureInteractor extends InteractorBase<BiometricCaptureC
                 @Override
                 public void onError(@NonNull Throwable e) {
                     presenter.onReadFingerPrintError();
+                }
+            });
+    }
+
+    @Override
+    public void getVoluntarySeal(List<FingerPrintDto> fingerPrintDtoList) {
+        Single
+            .create((SingleEmitter<String> emitter) ->{
+
+            })
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.computation())
+            .subscribe(new SingleObserver<String>() {
+                @Override
+                public void onSubscribe(@NonNull Disposable d) {
+
+                }
+
+                @Override
+                public void onSuccess(@NonNull String s) {
+
+                }
+
+                @Override
+                public void onError(@NonNull Throwable e) {
+
                 }
             });
     }

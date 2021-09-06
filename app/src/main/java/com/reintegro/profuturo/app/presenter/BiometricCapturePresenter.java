@@ -47,12 +47,13 @@ public class BiometricCapturePresenter extends PresenterBase<BiometricCaptureCon
 
     @Override
     public void onBiometricEngineResult() {
+        view.showLoading();
         interactor.readFingerPrints();
     }
 
     @Override
     public void onReadFingerPrintsSuccess(List<FingerPrintDto> fingerPrintDtoList) {
-
+        interactor.getVoluntarySeal(fingerPrintDtoList);
     }
 
     @Override
