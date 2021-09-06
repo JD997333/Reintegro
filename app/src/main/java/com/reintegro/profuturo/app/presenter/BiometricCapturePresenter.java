@@ -60,4 +60,19 @@ public class BiometricCapturePresenter extends PresenterBase<BiometricCaptureCon
     public void onReadFingerPrintError() {
 
     }
+
+    @Override
+    public void onGetVoluntarySealError() {
+        view.showGetVoluntarySealError();
+    }
+
+    @Override
+    public void onSaveVoluntarySealSuccess() {
+        view.showSaveVoluntarySealSuccess();
+    }
+
+    @Override
+    public void onSaveVoluntarySealError() {
+        view.showSaveVoluntarySealError();
+    }
 }

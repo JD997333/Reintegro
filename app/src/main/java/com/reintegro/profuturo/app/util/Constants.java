@@ -49,6 +49,15 @@ public class Constants {
     public static final String CONTRACT_BIO_ENGINE_SERIAL_NUMBER = "numero_serie_dispositivo";
     public static final int CONTRACT_BIO_ENGINE_EMPLOYEE_ID = 7;
 
+    public static final String REQUEST_BIOMETRIC_PROFILE_CODE = "30";
+    public static final String REQUEST_BIOMETRIC_RESOLUTION = "1";
+    public static final String REQUEST_BIOMETRIC_SCALE_UNITS = "1";
+    public static final String REQUEST_BIOMETRIC_SEAL_TYPE = "7484";
+    public static final String REQUEST_BIOMETRIC_SERVICE_CHANNEL = "001";
+    public static final String REQUEST_BIOMETRIC_SERVICE_ID_TRD = "602";
+    public static final String REQUEST_BIOMETRIC_APPLICANT_TYPE = "01";
+    public static final String REQUEST_BIOMETRIC_VOLUNTARY_SEAL_STATUS = "6626";
+
 
     public static final String URN_GET_AGENT_ASSIGNED_BRANCH_OFFICE = "/mb/appMovil/rest/cuo/consultaDatosSucursal";
     public static final String URN_GET_AGENT_INFORMATION ="/mb/cusp/rest/consultaInformacionUsuario";
@@ -68,6 +77,7 @@ public class Constants {
     public static final String URN_GET_REPAYMENT_SOLICITUDE_DOC = "/iib/nci/ReintegroSemanas/DocumentosReintegro/v1/consultarSolicitudReintegro";
     public static final String URN_GET_LETTER_REPAYMENT_DOC = "/iib/nci/ReintegroSemanas/DocumentosReintegro/v1/consultarCartaReintegro";
     public static final String URN_GET_RECOMMENDED_FINGERS = "/mb/selloNHuellas/obtenerSugerenciaHuellas";
+    public static final String URN_GET_VOLUNTARY_SEAL = "/mb/selloNHuellas/obtenerSelloNHuellas";
 
     public static final int IDENTIFICATION_INDICATOR_STATUS_ACTIVE = 5;
     public static final int BIOMETRIC_INDICATOR_STATUS_NOT_EXIST = 0;

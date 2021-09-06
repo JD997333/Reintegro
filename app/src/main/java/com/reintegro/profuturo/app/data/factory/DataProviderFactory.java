@@ -4,6 +4,7 @@ import com.reintegro.profuturo.app.data.entity.AgentEntity;
 import com.reintegro.profuturo.app.data.entity.BranchOfficeEntity;
 import com.reintegro.profuturo.app.data.entity.ClientEntity;
 import com.reintegro.profuturo.app.data.entity.DocumentEntity;
+import com.reintegro.profuturo.app.data.entity.FingerPrintEntity;
 import com.reintegro.profuturo.app.data.entity.LocationEntity;
 import com.reintegro.profuturo.app.data.entity.ProcedureEntity;
 import com.reintegro.profuturo.app.data.entity.RepaymentEntity;
@@ -35,4 +36,5 @@ public abstract class DataProviderFactory {
     public abstract Provider<String> createGetRepaymentSolicitudeDocProvider(AgentEntity agentEntity, ClientEntity clientEntity, ProcedureEntity procedureEntity, DocumentEntity documentEntity, RepaymentEntity repaymentEntity);
     public abstract Provider<String> createGetLetterRepaymentDocProvider(ClientEntity clientEntity, ProcedureEntity procedureEntity, RepaymentEntity repaymentEntity);
     public abstract Provider<String> createGetRecommendedFingersProvider(ClientEntity clientEntity);
+    public abstract Provider<ProcedureEntity> createGetVoluntarySealProvider(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity, List<FingerPrintEntity> fingerPrintEntities);
 }

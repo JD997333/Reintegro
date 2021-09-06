@@ -24,6 +24,8 @@ import com.reintegro.profuturo.app.api.vo.GetRepaymentEventsRequest;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentEventsResponse;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentSolicitudeDocRequest;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentSolicitudeDocResponse;
+import com.reintegro.profuturo.app.api.vo.GetVoluntarySealRequest;
+import com.reintegro.profuturo.app.api.vo.GetVoluntarySealResponse;
 import com.reintegro.profuturo.app.api.vo.InsertClientRequest;
 import com.reintegro.profuturo.app.api.vo.InsertClientResponse;
 import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureRequest;
@@ -135,5 +137,9 @@ public interface ApiClient {
     @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
     @POST(Constants.URL_BASE + BuildConfig.PORT_4 + Constants.URN_GET_RECOMMENDED_FINGERS)
     Call<GetRecommendedFingersResponse> getRecommendedFingers(@Body GetRecommendedFingersRequest request);
+
+    @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
+    @POST(Constants.URL_BASE + BuildConfig.PORT_4 + Constants.URN_GET_VOLUNTARY_SEAL)
+    Call<GetVoluntarySealResponse> getVoluntarySeal(@Body GetVoluntarySealRequest request);
 
 }

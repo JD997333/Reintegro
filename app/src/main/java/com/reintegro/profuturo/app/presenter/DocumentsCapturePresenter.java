@@ -169,7 +169,7 @@ public class DocumentsCapturePresenter
                 view.showLoading();
                 interactor.buildSolicitudeDocument(state.getSelectedDocument());
             }else{
-                view.showSignatureNeededError();
+                //view.showSignatureNeededError();
             }
         }
     }

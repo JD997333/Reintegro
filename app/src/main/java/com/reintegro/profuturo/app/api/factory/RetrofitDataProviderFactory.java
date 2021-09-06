@@ -16,6 +16,7 @@ import com.reintegro.profuturo.app.api.converter.GetLetterRepaymentResponseConve
 import com.reintegro.profuturo.app.api.converter.GetRecommendedFingersResponseConverter;
 import com.reintegro.profuturo.app.api.converter.GetRepaymentEventsResponseConverter;
 import com.reintegro.profuturo.app.api.converter.GetRepaymentSolicitudeDocResponseConverter;
+import com.reintegro.profuturo.app.api.converter.GetVoluntarySealResponseConverter;
 import com.reintegro.profuturo.app.api.converter.InsertClientResponseConverter;
 import com.reintegro.profuturo.app.api.converter.SaveInitialCaptureResponseConverter;
 import com.reintegro.profuturo.app.api.converter.SaveLoginResponseConverter;
@@ -35,6 +36,7 @@ import com.reintegro.profuturo.app.api.validator.GetLetterRepaymentResponseValid
 import com.reintegro.profuturo.app.api.validator.GetRecommendedFingersResponseValidator;
 import com.reintegro.profuturo.app.api.validator.GetRepaymentEventsResponseValidator;
 import com.reintegro.profuturo.app.api.validator.GetRepaymentSolicitudeDocResponseValidator;
+import com.reintegro.profuturo.app.api.validator.GetVoluntarySealResponseValidator;
 import com.reintegro.profuturo.app.api.validator.InsertClientResponseValidator;
 import com.reintegro.profuturo.app.api.validator.SaveInitialCaptureResponseValidator;
 import com.reintegro.profuturo.app.api.validator.SaveLoginResponseValidator;
@@ -47,6 +49,7 @@ import com.reintegro.profuturo.app.data.entity.AgentEntity;
 import com.reintegro.profuturo.app.data.entity.BranchOfficeEntity;
 import com.reintegro.profuturo.app.data.entity.ClientEntity;
 import com.reintegro.profuturo.app.data.entity.DocumentEntity;
+import com.reintegro.profuturo.app.data.entity.FingerPrintEntity;
 import com.reintegro.profuturo.app.data.entity.LocationEntity;
 import com.reintegro.profuturo.app.data.entity.ProcedureEntity;
 import com.reintegro.profuturo.app.data.entity.RepaymentEntity;
@@ -228,6 +231,15 @@ public class RetrofitDataProviderFactory extends DataProviderFactory {
             Api.getClient().getRecommendedFingers(requestFactory.createGetRecommendedFingersRequest(clientEntity)),
             new GetRecommendedFingersResponseConverter(),
             new GetRecommendedFingersResponseValidator()
+        );
+    }
+
+    @Override
+    public Provider<ProcedureEntity> createGetVoluntarySealProvider(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity, List<FingerPrintEntity> fingerPrintEntities) {
+        return new RetrofitWebServiceDataProvider<>(
+            Api.getClient().getVoluntarySeal(requestFactory.createGetVoluntarySealRequest(clientEntity, agentEntity, procedureEntity, fingerPrintEntities)),
+            new GetVoluntarySealResponseConverter(),
+            new GetVoluntarySealResponseValidator()
         );
     }
 }

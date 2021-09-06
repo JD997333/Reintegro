@@ -80,6 +80,9 @@ public class GetRecommendedFingersResponse {
         @Expose
         @SerializedName("sugerido")
         private boolean suggested;
+        @Expose
+        @SerializedName("excepcion")
+        private String exception;
 
         public int getId() {
             return id;
@@ -95,6 +98,14 @@ public class GetRecommendedFingersResponse {
 
         public void setSuggested(boolean suggested) {
             this.suggested = suggested;
+        }
+
+        public String getException() {
+            return exception;
+        }
+
+        public void setException(String exception) {
+            this.exception = exception;
         }
     }
 }

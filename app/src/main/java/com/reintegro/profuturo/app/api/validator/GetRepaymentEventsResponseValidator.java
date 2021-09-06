@@ -15,7 +15,7 @@ public class GetRepaymentEventsResponseValidator extends ResponseValidator<GetRe
             return false;
         }
         if (response.getRepaymentEvents().get(0).getResultadoOperacion().equals("02")){
-            return false;//TODO change to false TEST
+            return false;//TODO change to false before commit TEST
         }
         return true;
     }

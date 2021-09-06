@@ -113,4 +113,19 @@ public class BiometricCaptureFragment extends NavigationAdapter.Fragment impleme
     public void showGetRecommendedFingersError() {
         SnackBar.show(getView(), getString(R.string.recommended_fingers_error));
     }
+
+    @Override
+    public void showGetVoluntarySealError() {
+        SnackBar.show(getView(), "Error al obtener el sello de voluntad");
+    }
+
+    @Override
+    public void showSaveVoluntarySealError() {
+        SnackBar.show(getView(), "Error al guardar el sello de voluntad");
+    }
+
+    @Override
+    public void showSaveVoluntarySealSuccess() {
+        SnackBar.show(getView(), "Sello de voluntad guardado exitosamente");
+    }
 }

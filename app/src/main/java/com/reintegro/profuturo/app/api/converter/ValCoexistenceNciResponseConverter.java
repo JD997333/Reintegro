@@ -9,8 +9,7 @@ public class ValCoexistenceNciResponseConverter extends ResponseConverter<ValCoe
     public CoexistenceResult convert(ValCoexistenceNCIResponse response) {
         CoexistenceResult result = new CoexistenceResult();
         result.setCoexistenceSuccess(Boolean.parseBoolean(response.getConsultaConvivenciaCompletaComunNCIResponse().getConvive()));
-        //TODO delete this just for TEST
-        //result.setCoexistenceSuccess(true);
+        //result.setCoexistenceSuccess(true);//TODO delete this just for TEST
         result.setCoexistenceMessage(response.getConsultaConvivenciaCompletaComunNCIResponse().getDescNoConvivencia());
         return result;
     }

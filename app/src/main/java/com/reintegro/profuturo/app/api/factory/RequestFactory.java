@@ -10,6 +10,7 @@ import com.reintegro.profuturo.app.api.vo.GetLetterRepaymentDocRequest;
 import com.reintegro.profuturo.app.api.vo.GetRecommendedFingersRequest;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentEventsRequest;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentSolicitudeDocRequest;
+import com.reintegro.profuturo.app.api.vo.GetVoluntarySealRequest;
 import com.reintegro.profuturo.app.api.vo.InsertClientRequest;
 import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureRequest;
 import com.reintegro.profuturo.app.api.vo.SaveLoginRequest;
@@ -18,6 +19,7 @@ import com.reintegro.profuturo.app.api.vo.ValidateAuthFolioRequest;
 import com.reintegro.profuturo.app.data.entity.AgentEntity;
 import com.reintegro.profuturo.app.data.entity.ClientEntity;
 import com.reintegro.profuturo.app.data.entity.DocumentEntity;
+import com.reintegro.profuturo.app.data.entity.FingerPrintEntity;
 import com.reintegro.profuturo.app.data.entity.ProcedureEntity;
 import com.reintegro.profuturo.app.data.entity.RepaymentEntity;
 import com.reintegro.profuturo.app.util.Constants;
@@ -294,6 +296,71 @@ public class RequestFactory {
         GetRecommendedFingersRequest.Req req = new GetRecommendedFingersRequest.Req();
         req.setCurp(clientEntity.getCurp());
         request.setReq(req);
+
+        return request;
+    }
+
+    public GetVoluntarySealRequest createGetVoluntarySealRequest(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity, List<FingerPrintEntity> fingerPrintEntities){
+        GetVoluntarySealRequest.Device device = new GetVoluntarySealRequest.Device();
+        device.setDeviceIdentificationId(fingerPrintEntities.get(0).getSerialNumber());
+        device.setAcquisitionProfileCode(Constants.REQUEST_BIOMETRIC_PROFILE_CODE);
+        device.setCaptureResolution(Constants.REQUEST_BIOMETRIC_RESOLUTION);
+        device.setImageScaleUnitsCode(Constants.REQUEST_BIOMETRIC_SCALE_UNITS);
+
+        GetVoluntarySealRequest.ProcedureInformation procedureInformation = new GetVoluntarySealRequest.ProcedureInformation();
+        procedureInformation.setIdTramite(procedureEntity.getProcedureFolio());
+        procedureInformation.setNumeroEmpleado(agentEntity.getAgentCode());
+        procedureInformation.setIdTipoSello(Constants.REQUEST_BIOMETRIC_SEAL_TYPE);
+        procedureInformation.setIndicadorSelloNuevo(true);
+
+        List<GetVoluntarySealRequest.FingerPrint> fingerPrintsAgent = new ArrayList<>();
+        List<GetVoluntarySealRequest.FingerPrint> fingerPrintsClient = new ArrayList<>();
+        GetVoluntarySealRequest.FingerPrint fingerPrintReq;
+
+        for (FingerPrintEntity fingerEntity : fingerPrintEntities){
+            if (fingerEntity.getIsEmployee() == 1){
+                fingerPrintReq = new GetVoluntarySealRequest.FingerPrint();
+                fingerPrintReq.setBase64data(fingerEntity.getBase64Image());
+                fingerPrintReq.setFechaCaptura(fingerEntity.getCaptureDate());
+                fingerPrintReq.setFingerPositionCode(String.valueOf(fingerEntity.getFingerPositionCode()));
+                fingerPrintReq.setImageHashValue(fingerEntity.getImageHashValue());
+                fingerPrintReq.setMotivoSinHuella(fingerEntity.getAbsenceReason());
+                fingerPrintReq.setNistQualityMeasure(fingerEntity.getNistQualityMeasure());
+                fingerPrintsAgent.add(fingerPrintReq);
+            }else {
+                fingerPrintReq = new GetVoluntarySealRequest.FingerPrint();
+                fingerPrintReq.setBase64data(fingerEntity.getBase64Image());
+                fingerPrintReq.setFechaCaptura(fingerEntity.getCaptureDate());
+                fingerPrintReq.setFingerPositionCode(String.valueOf(fingerEntity.getFingerPositionCode()));
+                fingerPrintReq.setImageHashValue(fingerEntity.getImageHashValue());
+                fingerPrintReq.setMotivoSinHuella(fingerEntity.getAbsenceReason());
+                fingerPrintReq.setNistQualityMeasure(fingerEntity.getNistQualityMeasure());
+                fingerPrintsClient.add(fingerPrintReq);
+            }
+        }
+
+        GetVoluntarySealRequest.SealInformation sealInformation = new GetVoluntarySealRequest.SealInformation();
+        sealInformation.setAgentFingerPrintList(fingerPrintsAgent);
+        sealInformation.setCanalServicio(Constants.REQUEST_BIOMETRIC_SERVICE_CHANNEL);
+        sealInformation.setClientFingerPrintList(fingerPrintsClient);
+        sealInformation.setCurpEmpleado(agentEntity.getCurp());
+        sealInformation.setCurpSolicitante("");
+        sealInformation.setCurpTrabajador(clientEntity.getCurp());
+        sealInformation.setDevice(device);
+        sealInformation.setFechaSolicitud(DateUtils.getFormatedTodayDate(Constants.DATE_FORMAT_6));
+        sealInformation.setFolioSolicitud(procedureEntity.getProcedureFolio());
+        sealInformation.setNumeroOficina(Constants.ID_PROFUTURO_AFORE_KEY.toString());
+        sealInformation.setServiceId(Constants.REQUEST_BIOMETRIC_SERVICE_ID_TRD);
+        sealInformation.setTipoSolicitante(Constants.REQUEST_BIOMETRIC_APPLICANT_TYPE);
+        sealInformation.setTokenMovil("");
+        sealInformation.setTransactionDate(DateUtils.getFormatedTodayDate(Constants.DATE_FORMAT_6));
+
+        GetVoluntarySealRequest.SealRequest sealRequest = new GetVoluntarySealRequest.SealRequest();
+        sealRequest.setSealInformation(sealInformation);
+        sealRequest.setProcedureInformation(procedureInformation);
+
+        GetVoluntarySealRequest request = new GetVoluntarySealRequest();
+        request.setSealRequest(sealRequest);
 
         return request;
     }

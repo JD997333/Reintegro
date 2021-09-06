@@ -21,6 +21,7 @@ public class ProcedureConverter {
         procedureDto.setProcedureDate(DateConverter.convertFromEntity(procedureEntity.getProcedureDate()));
         procedureDto.setProcedureFolio(procedureEntity.getProcedureFolio());
         procedureDto.setApplicantCurp(procedureEntity.getApplicantCurp());
+        procedureDto.setVerificationResultSeal(procedureEntity.getVerificationResultSeal());
 
         return procedureDto;
     }
@@ -41,6 +42,7 @@ public class ProcedureConverter {
         procedureEntity.setProcedureDate(DateConverter.convertFromDto(procedureDto.getProcedureDate()));
         procedureEntity.setProcedureFolio(procedureDto.getProcedureFolio());
         procedureEntity.setApplicantCurp(procedureDto.getApplicantCurp());
+        procedureEntity.setVerificationResultSeal(procedureDto.getVerificationResultSeal());
 
         return procedureEntity;
     }

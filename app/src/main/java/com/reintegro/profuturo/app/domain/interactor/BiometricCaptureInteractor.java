@@ -12,15 +12,19 @@ import com.reintegro.profuturo.app.contract.BiometricCaptureContract;
 import com.reintegro.profuturo.app.data.entity.AgentEntity;
 import com.reintegro.profuturo.app.data.entity.ClientEntity;
 import com.reintegro.profuturo.app.data.entity.FingerPrintEntity;
+import com.reintegro.profuturo.app.data.entity.ProcedureEntity;
 import com.reintegro.profuturo.app.data.factory.DataProviderFactory;
 import com.reintegro.profuturo.app.data.factory.RepositoryFactory;
 import com.reintegro.profuturo.app.data.provider.Provider;
 import com.reintegro.profuturo.app.data.repository.AgentRepository;
 import com.reintegro.profuturo.app.data.repository.ClientRepository;
+import com.reintegro.profuturo.app.data.repository.ProcedureRepository;
 import com.reintegro.profuturo.app.domain.converter.AgentConverter;
 import com.reintegro.profuturo.app.domain.converter.ClientConverter;
 import com.reintegro.profuturo.app.domain.converter.FingerPrintConverter;
+import com.reintegro.profuturo.app.domain.converter.ProcedureConverter;
 import com.reintegro.profuturo.app.domain.dto.FingerPrintDto;
+import com.reintegro.profuturo.app.domain.dto.ProcedureDto;
 import com.reintegro.profuturo.app.util.BiometricEngineUtils;
 import com.reintegro.profuturo.app.util.Constants;
 import com.reintegro.profuturo.app.util.DateUtils;
@@ -169,26 +173,59 @@ public class BiometricCaptureInteractor extends InteractorBase<BiometricCaptureC
     @Override
     public void getVoluntarySeal(List<FingerPrintDto> fingerPrintDtoList) {
         Single
-            .create((SingleEmitter<String> emitter) ->{
+            .create((SingleEmitter<ProcedureEntity> emitter) ->{
+                ClientRepository clientRepository = repositoryFactory.createClientRepository();
+                ClientEntity clientEntity = clientRepository.getSelected();
+
+                AgentRepository agentRepository = repositoryFactory.createAgentRepository();
+                AgentEntity agentEntity = agentRepository.getFirst();
+
+                ProcedureRepository procedureRepository = repositoryFactory.createProcedureRepository();
+                ProcedureEntity procedureEntity = procedureRepository.getFirst();
+
+                List<FingerPrintEntity> fingerPrintEntities = FingerPrintConverter.convertFromDtos(fingerPrintDtoList);
+
+                Provider<ProcedureEntity> getVoluntarySealProvider;
+                getVoluntarySealProvider = dataProviderFactory.createGetVoluntarySealProvider(clientEntity, agentEntity, procedureEntity, fingerPrintEntities);
+                getVoluntarySealProvider.subscribe(new Provider.Subscriber<ProcedureEntity>() {
+                    @Override
+                    public void onError(Throwable exception) {
+                        emitter.onError(exception);
+                    }
+
+                    @Override
+                    public void onSuccess(ProcedureEntity procedureResult) {
+                        procedureEntity.setVoluntarySeal(procedureResult.getVoluntarySeal());
+                        procedureEntity.setIdStatusVoluntarySeal(Constants.REQUEST_BIOMETRIC_VOLUNTARY_SEAL_STATUS);
+                        procedureEntity.setVerificationResultSeal(procedureResult.getVerificationResultSeal());
+                        procedureRepository.update(procedureEntity);
+                        emitter.onSuccess(procedureEntity);
+                    }
+                });
 
             })
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.computation())
-            .subscribe(new SingleObserver<String>() {
+            .subscribe(new SingleObserver<ProcedureEntity>() {
                 @Override
                 public void onSubscribe(@NonNull Disposable d) {
 
                 }
 
                 @Override
-                public void onSuccess(@NonNull String s) {
-
+                public void onSuccess(@NonNull ProcedureEntity procedureEntity) {
+                    saveVoluntarySeal(ProcedureConverter.convertFromEntity(procedureEntity));
                 }
 
                 @Override
                 public void onError(@NonNull Throwable e) {
-
+                    presenter.onGetVoluntarySealError();
                 }
             });
+    }
+
+    @Override
+    public void saveVoluntarySeal(ProcedureDto procedureDto) {
+        presenter.onSaveVoluntarySealSuccess();
     }
 }

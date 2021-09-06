@@ -15,6 +15,7 @@ public class ProcedureDto {
     private String idChannel;
     private String voluntarySeal;
     private String idStatusVoluntarySeal;
+    private String verificationResultSeal;
     private Integer idStage;
     private Integer idSubStage;
     private Integer idChannelStage;
@@ -137,5 +138,13 @@ public class ProcedureDto {
 
     public void setIdChannelStage(Integer idChannelStage) {
         this.idChannelStage = idChannelStage;
+    }
+
+    public String getVerificationResultSeal() {
+        return verificationResultSeal;
+    }
+
+    public void setVerificationResultSeal(String verificationResultSeal) {
+        this.verificationResultSeal = verificationResultSeal;
     }
 }
