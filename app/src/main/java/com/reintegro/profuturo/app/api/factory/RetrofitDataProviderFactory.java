@@ -16,6 +16,7 @@ import com.reintegro.profuturo.app.api.converter.GetLetterRepaymentResponseConve
 import com.reintegro.profuturo.app.api.converter.GetRepaymentEventsResponseConverter;
 import com.reintegro.profuturo.app.api.converter.GetRepaymentSolicitudeDocResponseConverter;
 import com.reintegro.profuturo.app.api.converter.InsertClientResponseConverter;
+import com.reintegro.profuturo.app.api.converter.InsertInitialRulingResponseConverter;
 import com.reintegro.profuturo.app.api.converter.SaveInitialCaptureResponseConverter;
 import com.reintegro.profuturo.app.api.converter.SaveLoginResponseConverter;
 import com.reintegro.profuturo.app.api.converter.ValCoexistenceNciResponseConverter;
@@ -34,13 +35,13 @@ import com.reintegro.profuturo.app.api.validator.GetLetterRepaymentResponseValid
 import com.reintegro.profuturo.app.api.validator.GetRepaymentEventsResponseValidator;
 import com.reintegro.profuturo.app.api.validator.GetRepaymentSolicitudeDocResponseValidator;
 import com.reintegro.profuturo.app.api.validator.InsertClientResponseValidator;
+import com.reintegro.profuturo.app.api.validator.InsertInitialRulingResponseValidator;
 import com.reintegro.profuturo.app.api.validator.SaveInitialCaptureResponseValidator;
 import com.reintegro.profuturo.app.api.validator.SaveLoginResponseValidator;
 import com.reintegro.profuturo.app.api.validator.ValCoexistenceNciResponseValidator;
 import com.reintegro.profuturo.app.api.validator.ValidateAuthFolioResponseValidator;
 import com.reintegro.profuturo.app.api.vo.GetAgentAssignedBranchOfficeRequest;
 import com.reintegro.profuturo.app.api.vo.GetAgentInformationRequest;
-import com.reintegro.profuturo.app.api.vo.SaveLoginRequest;
 import com.reintegro.profuturo.app.data.entity.AgentEntity;
 import com.reintegro.profuturo.app.data.entity.BranchOfficeEntity;
 import com.reintegro.profuturo.app.data.entity.ClientEntity;
@@ -79,133 +80,133 @@ public class RetrofitDataProviderFactory extends DataProviderFactory {
     public Provider<AgentEntity> createGetAgentAssignedBranchOfficeProvider(AgentEntity agentEntity) {
         GetAgentAssignedBranchOfficeRequest request = requestFactory.createGetAgentAssignedBranchOfficeRequest(agentEntity);
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().getAgentAssignedBranchOffice(request),
-            new GetAgentAssignedBranchOfficeResponseConverter(),
-            new GetAgentAssignedBranchOfficeResponseValidator()
+                Api.getClient().getAgentAssignedBranchOffice(request),
+                new GetAgentAssignedBranchOfficeResponseConverter(),
+                new GetAgentAssignedBranchOfficeResponseValidator()
         );
     }
 
     @Override
     public Provider<List<BranchOfficeEntity>> createGetBranchOfficesProvider(AgentEntity agentEntity, LocationEntity locationEntity) {
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().getBranchOffices(agentEntity.getBranchOfficeNumber(), locationEntity.getLatitude(), locationEntity.getLongitude()),
-            new GetBranchOfficesResponseConverter(),
-            new GetBranchOfficesResponseValidator()
+                Api.getClient().getBranchOffices(agentEntity.getBranchOfficeNumber(), locationEntity.getLatitude(), locationEntity.getLongitude()),
+                new GetBranchOfficesResponseConverter(),
+                new GetBranchOfficesResponseValidator()
         );
     }
 
     @Override
     public Provider<Boolean> createSaveLogin(AgentEntity agentEntity) {
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().saveLogin(requestFactory.createSaveLoginRequest(agentEntity)),
-            new SaveLoginResponseConverter(),
-            new SaveLoginResponseValidator()
+                Api.getClient().saveLogin(requestFactory.createSaveLoginRequest(agentEntity)),
+                new SaveLoginResponseConverter(),
+                new SaveLoginResponseValidator()
         );
     }
 
     @Override
     public Provider<List<ClientEntity>> createGetClientDataProvider(SearchClientEntity searchClientEntity) {
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().getClientData(searchClientEntity.getAccountNumber(), searchClientEntity.getCurp(), searchClientEntity.getNss()),
-            new GetClientDataResponseConverter(),
-            new GetClientDataResponseValidator()
+                Api.getClient().getClientData(searchClientEntity.getAccountNumber(), searchClientEntity.getCurp(), searchClientEntity.getNss()),
+                new GetClientDataResponseConverter(),
+                new GetClientDataResponseValidator()
         );
     }
 
     @Override
     public Provider<ClientEntity> createGetClientImageProvider(ClientEntity clientEntity) {
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().getClientImage(requestFactory.createGetClientImageRequest(clientEntity)),
-            new GetClientImageResponseConverter(),
-            new GetClientImageResponseValidator()
+                Api.getClient().getClientImage(requestFactory.createGetClientImageRequest(clientEntity)),
+                new GetClientImageResponseConverter(),
+                new GetClientImageResponseValidator()
         );
     }
 
     @Override
     public Provider<ProcedureEntity> saveInitialCapture(RepaymentEntity repaymentEntity, ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity) {
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().saveInitialCapture(requestFactory.createSaveInitialCaptureRequest(agentEntity,clientEntity,repaymentEntity, procedureEntity)),
-            new SaveInitialCaptureResponseConverter(),
-            new SaveInitialCaptureResponseValidator()
+                Api.getClient().saveInitialCapture(requestFactory.createSaveInitialCaptureRequest(agentEntity, clientEntity, repaymentEntity, procedureEntity)),
+                new SaveInitialCaptureResponseConverter(),
+                new SaveInitialCaptureResponseValidator()
         );
     }
 
     @Override
     public Provider<Boolean> insertClient(ClientEntity clientEntity, AgentEntity agentEntity) {
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().insertClient(requestFactory.createInsertClientRequest(clientEntity, agentEntity)),
-            new InsertClientResponseConverter(),
-            new InsertClientResponseValidator()
+                Api.getClient().insertClient(requestFactory.createInsertClientRequest(clientEntity, agentEntity)),
+                new InsertClientResponseConverter(),
+                new InsertClientResponseValidator()
         );
     }
 
     @Override
     public Provider<HashMap<String, String>> getClientDataOP360(ClientEntity clientEntity) {
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().getClientDataOP360(requestFactory.createGetClientDataOP360Request(clientEntity)),
-            new GetClientDataOP360ResponseConverter(),
-            new GetClientDataOP360ResponseValidator()
+                Api.getClient().getClientDataOP360(requestFactory.createGetClientDataOP360Request(clientEntity)),
+                new GetClientDataOP360ResponseConverter(),
+                new GetClientDataOP360ResponseValidator()
         );
     }
 
     @Override
     public Provider<List<ApplicantType>> getApplicantTypes(ClientEntity clientEntity, ProcedureEntity procedureEntity) {
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().getApplicantTypes(requestFactory.createGetApplicantTypesRequest(clientEntity, procedureEntity)),
-            new ApplicantTypeResponseConverter(),
-            new ApplicantTypeResponseValidator()
+                Api.getClient().getApplicantTypes(requestFactory.createGetApplicantTypesRequest(clientEntity, procedureEntity)),
+                new ApplicantTypeResponseConverter(),
+                new ApplicantTypeResponseValidator()
         );
     }
 
     @Override
     public Provider<CoexistenceResult> createValCoexistenceNciProvider(ClientEntity clientEntity) {
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().valCoexistenceNci(requestFactory.createValCoexistenceNciRequest(clientEntity)),
-            new ValCoexistenceNciResponseConverter(),
-            new ValCoexistenceNciResponseValidator()
+                Api.getClient().valCoexistenceNci(requestFactory.createValCoexistenceNciRequest(clientEntity)),
+                new ValCoexistenceNciResponseConverter(),
+                new ValCoexistenceNciResponseValidator()
         );
     }
 
     @Override
     public Provider<List<RepaymentEntity>> createGetRepaymentsProvider(ClientEntity clientEntity) {
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().getRepaymentEvents(requestFactory.createGetRepaymentEventsRequest(clientEntity)),
-            new GetRepaymentEventsResponseConverter(),
-            new GetRepaymentEventsResponseValidator()
+                Api.getClient().getRepaymentEvents(requestFactory.createGetRepaymentEventsRequest(clientEntity)),
+                new GetRepaymentEventsResponseConverter(),
+                new GetRepaymentEventsResponseValidator()
         );
     }
 
     @Override
     public Provider<RepaymentEntity> createCalculateRepaymentProvider(RepaymentEntity repaymentEntity) {
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().calculateRepayment(requestFactory.createCalculateRepaymentRequest(repaymentEntity)),
-            new CalculateRepaymentResponseConverter(),
-            new CalculateRepaymentResponseValidator()
+                Api.getClient().calculateRepayment(requestFactory.createCalculateRepaymentRequest(repaymentEntity)),
+                new CalculateRepaymentResponseConverter(),
+                new CalculateRepaymentResponseValidator()
         );
     }
 
     @Override
     public Provider<ValidateFolioResult> createValidateAuthFolioProvider(ClientEntity clientEntity, ProcedureEntity procedureEntity) {
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().validateAuthFolio(requestFactory.createValidateAuthFolioRequest(clientEntity, procedureEntity)),
-            new ValidateAuthFolioResponseConverter(),
-            new ValidateAuthFolioResponseValidator()
+                Api.getClient().validateAuthFolio(requestFactory.createValidateAuthFolioRequest(clientEntity, procedureEntity)),
+                new ValidateAuthFolioResponseConverter(),
+                new ValidateAuthFolioResponseValidator()
         );
     }
 
     @Override
     public Provider<List<DocumentEntity>> createGetDocumentsProvider(int idProcess, int applicantType, int idSubProcess) {
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().getDocuments(idProcess, applicantType, idSubProcess),
-            new GetDocumentsResponseConverter(),
-            new GetDocumentsResponseValidator()
+                Api.getClient().getDocuments(idProcess, applicantType, idSubProcess),
+                new GetDocumentsResponseConverter(),
+                new GetDocumentsResponseValidator()
         );
     }
 
     @Override
     public Provider<String> createGetRepaymentSolicitudeDocProvider(AgentEntity agentEntity, ClientEntity clientEntity, ProcedureEntity procedureEntity, DocumentEntity documentEntity, RepaymentEntity repaymentEntity) {
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().getRepaymentSolicitudeDocument(requestFactory.createGetRepaymentSolicitudeRequest(agentEntity, clientEntity, procedureEntity, repaymentEntity, documentEntity)),
+                Api.getClient().getRepaymentSolicitudeDocument(requestFactory.createGetRepaymentSolicitudeRequest(agentEntity, clientEntity, procedureEntity, repaymentEntity, documentEntity)),
                 new GetRepaymentSolicitudeDocResponseConverter(),
                 new GetRepaymentSolicitudeDocResponseValidator()
         );
@@ -214,9 +215,18 @@ public class RetrofitDataProviderFactory extends DataProviderFactory {
     @Override
     public Provider<String> createGetLetterRepaymentDocProvider(ClientEntity clientEntity, ProcedureEntity procedureEntity, RepaymentEntity repaymentEntity) {
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().getLetterRepaymentDocument(requestFactory.createGetLetterRepaymentRequest(clientEntity, procedureEntity, repaymentEntity)),
-            new GetLetterRepaymentResponseConverter(),
-            new GetLetterRepaymentResponseValidator()
+                Api.getClient().getLetterRepaymentDocument(requestFactory.createGetLetterRepaymentRequest(clientEntity, procedureEntity, repaymentEntity)),
+                new GetLetterRepaymentResponseConverter(),
+                new GetLetterRepaymentResponseValidator()
         );
+    }
+
+    @Override
+    public Provider<Boolean> InsertInitialRulingProvider(ClientEntity clientEntity, ProcedureEntity procedureEntity, RepaymentEntity repaymentEntity) {
+        return new RetrofitWebServiceDataProvider<>(
+                Api.getClient().insertInitialRuling(requestFactory.createInsertInitialRulingRequest(clientEntity, procedureEntity, repaymentEntity)),
+                new InsertInitialRulingResponseConverter(),
+                new InsertInitialRulingResponseValidator()
+                );
     }
 }

@@ -44,6 +44,7 @@ public class Constants {
     public static final String URN_GET_DOCUMENTS = "/iib/retiros/reglasRetiros/v1/consultarDocumentoTramite";
     public static final String URN_GET_REPAYMENT_SOLICITUDE_DOC = "/iib/nci/ReintegroSemanas/DocumentosReintegro/v1/consultarSolicitudReintegro";
     public static final String URN_GET_LETTER_REPAYMENT_DOC = "/iib/nci/ReintegroSemanas/DocumentosReintegro/v1/consultarCartaReintegro";
+    public static final String URN_INSERT_REINTEGRO_SEMANAS = "/iib/nci/ReintegroSemanas/IniciarDictamen/v1/iniciar";
 
     public static final int IDENTIFICATION_INDICATOR_STATUS_ACTIVE = 5;
     public static final int BIOMETRIC_INDICATOR_STATUS_NOT_EXIST = 0;

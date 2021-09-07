@@ -10,6 +10,7 @@ import com.reintegro.profuturo.app.api.vo.GetLetterRepaymentDocRequest;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentEventsRequest;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentSolicitudeDocRequest;
 import com.reintegro.profuturo.app.api.vo.InsertClientRequest;
+import com.reintegro.profuturo.app.api.vo.InsertInitialRulingRequest;
 import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureRequest;
 import com.reintegro.profuturo.app.api.vo.SaveLoginRequest;
 import com.reintegro.profuturo.app.api.vo.ValCoexistenceNCIRequest;
@@ -288,4 +289,18 @@ public class RequestFactory {
         return request;
     }
 
+    public InsertInitialRulingRequest createInsertInitialRulingRequest(ClientEntity clientEntity, ProcedureEntity procedureEntity, RepaymentEntity repaymentEntity){
+        InsertInitialRulingRequest.Iniciar iniciar = new InsertInitialRulingRequest.Iniciar();
+     /*   iniciar.setFolio();
+        iniciar.setFolioBitacora();
+        iniciar.setIdTipoTramite();
+        iniciar.setNombreTipoTramite();
+        iniciar.setIdProceso();
+        iniciar.setNombreProceso();
+*/
+        InsertInitialRulingRequest request = new InsertInitialRulingRequest();
+
+        request.setIniciar(iniciar);
+        return request;
+    }
 }

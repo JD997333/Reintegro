@@ -24,6 +24,8 @@ import com.reintegro.profuturo.app.api.vo.GetRepaymentSolicitudeDocRequest;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentSolicitudeDocResponse;
 import com.reintegro.profuturo.app.api.vo.InsertClientRequest;
 import com.reintegro.profuturo.app.api.vo.InsertClientResponse;
+import com.reintegro.profuturo.app.api.vo.InsertInitialRulingRequest;
+import com.reintegro.profuturo.app.api.vo.InsertInitialRulingResponse;
 import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureRequest;
 import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureResponse;
 import com.reintegro.profuturo.app.api.vo.SaveLoginRequest;
@@ -129,4 +131,8 @@ public interface ApiClient {
     @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
     @POST(Constants.URL_BASE + BuildConfig.PORT_3 + Constants.URN_GET_LETTER_REPAYMENT_DOC)
     Call<GetLetterRepaymentDocResponse> getLetterRepaymentDocument(@Body GetLetterRepaymentDocRequest request);
+
+    @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
+    @POST(Constants.URL_BASE + BuildConfig.PORT_3 + Constants.URN_SAVE_INITIAL_CAPTURE)
+    Call<InsertInitialRulingResponse> insertInitialRuling(@Body InsertInitialRulingRequest request);
 }
