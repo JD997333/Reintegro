@@ -152,4 +152,8 @@ public class Constants {
     public static final int NOTIFICATION_CHANNEL_NO_NOTIFY = 1;
     public static final int NOTIFICATION_CHANNEL_SMS = 2;
     public static final int NOTIFICATION_CHANNEL_UNSELECTED = 3;
+
+    public static final String REGULAR_EXPRESSION_VALIDATE_CELL_PHONE = "[0-9]{10}";
+    public static final String REGULAR_EXPRESSION_VALIDATE_EMAIL = "^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z|A-Z]{2,6}(?:\\.[a-z|A-Z]{2})?)$";
+
 }

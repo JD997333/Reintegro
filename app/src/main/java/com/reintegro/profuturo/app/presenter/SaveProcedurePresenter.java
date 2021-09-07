@@ -59,7 +59,18 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
 
     @Override
     public void onClickModifyNotification() {
+        view.showModifyNotificationChannel(state.getNotificationChannel());
+    }
 
+    @Override
+    public void onNotificationChannelModified(NotificationChannelDto notificationChannelDto) {
+        state.setNotificationChannel(notificationChannelDto);
+        interactor.validateCellPhone(notificationChannelDto.getCellPhone());
+    }
+
+    @Override
+    public void onNotificationChannelSelected(NotificationChannelDto notificationChannel) {
+        state.setNotificationChannel(notificationChannel);
     }
 
     @Override
@@ -90,5 +101,90 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
                     break;
             }
         }
+    }
+
+    @Override
+    public void onMarkNciCoexistenceSuccess() {
+
+    }
+
+    @Override
+    public void onMarkNciCoexistenceError() {
+
+    }
+
+    @Override
+    public void onSendEmailSuccess() {
+
+    }
+
+    @Override
+    public void onSendEmailError() {
+
+    }
+
+    @Override
+    public void onStartBpmInstanceSuccess() {
+
+    }
+
+    @Override
+    public void onStartBpmInstanceError() {
+
+    }
+
+    @Override
+    public void onUploadImageFilenetSuccess() {
+
+    }
+
+    @Override
+    public void onUploadImageFilenetError() {
+
+    }
+
+    @Override
+    public void onUpdateProcedureSuccess() {
+
+    }
+
+    @Override
+    public void onUpdateProcedureError() {
+
+    }
+
+    @Override
+    public void onCloseBinnacleSuccess() {
+
+    }
+
+    @Override
+    public void onCloseBinnacleError() {
+
+    }
+
+    @Override
+    public void onValidateCellPhoneSuccess() {
+        interactor.validateEmail(state.getNotificationChannel().getEmail());
+    }
+
+    @Override
+    public void onValidateCellPhoneError() {
+        view.showCellPhoneError();
+    }
+
+    @Override
+    public void onValidateEmailSuccess() {
+        view.setEmailRadioButtonCheck(false);
+        view.setNoNotifyRadioButtonCheck(false);
+        view.setSmsRadioButtonCheck(false);
+        view.showCellPhone(state.getNotificationChannel().getCellPhone());
+        view.showEmail(state.getNotificationChannel().getEmail());
+        state.getNotificationChannel().setSelectedNotificationChannel(Constants.NOTIFICATION_CHANNEL_UNSELECTED);
+    }
+
+    @Override
+    public void onValidateEmailError() {
+        view.showEmailError();
     }
 }

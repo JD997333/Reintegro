@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,17 +13,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.reintegro.profuturo.app.R;
 import com.reintegro.profuturo.app.android.ui.adapters.DocumentsAdapter;
+import com.reintegro.profuturo.app.android.ui.dialogs.ModifyNotificationChannelDialog;
 import com.reintegro.profuturo.app.android.ui.dialogs.SimpleAlertDialog;
 import com.reintegro.profuturo.app.android.widget.RecyclerView;
+import com.reintegro.profuturo.app.android.widget.SnackBar;
 import com.reintegro.profuturo.app.api.factory.RetrofitDataProviderFactory;
 import com.reintegro.profuturo.app.contract.SaveProcedureContract;
 import com.reintegro.profuturo.app.database.factory.RealmRepositoryFactory;
 import com.reintegro.profuturo.app.databinding.FragmentSaveProcedureBinding;
 import com.reintegro.profuturo.app.domain.dto.DocumentDto;
+import com.reintegro.profuturo.app.domain.dto.NotificationChannelDto;
 import com.reintegro.profuturo.app.domain.interactor.SaveProcedureInteractor;
 import com.reintegro.profuturo.app.domain.state.SaveProcedureState;
 import com.reintegro.profuturo.app.presenter.SaveProcedurePresenter;
 import com.reintegro.profuturo.app.ui.main.NavigationAdapter;
+import com.reintegro.profuturo.app.util.Constants;
 
 import java.util.List;
 
@@ -42,6 +47,54 @@ public class SaveProcedureFragment extends NavigationAdapter.Fragment implements
 
     private View.OnClickListener modifyNotificationOnClickListener = (view) ->{
         presenter.onClickModifyNotification();
+    };
+
+    private CompoundButton.OnCheckedChangeListener emailOnCheckedChangeListener = (buttonView, isChecked) -> {
+        if (isChecked) {
+            NotificationChannelDto notificationChannelDto;
+            notificationChannelDto = new NotificationChannelDto();
+            notificationChannelDto.setCellPhone(cellPhone);
+            notificationChannelDto.setEmail(email);
+            notificationChannelDto.setSelectedNotificationChannel(Constants.NOTIFICATION_CHANNEL_EMAIL);
+
+            presenter.onNotificationChannelSelected(notificationChannelDto);
+
+            viewDataBinding.clientEmailRadioButton.setChecked(true);
+            viewDataBinding.noNotifyRadioButton.setChecked(false);
+            viewDataBinding.smsRadioButton.setChecked(false);
+        }
+    };
+
+    private CompoundButton.OnCheckedChangeListener noNotifyOnCheckedChangeListener = (buttonView, isChecked) -> {
+        if (isChecked) {
+            NotificationChannelDto notificationChannelDto;
+            notificationChannelDto = new NotificationChannelDto();
+            notificationChannelDto.setCellPhone(cellPhone);
+            notificationChannelDto.setEmail(email);
+            notificationChannelDto.setSelectedNotificationChannel(Constants.NOTIFICATION_CHANNEL_NO_NOTIFY);
+
+            presenter.onNotificationChannelSelected(notificationChannelDto);
+
+            viewDataBinding.clientEmailRadioButton.setChecked(false);
+            viewDataBinding.noNotifyRadioButton.setChecked(true);
+            viewDataBinding.smsRadioButton.setChecked(false);
+        }
+    };
+
+    private CompoundButton.OnCheckedChangeListener smsOnCheckedChangeListener = (buttonView, isChecked) -> {
+        if (isChecked) {
+            NotificationChannelDto notificationChannelDto;
+            notificationChannelDto = new NotificationChannelDto();
+            notificationChannelDto.setCellPhone(cellPhone);
+            notificationChannelDto.setEmail(email);
+            notificationChannelDto.setSelectedNotificationChannel(Constants.NOTIFICATION_CHANNEL_SMS);
+
+            presenter.onNotificationChannelSelected(notificationChannelDto);
+
+            viewDataBinding.clientEmailRadioButton.setChecked(false);
+            viewDataBinding.noNotifyRadioButton.setChecked(false);
+            viewDataBinding.smsRadioButton.setChecked(true);
+        }
     };
 
     @Override
@@ -76,7 +129,10 @@ public class SaveProcedureFragment extends NavigationAdapter.Fragment implements
         viewDataBinding.cancelButton.setOnClickListener(cancelOnClickListener);
         viewDataBinding.finishProcedureButton.setOnClickListener(saveProcedureOnClickListener);
         viewDataBinding.modifyNotificationChannelButton.setOnClickListener(modifyNotificationOnClickListener);
-        viewDataBinding.documentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        viewDataBinding.documentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+        viewDataBinding.clientEmailRadioButton.setOnCheckedChangeListener(emailOnCheckedChangeListener);
+        viewDataBinding.smsRadioButton.setOnCheckedChangeListener(smsOnCheckedChangeListener);
+        viewDataBinding.noNotifyRadioButton.setOnCheckedChangeListener(noNotifyOnCheckedChangeListener);
 
     }
 
@@ -103,6 +159,22 @@ public class SaveProcedureFragment extends NavigationAdapter.Fragment implements
         adapter = new DocumentsAdapter(getLayoutInflater(), documents);
 
         viewDataBinding.documentsRecyclerView.setAdapter(adapter);
+        viewDataBinding.documentsRecyclerView.setEnabled(false);
+    }
+
+    @Override
+    public void setEmailRadioButtonCheck(boolean checked) {
+        viewDataBinding.clientEmailRadioButton.setChecked(checked);
+    }
+
+    @Override
+    public void setNoNotifyRadioButtonCheck(boolean checked) {
+        viewDataBinding.noNotifyRadioButton.setChecked(checked);
+    }
+
+    @Override
+    public void setSmsRadioButtonCheck(boolean checked) {
+        viewDataBinding.smsRadioButton.setChecked(checked);
     }
 
     @Override
@@ -144,5 +216,26 @@ public class SaveProcedureFragment extends NavigationAdapter.Fragment implements
         simpleAlertDialog.setCloseButton((view) -> simpleAlertDialog.dismiss());
         simpleAlertDialog.setNegativeButton(getString(R.string.not), (view) -> simpleAlertDialog.dismiss());
         simpleAlertDialog.show(getFragmentManager(), null);
+    }
+
+    @Override
+    public void showModifyNotificationChannel(NotificationChannelDto notificationChannelDto) {
+        ModifyNotificationChannelDialog dialog = new ModifyNotificationChannelDialog(notificationChannelDto);
+        dialog.show(getFragmentManager(), null);
+        dialog.setCancelable(false);
+        dialog.setOnCompleteListener((notificationChannel) -> {
+            dialog.dismiss();
+            presenter.onNotificationChannelModified(notificationChannel);
+        });
+    }
+
+    @Override
+    public void showCellPhoneError() {
+        SnackBar.show(getView(), getString(R.string.validate_cell_phone_error_1));
+    }
+
+    @Override
+    public void showEmailError() {
+        SnackBar.show(getView(), getString(R.string.validate_email_error_1));
     }
 }

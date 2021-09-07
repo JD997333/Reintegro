@@ -12,9 +12,15 @@ import com.reintegro.profuturo.app.data.repository.ClientRepository;
 import com.reintegro.profuturo.app.data.repository.DocumentRepository;
 import com.reintegro.profuturo.app.domain.converter.ClientConverter;
 import com.reintegro.profuturo.app.domain.converter.DocumentConverter;
+import com.reintegro.profuturo.app.util.Constants;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import io.reactivex.Completable;
+import io.reactivex.CompletableEmitter;
+import io.reactivex.CompletableObserver;
 import io.reactivex.Single;
 import io.reactivex.SingleEmitter;
 import io.reactivex.SingleObserver;
@@ -113,5 +119,84 @@ public class SaveProcedureInteractor extends InteractorBase<SaveProcedureContrac
     @Override
     public void closeBinnacle() {
 
+    }
+
+    @Override
+    public void validateCellPhone(String cellPhone) {
+        Completable
+            .create((emitter) -> {
+                if (cellPhone != null && !cellPhone.isEmpty()) {
+                    Pattern pattern;
+                    pattern = Pattern.compile(Constants.REGULAR_EXPRESSION_VALIDATE_CELL_PHONE);
+
+                    Matcher matcher;
+                    matcher = pattern.matcher(cellPhone);
+
+                    if (matcher.matches()) {
+                        emitter.onComplete();
+                    } else {
+                        emitter.onError(new Throwable());
+                    }
+                } else {
+                    emitter.onError(new Throwable());
+                }
+            }).observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.computation())
+            .subscribe(new CompletableObserver() {
+                @Override
+                public void onComplete() {
+                    presenter.onValidateCellPhoneSuccess();
+                }
+
+                @Override
+                public void onError(Throwable exception) {
+                    presenter.onValidateCellPhoneError();
+                }
+
+                @Override
+                public void onSubscribe(Disposable disposable) {
+
+                }
+            });
+    }
+
+    @Override
+    public void validateEmail(String email) {
+        Completable
+            .create((CompletableEmitter emitter) -> {
+                if (email != null && !email.isEmpty()) {
+                    Pattern pattern;
+                    pattern = Pattern.compile(Constants.REGULAR_EXPRESSION_VALIDATE_EMAIL);
+
+                    Matcher matcher;
+                    matcher = pattern.matcher(email);
+
+                    if (matcher.matches()) {
+                        emitter.onComplete();
+                    } else {
+                        emitter.onError(new Throwable());
+                    }
+                } else {
+                    emitter.onError(new Throwable());
+                }
+
+            }).observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.computation())
+            .subscribe(new CompletableObserver() {
+                @Override
+                public void onComplete() {
+                    presenter.onValidateEmailSuccess();
+                }
+
+                @Override
+                public void onError(Throwable exception) {
+                    presenter.onValidateEmailError();
+                }
+
+                @Override
+                public void onSubscribe(Disposable disposable) {
+
+                }
+            });
     }
 }

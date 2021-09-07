@@ -17,6 +17,8 @@ public interface SaveProcedureContract {
         void uploadImagesFilenet();
         void updateProcedure();
         void closeBinnacle();
+        void validateCellPhone(String cellPhone);
+        void validateEmail(String email);
     }
 
     interface Presenter extends ContractBase.Presenter<Interactor, State, View>{
@@ -26,6 +28,24 @@ public interface SaveProcedureContract {
         void onClickModifyNotification();
         void onGetClientDataSuccess(ClientDto clientDto);
         void onGetDocumentsSuccess(List<DocumentDto> documents);
+        void onNotificationChannelSelected(NotificationChannelDto notificationChannel);
+        void onNotificationChannelModified(NotificationChannelDto notificationChannelDto);
+        void onMarkNciCoexistenceSuccess();
+        void onMarkNciCoexistenceError();
+        void onSendEmailSuccess();
+        void onSendEmailError();
+        void onStartBpmInstanceSuccess();
+        void onStartBpmInstanceError();
+        void onUploadImageFilenetSuccess();
+        void onUploadImageFilenetError();
+        void onUpdateProcedureSuccess();
+        void onUpdateProcedureError();
+        void onCloseBinnacleSuccess();
+        void onCloseBinnacleError();
+        void onValidateCellPhoneSuccess();
+        void onValidateCellPhoneError();
+        void onValidateEmailSuccess();
+        void onValidateEmailError();
     }
 
     interface State extends ContractBase.State{
@@ -43,5 +63,11 @@ public interface SaveProcedureContract {
         void showCellPhone(String cellPhone);
         void showEmail(String email);
         void showDocuments(List<DocumentDto> documents);
+        void showModifyNotificationChannel(NotificationChannelDto notificationChannelDto);
+        void setEmailRadioButtonCheck(boolean checked);
+        void setNoNotifyRadioButtonCheck(boolean checked);
+        void setSmsRadioButtonCheck(boolean checked);
+        void showCellPhoneError();
+        void showEmailError();
     }
 }
