@@ -88,7 +88,7 @@
     <string name="name_2">Nombre:</string>
     <string name="neighborhood_1">Colonia:</string>
     <string name="new_search_1">Nueva búsqueda</string>
-    <string name="no_notify">No notificar</string>
+    <string name="no_notify">No enviar correo electrónico</string>
     <string name="notice_1">Aviso</string>
     <string name="notification_active_1">Activar el medio de notificación que desee el cliente</string>
     <string name="nss_1">NSS</string>
@@ -137,6 +137,9 @@
     <string name="signature_needed">No se han capturado todas las firmas necesarias.</string>
     <string name="four_finger_stamp_message">Para generar la firma biométrica se deberá capturar 4 huellas del trabajador y 1 del asesor.</string>
     <string name="four_finger_stamp_note">Nota: Recuerda colocar y mantener el dedo sobre el lector al oprimir CAPTURAR</string>
+    <string name="biometric_engine_failed">El motor biométrico falló</string>
+    <string name="recommended_fingers_error">Ocurrió un error en el servicio consultar huellas recomendadas</string>
+    <string name="need_push_calculate">Es necesario presionar el botón CALCULAR</string>
 
     <string name="initial_capture_header">Captura inicial</string>
     <string name="initial_capture_title">Eventos de retiro por desempleo</string>
@@ -185,6 +188,10 @@
     <string name="insert_valid_weeks">Ingrese un número de semanas a reintegrar válido</string>
     <string name="procedure_saved_successful">Guardado de trámite exitoso</string>.
     <string name="save_initial_capture_error">Ocurrió un error en el servicio guardar captura inicial</string>
+    <string name="save_procedure_title">Guardar trámite</string>
+    <string name="confirm_save_procedure">¿Está seguro de guardar este trámite?</string>
+    <string name="yes">SI</string>
+    <string name="not">NO</string>
 
     <!--    IRR Changes     -->
     <string name="select_applicant_header">Envio de consulta de retiros por desempleo</string>

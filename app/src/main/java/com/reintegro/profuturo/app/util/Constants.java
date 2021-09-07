@@ -9,6 +9,7 @@ public class Constants {
     public static final String DATE_FORMAT_4 = "yyyy/MM/dd";
     public static final String DATE_FORMAT_5 = "yyyyMMdd";
     public static final String DATE_FORMAT_6 = "yyyy-MM-dd";
+    public static final String DATE_FORMAT_7 = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
 
     public static final String URL_BASE = "https://www.proinversion.mx";
     public static final String HTTP_HEADER_AUTHORIZATION = "Authorization: Basic cndzcHJheGlzcDpQcjR4MXMjdTVS";
@@ -26,6 +27,37 @@ public class Constants {
     public static final String EXTRA_IMAGE_ENGINE_PACKAGE_NAME = "mx.com.profuturo.motor";
     public static final String EXTRA_IMAGE_ENGINE_PATH = "rutaDestino";
     public static final String EXTRA_IMAGE_ENGINE_RESULT = "rutaImagen";
+
+    public static final String EXTRA_BIOMETRIC_PACKAGE_NAME = "com.profuturo.biometria";
+    public static final String EXTRA_BIOMETRIC_CLASS_NAME = "com.profuturo.biometria.HuellaDigital";
+    public static final String EXTRA_BIOMETRIC_AGENT_ID = "idEmpleadoProfuturo";
+    public static final String EXTRA_BIOMETRIC_PACKAGE_TAG = "packageName";
+    public static final String EXTRA_BIOMETRIC_OPERATION_TAG = "operacion";
+    public static final String EXTRA_BIOMETRIC_OP_FOUR_FINGERS = "sello-cuatro-dedos";
+    public static final String EXTRA_BIOMETRIC_TAG = "tag";
+    public static final String EXTRA_BIOMETRIC_FINGER_EVALUATION = "fingerEval";
+    public static final String EXTRA_BIOMETRIC_LEFT_FINGER_INDEX = "2";
+    public static final String EXTRA_BIOMETRIC_EMPLOYEE_ID_TAG = "idTrabajador";
+    public static final String EXTRA_BIOMETRIC_JSON_TAG = "json";
+
+    public static final String CONTRACT_BIO_ENGINE_QUALITY = "calidad_huella";
+    public static final String CONTRACT_BIO_ENGINE_IMAGE = "imagen_huella";
+    public static final String CONTRACT_BIO_ENGINE_FINGER_POSITION = "posicion_dedo";
+    public static final String CONTRACT_BIO_ENGINE_ABSENCE_REASON = "motivo_ausencia";
+    public static final String CONTRACT_BIO_ENGINE_ENCRYPTED_WSQ = "encrypted_wsq";
+    public static final String CONTRACT_BIO_ENGINE_CAPTURE_DATE = "fecha_captura";
+    public static final String CONTRACT_BIO_ENGINE_SERIAL_NUMBER = "numero_serie_dispositivo";
+    public static final int CONTRACT_BIO_ENGINE_EMPLOYEE_ID = 7;
+
+    public static final String REQUEST_BIOMETRIC_PROFILE_CODE = "30";
+    public static final String REQUEST_BIOMETRIC_RESOLUTION = "1";
+    public static final String REQUEST_BIOMETRIC_SCALE_UNITS = "1";
+    public static final String REQUEST_BIOMETRIC_SEAL_TYPE = "7484";
+    public static final String REQUEST_BIOMETRIC_SERVICE_CHANNEL = "001";
+    public static final String REQUEST_BIOMETRIC_SERVICE_ID_TRD = "602";
+    public static final String REQUEST_BIOMETRIC_APPLICANT_TYPE = "01";
+    public static final String REQUEST_BIOMETRIC_VOLUNTARY_SEAL_STATUS = "6626";
+
 
     public static final String URN_GET_AGENT_ASSIGNED_BRANCH_OFFICE = "/mb/appMovil/rest/cuo/consultaDatosSucursal";
     public static final String URN_GET_AGENT_INFORMATION ="/mb/cusp/rest/consultaInformacionUsuario";
@@ -45,6 +77,11 @@ public class Constants {
     public static final String URN_GET_REPAYMENT_SOLICITUDE_DOC = "/iib/nci/ReintegroSemanas/DocumentosReintegro/v1/consultarSolicitudReintegro";
     public static final String URN_GET_LETTER_REPAYMENT_DOC = "/iib/nci/ReintegroSemanas/DocumentosReintegro/v1/consultarCartaReintegro";
     public static final String URN_INSERT_REINTEGRO_SEMANAS = "/iib/nci/ReintegroSemanas/IniciarDictamen/v1/iniciar";
+    public static final String URN_GET_RECOMMENDED_FINGERS = "/mb/selloNHuellas/obtenerSugerenciaHuellas";
+    public static final String URN_GET_VOLUNTARY_SEAL = "/mb/selloNHuellas/obtenerSelloNHuellas";
+    public static final String URN_SAVE_VOLUNTARY_SEAL = "/iib/api/BiometriaSello/BiometriaSelloService/v1/guardarSelloProceSAR";
+    public static final String URN_MARK_NCI_COEXISTENCE = "/iib/nci/comunes/servicio/matriz/v1/marcarConvivencia";
+    public static final String URN_UPLOAD_FILES_TO_FILE_NET = "/iib/servicio/comun/cargaImagen/tramite/v1/cargarImagenFileNet";
 
     public static final int IDENTIFICATION_INDICATOR_STATUS_ACTIVE = 5;
     public static final int BIOMETRIC_INDICATOR_STATUS_NOT_EXIST = 0;
@@ -77,6 +114,7 @@ public class Constants {
     public static final Integer ID_OWNER_APPLICANT = 3278;
     public static final Integer ID_PROFUTURO_AFORE_KEY = 534;
     public static final Integer ID_PROCESS_AUTH_FOLIO = 9182;
+    public static final Integer ID_PROCESS_REPAYMENT_FILENET = 5719;
 
     public static final String DEPOSIT_DATA_CONCEPT = "57822";
     public static final String DEPOSIT_DATA_AGREEMENT = "0682907";
@@ -112,5 +150,13 @@ public class Constants {
     public static final String ID_TYPE_MILITARY = "Cartilla militar";
     public static final String ID_TYPE_PROFESSIONAL = "Cédula profesional";
     public static final String ID_TYPE_MIGRATION_DOC = "Documento migratorio (FM2/FM3)";
+
+    public static final int NOTIFICATION_CHANNEL_EMAIL = 0;
+    public static final int NOTIFICATION_CHANNEL_NO_NOTIFY = 1;
+    public static final int NOTIFICATION_CHANNEL_SMS = 2;
+    public static final int NOTIFICATION_CHANNEL_UNSELECTED = 3;
+
+    public static final String REGULAR_EXPRESSION_VALIDATE_CELL_PHONE = "[0-9]{10}";
+    public static final String REGULAR_EXPRESSION_VALIDATE_EMAIL = "^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z|A-Z]{2,6}(?:\\.[a-z|A-Z]{2})?)$";
 
 }

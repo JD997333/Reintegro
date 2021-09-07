@@ -13,6 +13,7 @@ public class ProcedureEntity {
     private String idChannel;
     private String voluntarySeal;
     private String idStatusVoluntarySeal;
+    private String verificationResultSeal;
     private Integer idStage;
     private Integer idSubStage;
     private Integer idChannelStage;
@@ -135,5 +136,13 @@ public class ProcedureEntity {
 
     public void setApplicantCurp(String applicantCurp) {
         this.applicantCurp = applicantCurp;
+    }
+
+    public String getVerificationResultSeal() {
+        return verificationResultSeal;
+    }
+
+    public void setVerificationResultSeal(String verificationResultSeal) {
+        this.verificationResultSeal = verificationResultSeal;
     }
 }

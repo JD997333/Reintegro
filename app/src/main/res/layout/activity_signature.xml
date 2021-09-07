@@ -54,7 +54,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/accept_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/term_signature_text_view" />
+                app:layout_constraintTop_toBottomOf="@+id/term_signature_text_view"
+                android:background="@drawable/edit_text_shape"/>
 
 
 

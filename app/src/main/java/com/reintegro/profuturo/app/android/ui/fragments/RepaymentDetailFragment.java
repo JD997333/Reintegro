@@ -1,6 +1,8 @@
 package com.reintegro.profuturo.app.android.ui.fragments;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,9 +49,35 @@ public class RepaymentDetailFragment extends NavigationAdapter.Fragment implemen
 
     private View.OnClickListener confirmButtonOnClickListener = v -> {
         if (weeksNum != null && !weeksNum.isEmpty() && !weeksNum.equals("0")){
-            presenter.onConfirmButtonClicked();
+            if (!weeksNum.equals("-1")){
+                presenter.onConfirmButtonClicked();
+            }else {
+                SnackBar.show(getView(), getString(R.string.need_push_calculate));
+            }
         }else{
             SnackBar.show(getView(), getString(R.string.insert_valid_weeks));
+        }
+    };
+
+    private TextWatcher weeksEditTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            viewDataBinding.repaymentAmountTextView.setText("");
+            if (s.toString().isEmpty()){
+                weeksNum = "";
+            }else {
+                weeksNum = "-1";
+            }
         }
     };
 
@@ -88,6 +116,7 @@ public class RepaymentDetailFragment extends NavigationAdapter.Fragment implemen
         viewDataBinding.backButton.setOnClickListener(backButtonOnClickListener);
         viewDataBinding.cancelButton.setOnClickListener(cancelButtonOnClickListener);
         viewDataBinding.confirmButton.setOnClickListener(confirmButtonOnClickListener);
+        viewDataBinding.requestedWeeksEditText.addTextChangedListener(weeksEditTextWatcher);
     }
 
     @Override

@@ -94,9 +94,7 @@ public class RepaymentDetailPresenter
 
     @Override
     public void onInsertClientDataSuccess() {
-        view.showFinishProvisionalDialog();
-        //TODO comment this before commit on github TEST
-        //view.pushDocumentsCapture();
+        view.pushDocumentsCapture();
         view.dismissLoading();
     }
 

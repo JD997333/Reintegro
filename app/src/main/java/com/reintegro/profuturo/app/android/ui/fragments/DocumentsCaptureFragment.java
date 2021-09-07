@@ -373,8 +373,7 @@ public class DocumentsCaptureFragment extends NavigationAdapter.Fragment impleme
 
     @Override
     public void pushBiometricCapture() {
-        //TODO implement navigation to biometric fragment
-        SnackBar.show(getView(), "Captura de documentos exitosa");
+        setBackEnabled(false);
         navigationDelegate.pushBiometricCapture();
     }
 }

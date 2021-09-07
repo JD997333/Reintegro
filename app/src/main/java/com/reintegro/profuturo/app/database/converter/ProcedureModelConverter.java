@@ -20,6 +20,8 @@ public class ProcedureModelConverter {
         procedureEntity.setProcedureDate(DateConverter.convertFromModel(procedureModel.getProcedureDate()));
         procedureEntity.setProcedureFolio(procedureModel.getProcedureFolio());
         procedureEntity.setApplicantCurp(procedureModel.getApplicantCurp());
+        procedureEntity.setVerificationResultSeal(procedureModel.getVerificationResultSeal());
+        procedureEntity.setVoluntarySeal(procedureModel.getVoluntarySeal());
 
         return procedureEntity;
     }
@@ -39,6 +41,8 @@ public class ProcedureModelConverter {
         procedureModel.setProcedureDate(DateConverter.convertFromEntity(procedureEntity.getProcedureDate()));
         procedureModel.setProcedureFolio(procedureEntity.getProcedureFolio());
         procedureModel.setApplicantCurp(procedureEntity.getApplicantCurp());
+        procedureModel.setVerificationResultSeal(procedureEntity.getVerificationResultSeal());
+        procedureModel.setVoluntarySeal(procedureEntity.getVoluntarySeal());
 
         boolean hasId;
         hasId = procedureEntity.getId() != null;

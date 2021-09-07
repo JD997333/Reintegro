@@ -7,19 +7,26 @@ import com.reintegro.profuturo.app.api.vo.GetAgentInformationRequest;
 import com.reintegro.profuturo.app.api.vo.GetClientData360Request;
 import com.reintegro.profuturo.app.api.vo.GetClientImageRequest;
 import com.reintegro.profuturo.app.api.vo.GetLetterRepaymentDocRequest;
+import com.reintegro.profuturo.app.api.vo.GetRecommendedFingersRequest;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentEventsRequest;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentSolicitudeDocRequest;
+import com.reintegro.profuturo.app.api.vo.GetVoluntarySealRequest;
 import com.reintegro.profuturo.app.api.vo.InsertClientRequest;
 import com.reintegro.profuturo.app.api.vo.InsertInitialRulingRequest;
+import com.reintegro.profuturo.app.api.vo.MarkNciCoexistenceRequest;
 import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureRequest;
 import com.reintegro.profuturo.app.api.vo.SaveLoginRequest;
+import com.reintegro.profuturo.app.api.vo.SaveVoluntarySealRequest;
+import com.reintegro.profuturo.app.api.vo.UploadFilesToFileNetRequest;
 import com.reintegro.profuturo.app.api.vo.ValCoexistenceNCIRequest;
 import com.reintegro.profuturo.app.api.vo.ValidateAuthFolioRequest;
 import com.reintegro.profuturo.app.data.entity.AgentEntity;
 import com.reintegro.profuturo.app.data.entity.ClientEntity;
 import com.reintegro.profuturo.app.data.entity.DocumentEntity;
+import com.reintegro.profuturo.app.data.entity.FingerPrintEntity;
 import com.reintegro.profuturo.app.data.entity.ProcedureEntity;
 import com.reintegro.profuturo.app.data.entity.RepaymentEntity;
+import com.reintegro.profuturo.app.util.Base64Utils;
 import com.reintegro.profuturo.app.util.Constants;
 import com.reintegro.profuturo.app.util.DateUtils;
 import com.reintegro.profuturo.app.util.TypeUtils;
@@ -289,6 +296,7 @@ public class RequestFactory {
         return request;
     }
 
+
     public InsertInitialRulingRequest createInsertInitialRulingRequest(ClientEntity clientEntity, ProcedureEntity procedureEntity, RepaymentEntity repaymentEntity){
         InsertInitialRulingRequest.Iniciar iniciar = new InsertInitialRulingRequest.Iniciar();
      /*   iniciar.setFolio();
@@ -303,4 +311,154 @@ public class RequestFactory {
         request.setIniciar(iniciar);
         return request;
     }
+
+    public GetRecommendedFingersRequest createGetRecommendedFingersRequest(ClientEntity clientEntity){
+        GetRecommendedFingersRequest request = new GetRecommendedFingersRequest();
+        GetRecommendedFingersRequest.Req req = new GetRecommendedFingersRequest.Req();
+        req.setCurp(clientEntity.getCurp());
+        request.setReq(req);
+
+        return request;
+    }
+
+    public GetVoluntarySealRequest createGetVoluntarySealRequest(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity, List<FingerPrintEntity> fingerPrintEntities){
+        GetVoluntarySealRequest.Device device = new GetVoluntarySealRequest.Device();
+        device.setDeviceIdentificationId(fingerPrintEntities.get(0).getSerialNumber());
+        device.setAcquisitionProfileCode(Constants.REQUEST_BIOMETRIC_PROFILE_CODE);
+        device.setCaptureResolution(Constants.REQUEST_BIOMETRIC_RESOLUTION);
+        device.setImageScaleUnitsCode(Constants.REQUEST_BIOMETRIC_SCALE_UNITS);
+
+        GetVoluntarySealRequest.ProcedureInformation procedureInformation = new GetVoluntarySealRequest.ProcedureInformation();
+        procedureInformation.setIdTramite(procedureEntity.getProcedureFolio());
+        procedureInformation.setNumeroEmpleado(agentEntity.getAgentCode());
+        procedureInformation.setIdTipoSello(Constants.REQUEST_BIOMETRIC_SEAL_TYPE);
+        procedureInformation.setIndicadorSelloNuevo(true);
+
+        List<GetVoluntarySealRequest.FingerPrint> fingerPrintsAgent = new ArrayList<>();
+        List<GetVoluntarySealRequest.FingerPrint> fingerPrintsClient = new ArrayList<>();
+        GetVoluntarySealRequest.FingerPrint fingerPrintReq;
+
+        for (FingerPrintEntity fingerEntity : fingerPrintEntities){
+            if (fingerEntity.getIsEmployee() == 1){
+                fingerPrintReq = new GetVoluntarySealRequest.FingerPrint();
+                fingerPrintReq.setBase64data(fingerEntity.getBase64Image());
+                fingerPrintReq.setFechaCaptura(fingerEntity.getCaptureDate());
+                fingerPrintReq.setFingerPositionCode(String.valueOf(fingerEntity.getFingerPositionCode()));
+                fingerPrintReq.setImageHashValue(fingerEntity.getImageHashValue());
+                fingerPrintReq.setMotivoSinHuella(fingerEntity.getAbsenceReason());
+                fingerPrintReq.setNistQualityMeasure(fingerEntity.getNistQualityMeasure());
+                fingerPrintsAgent.add(fingerPrintReq);
+            }else {
+                fingerPrintReq = new GetVoluntarySealRequest.FingerPrint();
+                fingerPrintReq.setBase64data(fingerEntity.getBase64Image());
+                fingerPrintReq.setFechaCaptura(fingerEntity.getCaptureDate());
+                fingerPrintReq.setFingerPositionCode(String.valueOf(fingerEntity.getFingerPositionCode()));
+                fingerPrintReq.setImageHashValue(fingerEntity.getImageHashValue());
+                fingerPrintReq.setMotivoSinHuella(fingerEntity.getAbsenceReason());
+                fingerPrintReq.setNistQualityMeasure(fingerEntity.getNistQualityMeasure());
+                fingerPrintsClient.add(fingerPrintReq);
+            }
+        }
+
+        GetVoluntarySealRequest.SealInformation sealInformation = new GetVoluntarySealRequest.SealInformation();
+        sealInformation.setAgentFingerPrintList(fingerPrintsAgent);
+        sealInformation.setCanalServicio(Constants.REQUEST_BIOMETRIC_SERVICE_CHANNEL);
+        sealInformation.setClientFingerPrintList(fingerPrintsClient);
+        sealInformation.setCurpEmpleado(agentEntity.getCurp());
+        sealInformation.setCurpSolicitante("");
+        sealInformation.setCurpTrabajador(clientEntity.getCurp());
+        sealInformation.setDevice(device);
+        sealInformation.setFechaSolicitud(DateUtils.getFormatedTodayDate(Constants.DATE_FORMAT_6));
+        sealInformation.setFolioSolicitud(procedureEntity.getProcedureFolio());
+        sealInformation.setNumeroOficina(Constants.ID_PROFUTURO_AFORE_KEY.toString());
+        sealInformation.setServiceId(Constants.REQUEST_BIOMETRIC_SERVICE_ID_TRD);
+        sealInformation.setTipoSolicitante(Constants.REQUEST_BIOMETRIC_APPLICANT_TYPE);
+        sealInformation.setTokenMovil("");
+        sealInformation.setTransactionDate(DateUtils.getFormatedTodayDate(Constants.DATE_FORMAT_6));
+
+        GetVoluntarySealRequest.SealRequest sealRequest = new GetVoluntarySealRequest.SealRequest();
+        sealRequest.setSealInformation(sealInformation);
+        sealRequest.setProcedureInformation(procedureInformation);
+
+        GetVoluntarySealRequest request = new GetVoluntarySealRequest();
+        request.setSealRequest(sealRequest);
+
+        return request;
+    }
+
+    public SaveVoluntarySealRequest createSaveVoluntarySealRequest(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity){
+        SaveVoluntarySealRequest request = new SaveVoluntarySealRequest();
+        SaveVoluntarySealRequest.SaveVoluntarySealBody body = new SaveVoluntarySealRequest.SaveVoluntarySealBody();
+        body.setClaveAfore(Constants.ID_PROFUTURO_AFORE_KEY.toString());
+        body.setClaveConsar(String.valueOf(agentEntity.getConsarKey()));
+        body.setCurpEmpleado(agentEntity.getCurp());
+        body.setCurpTrabajador(clientEntity.getCurp());
+        body.setFechaGeneracion(DateUtils.getFormatedTodayDate(Constants.DATE_FORMAT_7));
+        body.setFechaVigencia(DateUtils.parseDateToString(DateUtils.getTomorrowDate(), Constants.DATE_FORMAT_7));
+        body.setIdTramite(procedureEntity.getProcedureFolio());
+        body.setNumeroEmpleado(agentEntity.getAgentCode());
+        body.setIdEstatusSello(procedureEntity.getIdStatusVoluntarySeal());
+        body.setResultadoVerificacion(procedureEntity.getVerificationResultSeal());
+        body.setSelloVerificacion(procedureEntity.getVoluntarySeal());
+        body.setIdTipoSello(Constants.REQUEST_BIOMETRIC_SEAL_TYPE);
+
+        request.setSaveVoluntarySealBody(body);
+
+        return request;
+    }
+
+    public MarkNciCoexistenceRequest createMarkNciCoexistenceRequest(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity){
+        MarkNciCoexistenceRequest request = new MarkNciCoexistenceRequest();
+        request.setFolio(procedureEntity.getBinnacleFolio());
+        request.setIdProceso(procedureEntity.getIdProcess().toString());
+        request.setIdSubProceso(procedureEntity.getIdSubProcess().toString());
+        request.setNumCuentaIndividual(clientEntity.getAccountNumber());
+        request.setIdSaldoOpera("12");
+        request.setTipoMovimiento("181");
+        request.setIdSubEtapa("25");
+        request.setUsuario(agentEntity.getAgentCode());
+        request.setFlgSaltaIntgy("1");
+        return request;
+    }
+
+    public UploadFilesToFileNetRequest createUploadFilesFilenetRequest(ProcedureEntity procedureEntity, List<DocumentEntity> documents){
+        List<UploadFilesToFileNetRequest.DocumentName> documentNames;
+        documentNames = new ArrayList<>();
+
+        for (DocumentEntity document : documents){
+            String documentType;
+
+            if (document.getDocumentType() == Constants.DOCUMENT_TYPE_PDF) {
+                documentType = ".pdf";
+            } else {
+                documentType = ".jpg";
+            }
+
+            UploadFilesToFileNetRequest.DocumentName documentName;
+            documentName = new UploadFilesToFileNetRequest.DocumentName();
+            documentName.setBase64(Base64Utils.encodeFile(document.getFile()));
+            documentName.setName(document.getDocumentKey() + "_" + document.getDocumentName() + "_" + "1" + documentType);
+
+            documentNames.add(documentName);
+        }
+
+        UploadFilesToFileNetRequest.ImageData imageData;
+        imageData = new UploadFilesToFileNetRequest.ImageData();
+        imageData.setBinnacleFolio(procedureEntity.getBinnacleFolio());
+        imageData.setDocuments(documentNames);
+        imageData.setProcessId(Constants.ID_PROCESS_REPAYMENT_FILENET);
+        imageData.setRetry(false);
+        imageData.setTotal((long) documentNames.size());
+
+        UploadFilesToFileNetRequest.Request request;
+        request = new UploadFilesToFileNetRequest.Request();
+        request.setImageData(imageData);
+
+        UploadFilesToFileNetRequest uploadFilesToFileNetRequest;
+        uploadFilesToFileNetRequest = new UploadFilesToFileNetRequest();
+        uploadFilesToFileNetRequest.setRequest(request);
+
+        return uploadFilesToFileNetRequest;
+    }
+
 }

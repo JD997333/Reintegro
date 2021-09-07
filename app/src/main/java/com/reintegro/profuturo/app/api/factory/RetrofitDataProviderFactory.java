@@ -13,12 +13,17 @@ import com.reintegro.profuturo.app.api.converter.GetClientDataResponseConverter;
 import com.reintegro.profuturo.app.api.converter.GetClientImageResponseConverter;
 import com.reintegro.profuturo.app.api.converter.GetDocumentsResponseConverter;
 import com.reintegro.profuturo.app.api.converter.GetLetterRepaymentResponseConverter;
+import com.reintegro.profuturo.app.api.converter.GetRecommendedFingersResponseConverter;
 import com.reintegro.profuturo.app.api.converter.GetRepaymentEventsResponseConverter;
 import com.reintegro.profuturo.app.api.converter.GetRepaymentSolicitudeDocResponseConverter;
+import com.reintegro.profuturo.app.api.converter.GetVoluntarySealResponseConverter;
 import com.reintegro.profuturo.app.api.converter.InsertClientResponseConverter;
 import com.reintegro.profuturo.app.api.converter.InsertInitialRulingResponseConverter;
+import com.reintegro.profuturo.app.api.converter.MarkNciCoexistenceConverter;
 import com.reintegro.profuturo.app.api.converter.SaveInitialCaptureResponseConverter;
 import com.reintegro.profuturo.app.api.converter.SaveLoginResponseConverter;
+import com.reintegro.profuturo.app.api.converter.SaveVoluntarySealResponseConverter;
+import com.reintegro.profuturo.app.api.converter.UploadFilesToFilenetResponseConverter;
 import com.reintegro.profuturo.app.api.converter.ValCoexistenceNciResponseConverter;
 import com.reintegro.profuturo.app.api.converter.ValidateAuthFolioResponseConverter;
 import com.reintegro.profuturo.app.api.provider.RetrofitWebServiceDataProvider;
@@ -32,12 +37,17 @@ import com.reintegro.profuturo.app.api.validator.GetClientDataResponseValidator;
 import com.reintegro.profuturo.app.api.validator.GetClientImageResponseValidator;
 import com.reintegro.profuturo.app.api.validator.GetDocumentsResponseValidator;
 import com.reintegro.profuturo.app.api.validator.GetLetterRepaymentResponseValidator;
+import com.reintegro.profuturo.app.api.validator.GetRecommendedFingersResponseValidator;
 import com.reintegro.profuturo.app.api.validator.GetRepaymentEventsResponseValidator;
 import com.reintegro.profuturo.app.api.validator.GetRepaymentSolicitudeDocResponseValidator;
+import com.reintegro.profuturo.app.api.validator.GetVoluntarySealResponseValidator;
 import com.reintegro.profuturo.app.api.validator.InsertClientResponseValidator;
 import com.reintegro.profuturo.app.api.validator.InsertInitialRulingResponseValidator;
+import com.reintegro.profuturo.app.api.validator.MarkNciCoexistenceValidator;
 import com.reintegro.profuturo.app.api.validator.SaveInitialCaptureResponseValidator;
 import com.reintegro.profuturo.app.api.validator.SaveLoginResponseValidator;
+import com.reintegro.profuturo.app.api.validator.SaveVoluntarySealResponseValidator;
+import com.reintegro.profuturo.app.api.validator.UploadFilesToFileNetResponseValidator;
 import com.reintegro.profuturo.app.api.validator.ValCoexistenceNciResponseValidator;
 import com.reintegro.profuturo.app.api.validator.ValidateAuthFolioResponseValidator;
 import com.reintegro.profuturo.app.api.vo.GetAgentAssignedBranchOfficeRequest;
@@ -46,6 +56,7 @@ import com.reintegro.profuturo.app.data.entity.AgentEntity;
 import com.reintegro.profuturo.app.data.entity.BranchOfficeEntity;
 import com.reintegro.profuturo.app.data.entity.ClientEntity;
 import com.reintegro.profuturo.app.data.entity.DocumentEntity;
+import com.reintegro.profuturo.app.data.entity.FingerPrintEntity;
 import com.reintegro.profuturo.app.data.entity.LocationEntity;
 import com.reintegro.profuturo.app.data.entity.ProcedureEntity;
 import com.reintegro.profuturo.app.data.entity.RepaymentEntity;
@@ -222,6 +233,7 @@ public class RetrofitDataProviderFactory extends DataProviderFactory {
     }
 
     @Override
+
     public Provider<Boolean> InsertInitialRulingProvider(ClientEntity clientEntity, ProcedureEntity procedureEntity, RepaymentEntity repaymentEntity) {
         return new RetrofitWebServiceDataProvider<>(
                 Api.getClient().insertInitialRuling(requestFactory.createInsertInitialRulingRequest(clientEntity, procedureEntity, repaymentEntity)),
@@ -229,4 +241,49 @@ public class RetrofitDataProviderFactory extends DataProviderFactory {
                 new InsertInitialRulingResponseValidator()
                 );
     }
+
+    public Provider<String> createGetRecommendedFingersProvider(ClientEntity clientEntity) {
+        return new RetrofitWebServiceDataProvider<>(
+            Api.getClient().getRecommendedFingers(requestFactory.createGetRecommendedFingersRequest(clientEntity)),
+            new GetRecommendedFingersResponseConverter(),
+            new GetRecommendedFingersResponseValidator()
+        );
+    }
+
+    @Override
+    public Provider<ProcedureEntity> createGetVoluntarySealProvider(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity, List<FingerPrintEntity> fingerPrintEntities) {
+        return new RetrofitWebServiceDataProvider<>(
+            Api.getClient().getVoluntarySeal(requestFactory.createGetVoluntarySealRequest(clientEntity, agentEntity, procedureEntity, fingerPrintEntities)),
+            new GetVoluntarySealResponseConverter(),
+            new GetVoluntarySealResponseValidator()
+        );
+    }
+
+    @Override
+    public Provider<Boolean> createSaveVoluntarySealProvider(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity) {
+        return new RetrofitWebServiceDataProvider<>(
+            Api.getClient().saveVoluntarySeal(requestFactory.createSaveVoluntarySealRequest(clientEntity, agentEntity, procedureEntity)),
+            new SaveVoluntarySealResponseConverter(),
+            new SaveVoluntarySealResponseValidator()
+        );
+    }
+
+    @Override
+    public Provider<CoexistenceResult> createMarkNciCoexistenceProvider(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity) {
+        return new RetrofitWebServiceDataProvider<>(
+            Api.getClient().markNciCoexistence(requestFactory.createMarkNciCoexistenceRequest(clientEntity, agentEntity, procedureEntity)),
+            new MarkNciCoexistenceConverter(),
+            new MarkNciCoexistenceValidator()
+        );
+    }
+
+    @Override
+    public Provider<Boolean> createUploadFilesToFileNetProvider(ProcedureEntity procedureEntity, List<DocumentEntity> documents) {
+        return new RetrofitWebServiceDataProvider<>(
+            Api.getClient().uploadFilesToFileNet(requestFactory.createUploadFilesFilenetRequest(procedureEntity, documents)),
+            new UploadFilesToFilenetResponseConverter(),
+            new UploadFilesToFileNetResponseValidator()
+        );
+    }
+
 }

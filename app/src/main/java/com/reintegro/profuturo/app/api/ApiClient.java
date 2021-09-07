@@ -18,18 +18,28 @@ import com.reintegro.profuturo.app.api.vo.GetClientImageResponse;
 import com.reintegro.profuturo.app.api.vo.GetDocumentsResponse;
 import com.reintegro.profuturo.app.api.vo.GetLetterRepaymentDocRequest;
 import com.reintegro.profuturo.app.api.vo.GetLetterRepaymentDocResponse;
+import com.reintegro.profuturo.app.api.vo.GetRecommendedFingersRequest;
+import com.reintegro.profuturo.app.api.vo.GetRecommendedFingersResponse;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentEventsRequest;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentEventsResponse;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentSolicitudeDocRequest;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentSolicitudeDocResponse;
+import com.reintegro.profuturo.app.api.vo.GetVoluntarySealRequest;
+import com.reintegro.profuturo.app.api.vo.GetVoluntarySealResponse;
 import com.reintegro.profuturo.app.api.vo.InsertClientRequest;
 import com.reintegro.profuturo.app.api.vo.InsertClientResponse;
 import com.reintegro.profuturo.app.api.vo.InsertInitialRulingRequest;
 import com.reintegro.profuturo.app.api.vo.InsertInitialRulingResponse;
+import com.reintegro.profuturo.app.api.vo.MarkNciCoexistenceRequest;
+import com.reintegro.profuturo.app.api.vo.MarkNciCoexistenceResponse;
 import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureRequest;
 import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureResponse;
 import com.reintegro.profuturo.app.api.vo.SaveLoginRequest;
 import com.reintegro.profuturo.app.api.vo.SaveLoginResponse;
+import com.reintegro.profuturo.app.api.vo.SaveVoluntarySealRequest;
+import com.reintegro.profuturo.app.api.vo.SaveVoluntarySealResponse;
+import com.reintegro.profuturo.app.api.vo.UploadFilesToFileNetRequest;
+import com.reintegro.profuturo.app.api.vo.UploadFilesToFileNetResponse;
 import com.reintegro.profuturo.app.api.vo.ValCoexistenceNCIRequest;
 import com.reintegro.profuturo.app.api.vo.ValCoexistenceNCIResponse;
 import com.reintegro.profuturo.app.api.vo.ValidateAuthFolioRequest;
@@ -135,4 +145,25 @@ public interface ApiClient {
     @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
     @POST(Constants.URL_BASE + BuildConfig.PORT_3 + Constants.URN_SAVE_INITIAL_CAPTURE)
     Call<InsertInitialRulingResponse> insertInitialRuling(@Body InsertInitialRulingRequest request);
+
+@Headers({Constants.HTTP_HEADER_AUTHORIZATION})
+    @POST(Constants.URL_BASE + BuildConfig.PORT_4 + Constants.URN_GET_RECOMMENDED_FINGERS)
+    Call<GetRecommendedFingersResponse> getRecommendedFingers(@Body GetRecommendedFingersRequest request);
+
+    @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
+    @POST(Constants.URL_BASE + BuildConfig.PORT_4 + Constants.URN_GET_VOLUNTARY_SEAL)
+    Call<GetVoluntarySealResponse> getVoluntarySeal(@Body GetVoluntarySealRequest request);
+
+    @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
+    @POST(Constants.URL_BASE + BuildConfig.PORT_1 + Constants.URN_SAVE_VOLUNTARY_SEAL)
+    Call<SaveVoluntarySealResponse> saveVoluntarySeal(@Body SaveVoluntarySealRequest request);
+
+    @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
+    @POST(Constants.URL_BASE + BuildConfig.PORT_2 + Constants.URN_MARK_NCI_COEXISTENCE)
+    Call<MarkNciCoexistenceResponse> markNciCoexistence(@Body MarkNciCoexistenceRequest request);
+
+    @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
+    @POST(Constants.URL_BASE + BuildConfig.PORT_1 + Constants.URN_UPLOAD_FILES_TO_FILE_NET)
+    Call<UploadFilesToFileNetResponse> uploadFilesToFileNet(@Body UploadFilesToFileNetRequest request);
+
 }

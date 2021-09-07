@@ -56,5 +56,15 @@ public class DateUtils {
 
         return dateFormat.format(date);
     }
+
+    public static Date getTomorrowDate(){
+        return new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+    }
+
+    public static String parseDateToString(Date date, String pattern){
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern, LocaleUtils.MEXICO);
+
+        return dateFormat.format(date);
+    }
 }
 
