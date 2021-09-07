@@ -14,4 +14,5 @@ public interface NavigationDelegate<T> {
     void pushRepaymentEventsDetail();
     void pushDocumentsCapture();
     void pushBiometricCapture();
+    void pushSaveProcedure();
 }

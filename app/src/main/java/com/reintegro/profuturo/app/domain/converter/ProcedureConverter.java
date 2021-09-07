@@ -22,6 +22,7 @@ public class ProcedureConverter {
         procedureDto.setProcedureFolio(procedureEntity.getProcedureFolio());
         procedureDto.setApplicantCurp(procedureEntity.getApplicantCurp());
         procedureDto.setVerificationResultSeal(procedureEntity.getVerificationResultSeal());
+        procedureDto.setVoluntarySeal(procedureEntity.getVoluntarySeal());
 
         return procedureDto;
     }
@@ -43,6 +44,7 @@ public class ProcedureConverter {
         procedureEntity.setProcedureFolio(procedureDto.getProcedureFolio());
         procedureEntity.setApplicantCurp(procedureDto.getApplicantCurp());
         procedureEntity.setVerificationResultSeal(procedureDto.getVerificationResultSeal());
+        procedureEntity.setVoluntarySeal(procedureDto.getVoluntarySeal());
 
         return procedureEntity;
     }

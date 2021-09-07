@@ -148,6 +148,8 @@ public class Constants {
     public static final String ID_TYPE_PROFESSIONAL = "Cédula profesional";
     public static final String ID_TYPE_MIGRATION_DOC = "Documento migratorio (FM2/FM3)";
 
-
-    
+    public static final int NOTIFICATION_CHANNEL_EMAIL = 0;
+    public static final int NOTIFICATION_CHANNEL_NO_NOTIFY = 1;
+    public static final int NOTIFICATION_CHANNEL_SMS = 2;
+    public static final int NOTIFICATION_CHANNEL_UNSELECTED = 3;
 }

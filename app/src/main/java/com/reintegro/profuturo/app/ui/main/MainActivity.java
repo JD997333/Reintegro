@@ -19,6 +19,7 @@ import com.reintegro.profuturo.app.android.ui.fragments.DocumentsCaptureFragment
 import com.reintegro.profuturo.app.android.ui.fragments.GreetingFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.InitialCaptureFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.RepaymentDetailFragment;
+import com.reintegro.profuturo.app.android.ui.fragments.SaveProcedureFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.SearchClientFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.SearchResultsFragment;
 import com.reintegro.profuturo.app.android.ui.fragments.SelectApplicantFragment;
@@ -134,7 +135,7 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
         if (getIntent() != null && getIntent().hasExtra(EXTRA_AGENT_NUMBER)) {
             agentDto.setAgentCode(getIntent().getStringExtra(EXTRA_AGENT_NUMBER));
         }
-        agentDto.setAgentCode("112082");//TODO delete this code, TEST
+
         presenter.load(agentDto);
     }
 
@@ -347,5 +348,19 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
         viewDataBinding.navigationViewPager.setCurrentItem(fragmentPosition);
 
         viewDataBinding.timelineView.setCurrentPosition(TimelineView.POSITION_BIOMETRICS_CAPTURE);
+    }
+
+    @Override
+    public void pushSaveProcedure() {
+        SaveProcedureFragment fragment = new SaveProcedureFragment();
+        fragment.setNavigationDelegate(this);
+
+        int fragmentPosition;
+        fragmentPosition = navigationAdapter.pushFragment(fragment);
+
+        navigationState.putState(NavigationState.PAGE_SAVE_PROCEDURE, fragmentPosition);
+        viewDataBinding.navigationViewPager.setCurrentItem(fragmentPosition);
+
+        viewDataBinding.timelineView.setCurrentPosition(TimelineView.POSITION_SAVE_PROCEDURE);
     }
 }

@@ -128,4 +128,10 @@ public class BiometricCaptureFragment extends NavigationAdapter.Fragment impleme
     public void showSaveVoluntarySealSuccess() {
         SnackBar.show(getView(), "Sello de voluntad guardado exitosamente");
     }
+
+    @Override
+    public void pushSaveProcedure() {
+        setBackEnabled(false);
+        navigationDelegate.pushSaveProcedure();
+    }
 }
