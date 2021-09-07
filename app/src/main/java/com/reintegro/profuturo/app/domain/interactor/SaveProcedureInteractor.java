@@ -127,7 +127,7 @@ public class SaveProcedureInteractor extends InteractorBase<SaveProcedureContrac
 
                 @Override
                 public void onSuccess(@NonNull CoexistenceResult coexistenceResult) {
-                    presenter.onMarkNciCoexistenceSuccess(coexistesnceResult);
+                    presenter.onMarkNciCoexistenceSuccess(coexistenceResult);
                 }
 
                 @Override
