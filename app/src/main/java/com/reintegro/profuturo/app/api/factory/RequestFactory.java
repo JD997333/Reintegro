@@ -12,9 +12,11 @@ import com.reintegro.profuturo.app.api.vo.GetRepaymentEventsRequest;
 import com.reintegro.profuturo.app.api.vo.GetRepaymentSolicitudeDocRequest;
 import com.reintegro.profuturo.app.api.vo.GetVoluntarySealRequest;
 import com.reintegro.profuturo.app.api.vo.InsertClientRequest;
+import com.reintegro.profuturo.app.api.vo.MarkNciCoexistenceRequest;
 import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureRequest;
 import com.reintegro.profuturo.app.api.vo.SaveLoginRequest;
 import com.reintegro.profuturo.app.api.vo.SaveVoluntarySealRequest;
+import com.reintegro.profuturo.app.api.vo.UploadFilesToFileNetRequest;
 import com.reintegro.profuturo.app.api.vo.ValCoexistenceNCIRequest;
 import com.reintegro.profuturo.app.api.vo.ValidateAuthFolioRequest;
 import com.reintegro.profuturo.app.data.entity.AgentEntity;
@@ -23,6 +25,7 @@ import com.reintegro.profuturo.app.data.entity.DocumentEntity;
 import com.reintegro.profuturo.app.data.entity.FingerPrintEntity;
 import com.reintegro.profuturo.app.data.entity.ProcedureEntity;
 import com.reintegro.profuturo.app.data.entity.RepaymentEntity;
+import com.reintegro.profuturo.app.util.Base64Utils;
 import com.reintegro.profuturo.app.util.Constants;
 import com.reintegro.profuturo.app.util.DateUtils;
 import com.reintegro.profuturo.app.util.TypeUtils;
@@ -385,6 +388,60 @@ public class RequestFactory {
         request.setSaveVoluntarySealBody(body);
 
         return request;
+    }
+
+    public MarkNciCoexistenceRequest createMarkNciCoexistenceRequest(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity){
+        MarkNciCoexistenceRequest request = new MarkNciCoexistenceRequest();
+        request.setFolio(procedureEntity.getBinnacleFolio());
+        request.setIdProceso(procedureEntity.getIdProcess().toString());
+        request.setIdSubProceso(procedureEntity.getIdSubProcess().toString());
+        request.setNumCuentaIndividual(clientEntity.getAccountNumber());
+        request.setIdSaldoOpera("12");
+        request.setTipoMovimiento("181");
+        request.setIdSubEtapa("25");
+        request.setUsuario(agentEntity.getAgentCode());
+        request.setFlgSaltaIntgy("1");
+        return request;
+    }
+
+    public UploadFilesToFileNetRequest createUploadFilesFilenetRequest(ProcedureEntity procedureEntity, List<DocumentEntity> documents){
+        List<UploadFilesToFileNetRequest.DocumentName> documentNames;
+        documentNames = new ArrayList<>();
+
+        for (DocumentEntity document : documents){
+            String documentType;
+
+            if (document.getDocumentType() == Constants.DOCUMENT_TYPE_PDF) {
+                documentType = ".pdf";
+            } else {
+                documentType = ".jpg";
+            }
+
+            UploadFilesToFileNetRequest.DocumentName documentName;
+            documentName = new UploadFilesToFileNetRequest.DocumentName();
+            documentName.setBase64(Base64Utils.encodeFile(document.getFile()));
+            documentName.setName(document.getDocumentKey() + "_" + document.getDocumentName() + "_" + "1" + documentType);
+
+            documentNames.add(documentName);
+        }
+
+        UploadFilesToFileNetRequest.ImageData imageData;
+        imageData = new UploadFilesToFileNetRequest.ImageData();
+        imageData.setBinnacleFolio(procedureEntity.getBinnacleFolio());
+        imageData.setDocuments(documentNames);
+        imageData.setProcessId(Constants.ID_PROCESS_REPAYMENT_FILENET);
+        imageData.setRetry(false);
+        imageData.setTotal((long) documentNames.size());
+
+        UploadFilesToFileNetRequest.Request request;
+        request = new UploadFilesToFileNetRequest.Request();
+        request.setImageData(imageData);
+
+        UploadFilesToFileNetRequest uploadFilesToFileNetRequest;
+        uploadFilesToFileNetRequest = new UploadFilesToFileNetRequest();
+        uploadFilesToFileNetRequest.setRequest(request);
+
+        return uploadFilesToFileNetRequest;
     }
 
 }

@@ -79,8 +79,6 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
             view.showUnselectedNotificationError();
         }else {
             switch (state.getCurrentStep()){
-                case SaveProcedureState.STEP_VALIDATE_NOTIFICATION_CHANNEL:
-                    break;
                 case SaveProcedureState.STEP_MARK_NCI_COEXISTENCE:
                     interactor.markNciCoexistence();
                     break;
@@ -105,7 +103,8 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
 
     @Override
     public void onMarkNciCoexistenceSuccess() {
-
+        state.setCurrentStep(SaveProcedureState.STEP_SEND_EMAIL);
+        interactor.sendEmail();
     }
 
     @Override
@@ -115,7 +114,8 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
 
     @Override
     public void onSendEmailSuccess() {
-
+        state.setCurrentStep(SaveProcedureState.STEP_START_BPM_INSTANCE);
+        interactor.startBpmInstance();
     }
 
     @Override
@@ -125,7 +125,8 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
 
     @Override
     public void onStartBpmInstanceSuccess() {
-
+        state.setCurrentStep(SaveProcedureState.STEP_UPLOAD_IMAGES_FILENET);
+        interactor.uploadImagesFilenet();
     }
 
     @Override
@@ -135,7 +136,8 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
 
     @Override
     public void onUploadImageFilenetSuccess() {
-
+        state.setCurrentStep(SaveProcedureState.STEP_UPDATE_PROCEDURE);
+        interactor.updateProcedure();
     }
 
     @Override
@@ -145,7 +147,8 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
 
     @Override
     public void onUpdateProcedureSuccess() {
-
+        state.setCurrentStep(SaveProcedureState.STEP_CLOSE_BINNACLE);
+        interactor.closeBinnacle();
     }
 
     @Override
@@ -155,7 +158,8 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
 
     @Override
     public void onCloseBinnacleSuccess() {
-
+        view.showSaveProcedureSuccess();
+        view.dismissLoading();
     }
 
     @Override

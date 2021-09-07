@@ -18,9 +18,11 @@ import com.reintegro.profuturo.app.api.converter.GetRepaymentEventsResponseConve
 import com.reintegro.profuturo.app.api.converter.GetRepaymentSolicitudeDocResponseConverter;
 import com.reintegro.profuturo.app.api.converter.GetVoluntarySealResponseConverter;
 import com.reintegro.profuturo.app.api.converter.InsertClientResponseConverter;
+import com.reintegro.profuturo.app.api.converter.MarkNciCoexistenceConverter;
 import com.reintegro.profuturo.app.api.converter.SaveInitialCaptureResponseConverter;
 import com.reintegro.profuturo.app.api.converter.SaveLoginResponseConverter;
 import com.reintegro.profuturo.app.api.converter.SaveVoluntarySealResponseConverter;
+import com.reintegro.profuturo.app.api.converter.UploadFilesToFilenetResponseConverter;
 import com.reintegro.profuturo.app.api.converter.ValCoexistenceNciResponseConverter;
 import com.reintegro.profuturo.app.api.converter.ValidateAuthFolioResponseConverter;
 import com.reintegro.profuturo.app.api.provider.RetrofitWebServiceDataProvider;
@@ -39,9 +41,11 @@ import com.reintegro.profuturo.app.api.validator.GetRepaymentEventsResponseValid
 import com.reintegro.profuturo.app.api.validator.GetRepaymentSolicitudeDocResponseValidator;
 import com.reintegro.profuturo.app.api.validator.GetVoluntarySealResponseValidator;
 import com.reintegro.profuturo.app.api.validator.InsertClientResponseValidator;
+import com.reintegro.profuturo.app.api.validator.MarkNciCoexistenceValidator;
 import com.reintegro.profuturo.app.api.validator.SaveInitialCaptureResponseValidator;
 import com.reintegro.profuturo.app.api.validator.SaveLoginResponseValidator;
 import com.reintegro.profuturo.app.api.validator.SaveVoluntarySealResponseValidator;
+import com.reintegro.profuturo.app.api.validator.UploadFilesToFileNetResponseValidator;
 import com.reintegro.profuturo.app.api.validator.ValCoexistenceNciResponseValidator;
 import com.reintegro.profuturo.app.api.validator.ValidateAuthFolioResponseValidator;
 import com.reintegro.profuturo.app.api.vo.GetAgentAssignedBranchOfficeRequest;
@@ -253,4 +257,23 @@ public class RetrofitDataProviderFactory extends DataProviderFactory {
             new SaveVoluntarySealResponseValidator()
         );
     }
+
+    @Override
+    public Provider<CoexistenceResult> createMarkNciCoexistenceProvider(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity) {
+        return new RetrofitWebServiceDataProvider<>(
+            Api.getClient().markNciCoexistence(requestFactory.createMarkNciCoexistenceRequest(clientEntity, agentEntity, procedureEntity)),
+            new MarkNciCoexistenceConverter(),
+            new MarkNciCoexistenceValidator()
+        );
+    }
+
+    @Override
+    public Provider<Boolean> createUploadFilesToFileNetProvider(ProcedureEntity procedureEntity, List<DocumentEntity> documents) {
+        return new RetrofitWebServiceDataProvider<>(
+            Api.getClient().uploadFilesToFileNet(requestFactory.createUploadFilesFilenetRequest(procedureEntity, documents)),
+            new UploadFilesToFilenetResponseConverter(),
+            new UploadFilesToFileNetResponseValidator()
+        );
+    }
+
 }

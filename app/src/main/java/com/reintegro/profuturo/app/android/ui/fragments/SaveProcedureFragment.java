@@ -238,4 +238,18 @@ public class SaveProcedureFragment extends NavigationAdapter.Fragment implements
     public void showEmailError() {
         SnackBar.show(getView(), getString(R.string.validate_email_error_1));
     }
+
+    @Override
+    public void showSaveProcedureSuccess() {
+        SimpleAlertDialog simpleAlertDialog;
+        simpleAlertDialog = new SimpleAlertDialog();
+        simpleAlertDialog.setCancelable(false);
+        simpleAlertDialog.setMessage(getString(R.string.save_procedure_success_1));
+        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1), (view) -> {
+            simpleAlertDialog.dismiss();
+            navigationDelegate.popToGreeting();
+        });
+        simpleAlertDialog.setTitle(getString(R.string.save_procedure_1));
+        simpleAlertDialog.show(getFragmentManager(), null);
+    }
 }

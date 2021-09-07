@@ -69,5 +69,6 @@ public interface SaveProcedureContract {
         void setSmsRadioButtonCheck(boolean checked);
         void showCellPhoneError();
         void showEmailError();
+        void showSaveProcedureSuccess();
     }
 }

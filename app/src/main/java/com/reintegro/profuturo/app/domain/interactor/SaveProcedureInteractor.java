@@ -93,32 +93,32 @@ public class SaveProcedureInteractor extends InteractorBase<SaveProcedureContrac
 
     @Override
     public void markNciCoexistence() {
-
+        presenter.onMarkNciCoexistenceSuccess();
     }
 
     @Override
     public void sendEmail() {
-
+        presenter.onSendEmailSuccess();
     }
 
     @Override
     public void startBpmInstance() {
-
+        presenter.onStartBpmInstanceSuccess();
     }
 
     @Override
     public void uploadImagesFilenet() {
-
+        presenter.onUploadImageFilenetSuccess();
     }
 
     @Override
     public void updateProcedure() {
-
+        presenter.onUpdateProcedureSuccess();
     }
 
     @Override
     public void closeBinnacle() {
-
+        presenter.onCloseBinnacleSuccess();
     }
 
     @Override

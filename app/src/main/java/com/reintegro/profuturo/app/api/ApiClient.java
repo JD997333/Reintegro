@@ -28,12 +28,16 @@ import com.reintegro.profuturo.app.api.vo.GetVoluntarySealRequest;
 import com.reintegro.profuturo.app.api.vo.GetVoluntarySealResponse;
 import com.reintegro.profuturo.app.api.vo.InsertClientRequest;
 import com.reintegro.profuturo.app.api.vo.InsertClientResponse;
+import com.reintegro.profuturo.app.api.vo.MarkNciCoexistenceRequest;
+import com.reintegro.profuturo.app.api.vo.MarkNciCoexistenceResponse;
 import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureRequest;
 import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureResponse;
 import com.reintegro.profuturo.app.api.vo.SaveLoginRequest;
 import com.reintegro.profuturo.app.api.vo.SaveLoginResponse;
 import com.reintegro.profuturo.app.api.vo.SaveVoluntarySealRequest;
 import com.reintegro.profuturo.app.api.vo.SaveVoluntarySealResponse;
+import com.reintegro.profuturo.app.api.vo.UploadFilesToFileNetRequest;
+import com.reintegro.profuturo.app.api.vo.UploadFilesToFileNetResponse;
 import com.reintegro.profuturo.app.api.vo.ValCoexistenceNCIRequest;
 import com.reintegro.profuturo.app.api.vo.ValCoexistenceNCIResponse;
 import com.reintegro.profuturo.app.api.vo.ValidateAuthFolioRequest;
@@ -147,5 +151,13 @@ public interface ApiClient {
     @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
     @POST(Constants.URL_BASE + BuildConfig.PORT_1 + Constants.URN_SAVE_VOLUNTARY_SEAL)
     Call<SaveVoluntarySealResponse> saveVoluntarySeal(@Body SaveVoluntarySealRequest request);
+
+    @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
+    @POST(Constants.URL_BASE + BuildConfig.PORT_2 + Constants.URN_MARK_NCI_COEXISTENCE)
+    Call<MarkNciCoexistenceResponse> markNciCoexistence(@Body MarkNciCoexistenceRequest request);
+
+    @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
+    @POST(Constants.URL_BASE + BuildConfig.PORT_1 + Constants.URN_UPLOAD_FILES_TO_FILE_NET)
+    Call<UploadFilesToFileNetResponse> uploadFilesToFileNet(@Body UploadFilesToFileNetRequest request);
 
 }

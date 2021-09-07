@@ -4,19 +4,18 @@ import com.reintegro.profuturo.app.contract.SaveProcedureContract;
 import com.reintegro.profuturo.app.domain.dto.NotificationChannelDto;
 
 public class SaveProcedureState implements SaveProcedureContract.State {
-    public static final int STEP_VALIDATE_NOTIFICATION_CHANNEL = 0;
-    public static final int STEP_MARK_NCI_COEXISTENCE = 1;
-    public static final int STEP_SEND_EMAIL = 2;
-    public static final int STEP_START_BPM_INSTANCE = 3;
-    public static final int STEP_UPLOAD_IMAGES_FILENET = 4;
-    public static final int STEP_UPDATE_PROCEDURE = 5;
-    public static final int STEP_CLOSE_BINNACLE = 6;
+    public static final int STEP_MARK_NCI_COEXISTENCE = 0;
+    public static final int STEP_SEND_EMAIL = 1;
+    public static final int STEP_START_BPM_INSTANCE = 2;
+    public static final int STEP_UPLOAD_IMAGES_FILENET = 3;
+    public static final int STEP_UPDATE_PROCEDURE = 4;
+    public static final int STEP_CLOSE_BINNACLE = 5;
 
     private NotificationChannelDto notificationChannelDto;
     private int currentStep;
 
     public SaveProcedureState() {
-        currentStep = STEP_VALIDATE_NOTIFICATION_CHANNEL;
+        currentStep = STEP_MARK_NCI_COEXISTENCE;
     }
 
     @Override
