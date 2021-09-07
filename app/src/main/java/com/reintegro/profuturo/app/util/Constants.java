@@ -76,12 +76,13 @@ public class Constants {
     public static final String URN_GET_DOCUMENTS = "/iib/retiros/reglasRetiros/v1/consultarDocumentoTramite";
     public static final String URN_GET_REPAYMENT_SOLICITUDE_DOC = "/iib/nci/ReintegroSemanas/DocumentosReintegro/v1/consultarSolicitudReintegro";
     public static final String URN_GET_LETTER_REPAYMENT_DOC = "/iib/nci/ReintegroSemanas/DocumentosReintegro/v1/consultarCartaReintegro";
-    public static final String URN_INSERT_REINTEGRO_SEMANAS = "/iib/nci/ReintegroSemanas/IniciarDictamen/v1/iniciar";
+    public static final String URN_INSERT_INITIAL_RULLING= "/iib/nci/ReintegroSemanas/IniciarDictamen/v1/iniciar";
     public static final String URN_GET_RECOMMENDED_FINGERS = "/mb/selloNHuellas/obtenerSugerenciaHuellas";
     public static final String URN_GET_VOLUNTARY_SEAL = "/mb/selloNHuellas/obtenerSelloNHuellas";
     public static final String URN_SAVE_VOLUNTARY_SEAL = "/iib/api/BiometriaSello/BiometriaSelloService/v1/guardarSelloProceSAR";
     public static final String URN_MARK_NCI_COEXISTENCE = "/iib/nci/comunes/servicio/matriz/v1/marcarConvivencia";
     public static final String URN_UPLOAD_FILES_TO_FILE_NET = "/iib/servicio/comun/cargaImagen/tramite/v1/cargarImagenFileNet";
+    public static final String URN_UPDATE_PAPERWORK= "/iib/nci/ReintegroSemanas/GuardadoTramite/v1/actualizarTramite";
 
     public static final int IDENTIFICATION_INDICATOR_STATUS_ACTIVE = 5;
     public static final int BIOMETRIC_INDICATOR_STATUS_NOT_EXIST = 0;

@@ -41,5 +41,6 @@ public abstract class DataProviderFactory {
     public abstract Provider<Boolean> createSaveVoluntarySealProvider(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity);
     public abstract Provider<CoexistenceResult> createMarkNciCoexistenceProvider(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity);
     public abstract Provider<Boolean> createUploadFilesToFileNetProvider(ProcedureEntity procedureEntity, List<DocumentEntity> documents);
+    public abstract Provider<Boolean> createUpdatePaperwork(ClientEntity clientEntity, ProcedureEntity procedureEntity, RepaymentEntity repaymentEntity);
 
 }

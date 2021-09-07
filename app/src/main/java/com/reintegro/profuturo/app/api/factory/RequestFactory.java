@@ -17,6 +17,7 @@ import com.reintegro.profuturo.app.api.vo.MarkNciCoexistenceRequest;
 import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureRequest;
 import com.reintegro.profuturo.app.api.vo.SaveLoginRequest;
 import com.reintegro.profuturo.app.api.vo.SaveVoluntarySealRequest;
+import com.reintegro.profuturo.app.api.vo.UpdatePaperworkRequest;
 import com.reintegro.profuturo.app.api.vo.UploadFilesToFileNetRequest;
 import com.reintegro.profuturo.app.api.vo.ValCoexistenceNCIRequest;
 import com.reintegro.profuturo.app.api.vo.ValidateAuthFolioRequest;
@@ -461,4 +462,41 @@ public class RequestFactory {
         return uploadFilesToFileNetRequest;
     }
 
+    public UpdatePaperworkRequest createUpdatePaperwork(ClientEntity clientEntity, ProcedureEntity procedureEntity, RepaymentEntity repaymentEntity){
+        UpdatePaperworkRequest request = new UpdatePaperworkRequest();
+
+        UpdatePaperworkRequest.ActualizarTramite updatePaperwork = new UpdatePaperworkRequest.ActualizarTramite();
+
+       /* updatePaperwork.setFolio();
+        updatePaperwork.setFolioTramite();
+        updatePaperwork.setFechTramite();
+        updatePaperwork.setIdTipoTramite();
+        updatePaperwork.setIdEstatusTramite();
+        updatePaperwork.setNumCuenta();
+        updatePaperwork.setCurp();
+        updatePaperwork.setNss();
+        updatePaperwork.setIdTipoSolicitante();
+        updatePaperwork.setCurpSol();
+        updatePaperwork.setFolioAutentificacion();
+        updatePaperwork.setIdValImporte();
+        updatePaperwork.setFechEstatus();
+        updatePaperwork.setIdMotivoRechazo();
+        updatePaperwork.setMontoSemana();
+        updatePaperwork.setSemMaxReitegrar();
+        updatePaperwork.setSemSolReintegrar();
+        updatePaperwork.setSemPrevReintegrados();
+        updatePaperwork.setFechSolTRD();
+        updatePaperwork.setMontoPagDRT();
+        updatePaperwork.setIdSucAsignada();
+        updatePaperwork.setCurpagenteServ();
+        updatePaperwork.setNumAsesor();
+        updatePaperwork.setCanal();
+        updatePaperwork.setSelloVol();
+        updatePaperwork.setIdEstatusSello();
+        updatePaperwork.setUsuAct();
+        updatePaperwork.setFehAct();
+*/
+        request.setActualizarTramite(updatePaperwork);
+        return request;
+    }
 }

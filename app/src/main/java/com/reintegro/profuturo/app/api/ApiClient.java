@@ -38,6 +38,8 @@ import com.reintegro.profuturo.app.api.vo.SaveLoginRequest;
 import com.reintegro.profuturo.app.api.vo.SaveLoginResponse;
 import com.reintegro.profuturo.app.api.vo.SaveVoluntarySealRequest;
 import com.reintegro.profuturo.app.api.vo.SaveVoluntarySealResponse;
+import com.reintegro.profuturo.app.api.vo.UpdatePaperworkRequest;
+import com.reintegro.profuturo.app.api.vo.UpdatePaperworkResponse;
 import com.reintegro.profuturo.app.api.vo.UploadFilesToFileNetRequest;
 import com.reintegro.profuturo.app.api.vo.UploadFilesToFileNetResponse;
 import com.reintegro.profuturo.app.api.vo.ValCoexistenceNCIRequest;
@@ -143,7 +145,7 @@ public interface ApiClient {
     Call<GetLetterRepaymentDocResponse> getLetterRepaymentDocument(@Body GetLetterRepaymentDocRequest request);
 
     @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
-    @POST(Constants.URL_BASE + BuildConfig.PORT_3 + Constants.URN_SAVE_INITIAL_CAPTURE)
+    @POST(Constants.URL_BASE + BuildConfig.PORT_3 + Constants.URN_INSERT_INITIAL_RULLING)
     Call<InsertInitialRulingResponse> insertInitialRuling(@Body InsertInitialRulingRequest request);
 
 @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
@@ -166,4 +168,7 @@ public interface ApiClient {
     @POST(Constants.URL_BASE + BuildConfig.PORT_1 + Constants.URN_UPLOAD_FILES_TO_FILE_NET)
     Call<UploadFilesToFileNetResponse> uploadFilesToFileNet(@Body UploadFilesToFileNetRequest request);
 
+    @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
+    @POST(Constants.URL_BASE + BuildConfig.PORT_3 + Constants.URN_UPDATE_PAPERWORK)
+    Call<UpdatePaperworkResponse> updatePaperwork(@Body UpdatePaperworkRequest request);
 }

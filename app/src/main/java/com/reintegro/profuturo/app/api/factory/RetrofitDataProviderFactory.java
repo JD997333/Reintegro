@@ -23,6 +23,7 @@ import com.reintegro.profuturo.app.api.converter.MarkNciCoexistenceConverter;
 import com.reintegro.profuturo.app.api.converter.SaveInitialCaptureResponseConverter;
 import com.reintegro.profuturo.app.api.converter.SaveLoginResponseConverter;
 import com.reintegro.profuturo.app.api.converter.SaveVoluntarySealResponseConverter;
+import com.reintegro.profuturo.app.api.converter.UpdatePaperworkResponseConverter;
 import com.reintegro.profuturo.app.api.converter.UploadFilesToFilenetResponseConverter;
 import com.reintegro.profuturo.app.api.converter.ValCoexistenceNciResponseConverter;
 import com.reintegro.profuturo.app.api.converter.ValidateAuthFolioResponseConverter;
@@ -47,6 +48,7 @@ import com.reintegro.profuturo.app.api.validator.MarkNciCoexistenceValidator;
 import com.reintegro.profuturo.app.api.validator.SaveInitialCaptureResponseValidator;
 import com.reintegro.profuturo.app.api.validator.SaveLoginResponseValidator;
 import com.reintegro.profuturo.app.api.validator.SaveVoluntarySealResponseValidator;
+import com.reintegro.profuturo.app.api.validator.UpdatePaperworkResponseValidator;
 import com.reintegro.profuturo.app.api.validator.UploadFilesToFileNetResponseValidator;
 import com.reintegro.profuturo.app.api.validator.ValCoexistenceNciResponseValidator;
 import com.reintegro.profuturo.app.api.validator.ValidateAuthFolioResponseValidator;
@@ -286,4 +288,12 @@ public class RetrofitDataProviderFactory extends DataProviderFactory {
         );
     }
 
+    @Override
+    public Provider<Boolean> createUpdatePaperwork(ClientEntity clientEntity, ProcedureEntity procedureEntity, RepaymentEntity repaymentEntity) {
+        return new RetrofitWebServiceDataProvider<>(
+            Api.getClient().updatePaperwork(requestFactory.createUpdatePaperwork(clientEntity, procedureEntity, repaymentEntity)),
+            new UpdatePaperworkResponseConverter(),
+            new UpdatePaperworkResponseValidator()
+        );
+    }
 }
