@@ -43,7 +43,7 @@ public class MarkNciCoexistenceRequest {
     @SerializedName("idSubProcesoJudicial")
     @Expose
     private String idSubProcesoJudicial;
-    @SerializedName("flgSaltaIntgy")
+    @SerializedName("flgSaltaIntgty")
     @Expose
     private String flgSaltaIntgy;
 

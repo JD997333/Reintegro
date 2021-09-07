@@ -8,6 +8,9 @@ public class MarkNciCoexistenceValidator extends ResponseValidator<MarkNciCoexis
         if (response == null){
             return false;
         }
+        if (response.getMarkResponse() == null){
+            return false;
+        }
         return true;
     }
 }

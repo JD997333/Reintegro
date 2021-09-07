@@ -6,6 +6,7 @@ import com.reintegro.profuturo.app.data.entity.ClientEntity;
 import com.reintegro.profuturo.app.data.entity.DocumentEntity;
 import com.reintegro.profuturo.app.data.entity.FingerPrintEntity;
 import com.reintegro.profuturo.app.data.entity.LocationEntity;
+import com.reintegro.profuturo.app.data.entity.NotificationChannelEntity;
 import com.reintegro.profuturo.app.data.entity.ProcedureEntity;
 import com.reintegro.profuturo.app.data.entity.RepaymentEntity;
 import com.reintegro.profuturo.app.data.entity.SearchClientEntity;
@@ -35,11 +36,14 @@ public abstract class DataProviderFactory {
     public abstract Provider<List<DocumentEntity>> createGetDocumentsProvider(int idProcess, int applicantType, int idSubProcess);
     public abstract Provider<String> createGetRepaymentSolicitudeDocProvider(AgentEntity agentEntity, ClientEntity clientEntity, ProcedureEntity procedureEntity, DocumentEntity documentEntity, RepaymentEntity repaymentEntity);
     public abstract Provider<String> createGetLetterRepaymentDocProvider(ClientEntity clientEntity, ProcedureEntity procedureEntity, RepaymentEntity repaymentEntity);
-    public abstract Provider<Boolean> InsertInitialRulingProvider(ClientEntity clientEntity, ProcedureEntity procedureEntity, RepaymentEntity repaymentEntity);
+    public abstract Provider<Boolean> createStartBpmInstanceProvider(ProcedureEntity procedureEntity);
     public abstract Provider<String> createGetRecommendedFingersProvider(ClientEntity clientEntity);
     public abstract Provider<ProcedureEntity> createGetVoluntarySealProvider(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity, List<FingerPrintEntity> fingerPrintEntities);
     public abstract Provider<Boolean> createSaveVoluntarySealProvider(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity);
     public abstract Provider<CoexistenceResult> createMarkNciCoexistenceProvider(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity);
     public abstract Provider<Boolean> createUploadFilesToFileNetProvider(ProcedureEntity procedureEntity, List<DocumentEntity> documents);
+
+    public abstract Provider<Boolean> createSendEmailProvider(AgentEntity agentEntity, ClientEntity clientEntity, ProcedureEntity procedureEntity, List<DocumentEntity> documents, NotificationChannelEntity notificationChannel);
+    public abstract Provider<Boolean> createInsertBinnacleProvider(AgentEntity agentEntity, ProcedureEntity procedureEntity);
 
 }

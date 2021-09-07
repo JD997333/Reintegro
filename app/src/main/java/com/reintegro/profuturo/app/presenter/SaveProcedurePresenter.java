@@ -9,6 +9,7 @@ import com.reintegro.profuturo.app.domain.dto.NotificationChannelDto;
 import com.reintegro.profuturo.app.domain.state.SaveProcedureState;
 import com.reintegro.profuturo.app.util.Constants;
 import com.reintegro.profuturo.app.util.Utils;
+import com.reintegro.profuturo.app.vo.CoexistenceResult;
 
 import java.util.List;
 
@@ -102,9 +103,18 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
     }
 
     @Override
-    public void onMarkNciCoexistenceSuccess() {
-        state.setCurrentStep(SaveProcedureState.STEP_SEND_EMAIL);
-        interactor.sendEmail();
+    public void onMarkNciCoexistenceSuccess(CoexistenceResult result) {
+        if (result.isCoexistenceSuccess()){
+            state.setCurrentStep(SaveProcedureState.STEP_SEND_EMAIL);
+            if (state.getNotificationChannel().getSelectedNotificationChannel() != Constants.NOTIFICATION_CHANNEL_NO_NOTIFY){
+                interactor.sendEmail();
+            }else {
+                onSendEmailSuccess();
+            }
+        }else {
+            view.showNoCoexistenceDialog(result.getCoexistenceMessage());
+            view.dismissLoading();
+        }
     }
 
     @Override

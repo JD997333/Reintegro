@@ -8,8 +8,8 @@ public class MarkNciCoexistenceConverter extends ResponseConverter<MarkNciCoexis
     @Override
     public CoexistenceResult convert(MarkNciCoexistenceResponse response) {
         CoexistenceResult result = new CoexistenceResult();
-        result.setCoexistenceSuccess(TypeUtils.getBooleanValueOrDefault(response.getSuccess()));
-        result.setCoexistenceMessage(TypeUtils.getValueOrDefault(response.getDescripcionNoConvivencia()));
+        result.setCoexistenceSuccess(TypeUtils.getValueOrDefault(response.getMarkResponse().isSuccess()));
+        result.setCoexistenceMessage(TypeUtils.getValueOrDefault(response.getMarkResponse().getMessage()));
         return result;
     }
 }

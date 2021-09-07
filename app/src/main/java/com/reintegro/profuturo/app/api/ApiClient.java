@@ -30,6 +30,8 @@ import com.reintegro.profuturo.app.api.vo.InsertClientRequest;
 import com.reintegro.profuturo.app.api.vo.InsertClientResponse;
 import com.reintegro.profuturo.app.api.vo.InsertInitialRulingRequest;
 import com.reintegro.profuturo.app.api.vo.InsertInitialRulingResponse;
+import com.reintegro.profuturo.app.api.vo.InsertProcessBinnacleRequest;
+import com.reintegro.profuturo.app.api.vo.InsertProcessBinnacleResponse;
 import com.reintegro.profuturo.app.api.vo.MarkNciCoexistenceRequest;
 import com.reintegro.profuturo.app.api.vo.MarkNciCoexistenceResponse;
 import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureRequest;
@@ -38,6 +40,8 @@ import com.reintegro.profuturo.app.api.vo.SaveLoginRequest;
 import com.reintegro.profuturo.app.api.vo.SaveLoginResponse;
 import com.reintegro.profuturo.app.api.vo.SaveVoluntarySealRequest;
 import com.reintegro.profuturo.app.api.vo.SaveVoluntarySealResponse;
+import com.reintegro.profuturo.app.api.vo.SendEmailRequest;
+import com.reintegro.profuturo.app.api.vo.SendEmailResponse;
 import com.reintegro.profuturo.app.api.vo.UploadFilesToFileNetRequest;
 import com.reintegro.profuturo.app.api.vo.UploadFilesToFileNetResponse;
 import com.reintegro.profuturo.app.api.vo.ValCoexistenceNCIRequest;
@@ -143,10 +147,10 @@ public interface ApiClient {
     Call<GetLetterRepaymentDocResponse> getLetterRepaymentDocument(@Body GetLetterRepaymentDocRequest request);
 
     @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
-    @POST(Constants.URL_BASE + BuildConfig.PORT_3 + Constants.URN_SAVE_INITIAL_CAPTURE)
-    Call<InsertInitialRulingResponse> insertInitialRuling(@Body InsertInitialRulingRequest request);
+    @POST(Constants.URL_BASE + BuildConfig.PORT_3 + Constants.URN_START_BPM_INSTANCE)
+    Call<InsertInitialRulingResponse> startBpmInstance(@Body InsertInitialRulingRequest request);
 
-@Headers({Constants.HTTP_HEADER_AUTHORIZATION})
+    @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
     @POST(Constants.URL_BASE + BuildConfig.PORT_4 + Constants.URN_GET_RECOMMENDED_FINGERS)
     Call<GetRecommendedFingersResponse> getRecommendedFingers(@Body GetRecommendedFingersRequest request);
 
@@ -165,5 +169,13 @@ public interface ApiClient {
     @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
     @POST(Constants.URL_BASE + BuildConfig.PORT_1 + Constants.URN_UPLOAD_FILES_TO_FILE_NET)
     Call<UploadFilesToFileNetResponse> uploadFilesToFileNet(@Body UploadFilesToFileNetRequest request);
+
+    @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
+    @POST(Constants.URL_BASE + BuildConfig.PORT_2 + Constants.URN_SEND_EMAIL)
+    Call<SendEmailResponse> sendEmail(@Body SendEmailRequest request);
+
+    @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
+    @POST(Constants.URL_BASE + BuildConfig.PORT_1 + Constants.URN_INSERT_PROCESS_BINNACLE)
+    Call<InsertProcessBinnacleResponse> insertBinnacleProcess(@Body InsertProcessBinnacleRequest request);
 
 }

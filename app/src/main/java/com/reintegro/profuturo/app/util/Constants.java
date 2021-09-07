@@ -20,6 +20,8 @@ public class Constants {
 
     public static final String KEY_BIOMETRIC_STATUS = "KEY_BIOMETRIC_STATUS";
     public static final String KEY_IDENTIFICATION_STATUS = "KEY_IDENTIFICATION_STATUS";
+    public static final String SUB_PROCESS_NAME = "REINTEGRO DE SEMANAS";
+    public static final String PROCESS_NAME = "RECAUDACION";
 
     public static final String EXTRA_IMAGE_ENGINE_CLASS_NAME = "mx.com.profuturo.motor.CameraUI";
     public static final String EXTRA_IMAGE_ENGINE_IS_CAMERA = "esCamara";
@@ -76,12 +78,15 @@ public class Constants {
     public static final String URN_GET_DOCUMENTS = "/iib/retiros/reglasRetiros/v1/consultarDocumentoTramite";
     public static final String URN_GET_REPAYMENT_SOLICITUDE_DOC = "/iib/nci/ReintegroSemanas/DocumentosReintegro/v1/consultarSolicitudReintegro";
     public static final String URN_GET_LETTER_REPAYMENT_DOC = "/iib/nci/ReintegroSemanas/DocumentosReintegro/v1/consultarCartaReintegro";
-    public static final String URN_INSERT_REINTEGRO_SEMANAS = "/iib/nci/ReintegroSemanas/IniciarDictamen/v1/iniciar";
+    public static final String URN_START_BPM_INSTANCE = "/iib/nci/ReintegroSemanas/IniciarDictamen/v1/iniciar";
     public static final String URN_GET_RECOMMENDED_FINGERS = "/mb/selloNHuellas/obtenerSugerenciaHuellas";
     public static final String URN_GET_VOLUNTARY_SEAL = "/mb/selloNHuellas/obtenerSelloNHuellas";
     public static final String URN_SAVE_VOLUNTARY_SEAL = "/iib/api/BiometriaSello/BiometriaSelloService/v1/guardarSelloProceSAR";
     public static final String URN_MARK_NCI_COEXISTENCE = "/iib/nci/comunes/servicio/matriz/v1/marcarConvivencia";
     public static final String URN_UPLOAD_FILES_TO_FILE_NET = "/iib/servicio/comun/cargaImagen/tramite/v1/cargarImagenFileNet";
+    public static final String URN_SEND_EMAIL = "/iib/api/correoElectronico/v1/enviarCorreo";
+    public static final String URN_INSERT_PROCESS_BINNACLE = "/iib/retiros/guardarRetiro/v1/insertarBitacoraProcesos";
+
 
     public static final int IDENTIFICATION_INDICATOR_STATUS_ACTIVE = 5;
     public static final int BIOMETRIC_INDICATOR_STATUS_NOT_EXIST = 0;
@@ -103,6 +108,8 @@ public class Constants {
     public static final Integer STATUS_SUB_STAGE_EXP_ACCEPTED = 3036;
 
     public static final Integer BINNACLE_STATUS_OPEN = 32;
+    public static final Integer BINNACLE_STATUS_CLOSED = 33;
+    public static final Integer BINNACLE_STATUS_CANCELED = 35;
     public static final Integer BINNACLE_STATUS_PROCESS = 32;
     public static final Integer ID_STAGE_RECEPTION = 19;
     public static final Integer ID_SUB_STAGE_CAPTURE = 990;

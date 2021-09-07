@@ -82,7 +82,7 @@ public class GetRecommendedFingersResponseConverter extends ResponseConverter<Ge
         }
 
         request.setEnroledProfuturo(response.isEnroladoProfuturo());
-        //request.setEnroledProfuturo(false);//TODO delete this line, just for TEST
+        request.setEnroledProfuturo(false);//TODO delete this line, just for TEST
         request.setFingerEngines(fingerEngineList);
         request.setForcedCapture(false);
         request.setManoDerecha(response.isRightHand());
