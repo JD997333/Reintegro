@@ -376,4 +376,19 @@ public class DocumentsCaptureFragment extends NavigationAdapter.Fragment impleme
         setBackEnabled(false);
         navigationDelegate.pushBiometricCapture();
     }
+
+    @Override
+    public void showCancelDialog() {
+        SimpleAlertDialog simpleAlertDialog = new SimpleAlertDialog();
+        simpleAlertDialog.setCancelable(false);
+        simpleAlertDialog.setTitle(getString(R.string.cancel_message_title));
+        simpleAlertDialog.setMessage(getString(R.string.cancel_message_ask));
+        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1),(view) -> {
+            simpleAlertDialog.dismiss();
+            navigationDelegate.popToSearchClient();
+        });
+        simpleAlertDialog.setCloseButton((view) -> simpleAlertDialog.dismiss());
+        simpleAlertDialog.setNegativeButton(getString(R.string.cancel_1), (view) -> simpleAlertDialog.dismiss());
+        simpleAlertDialog.show(getFragmentManager(), null);
+    }
 }

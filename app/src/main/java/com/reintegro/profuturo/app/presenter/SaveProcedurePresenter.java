@@ -79,6 +79,7 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
         if (state.getNotificationChannel().getSelectedNotificationChannel() == Constants.NOTIFICATION_CHANNEL_UNSELECTED){
             view.showUnselectedNotificationError();
         }else {
+            view.showLoading();
             switch (state.getCurrentStep()){
                 case SaveProcedureState.STEP_MARK_NCI_COEXISTENCE:
                     interactor.markNciCoexistence();

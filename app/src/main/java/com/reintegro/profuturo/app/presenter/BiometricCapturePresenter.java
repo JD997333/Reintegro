@@ -12,7 +12,7 @@ public class BiometricCapturePresenter extends PresenterBase<BiometricCaptureCon
 
     @Override
     public void onCancelCLick() {
-
+        view.showCancelDialog();
     }
 
     @Override
