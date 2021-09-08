@@ -228,8 +228,6 @@ public class SaveProcedureInteractor extends InteractorBase<SaveProcedureContrac
 
     @Override
     public void updateProcedure() {
-        presenter.onUpdateProcedureSuccess();
-        /*
         Completable
             .create((CompletableEmitter emitter) -> {
                 AgentRepository agentRepository = repositoryFactory.createAgentRepository();
@@ -268,7 +266,6 @@ public class SaveProcedureInteractor extends InteractorBase<SaveProcedureContrac
                     presenter.onUpdateProcedureError();
                 }
             });
-         */
     }
 
     @Override

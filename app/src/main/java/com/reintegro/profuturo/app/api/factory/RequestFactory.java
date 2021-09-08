@@ -477,6 +477,7 @@ public class RequestFactory {
         updatePaperwork.setSelloVol(procedureEntity.getVoluntarySeal());
         updatePaperwork.setIdEstatusSello(procedureEntity.getIdStatusVoluntarySeal());
         updatePaperwork.setUsuAct(agentEntity.getAgentCode());
+        updatePaperwork.setFehAct(DateUtils.getFormatedTodayDate(Constants.DATE_FORMAT_2));
 
         request.setActualizarTramite(updatePaperwork);
         return request;
