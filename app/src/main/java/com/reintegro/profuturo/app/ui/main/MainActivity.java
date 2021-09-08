@@ -135,7 +135,7 @@ public class MainActivity extends ActivityBase implements MainContract.View, Nav
         if (getIntent() != null && getIntent().hasExtra(EXTRA_AGENT_NUMBER)) {
             agentDto.setAgentCode(getIntent().getStringExtra(EXTRA_AGENT_NUMBER));
         }
-        agentDto.setAgentCode("112082");//TODO delete this code
+        //agentDto.setAgentCode("112082");//TODO delete this code
         presenter.load(agentDto);
     }
 

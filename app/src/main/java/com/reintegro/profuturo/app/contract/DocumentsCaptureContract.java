@@ -69,5 +69,6 @@ public interface DocumentsCaptureContract {
         void pushBiometricCapture();
         void showUpdatedDocumentsList(List<DocumentDto> documents);
         void showSignatureNeededError();
+        void showCancelDialog();
     }
 }

@@ -14,6 +14,6 @@ public class UploadFilesToFileNetResponseValidator extends ResponseValidator<Upl
         if (response.getResponse().getSuccess() == null){
             return false;
         }
-        return true;
+        return response.getResponse().getSuccess();
     }
 }

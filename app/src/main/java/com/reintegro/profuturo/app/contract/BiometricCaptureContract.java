@@ -46,5 +46,6 @@ public interface BiometricCaptureContract {
         void showSaveVoluntarySealError();
         void showSaveVoluntarySealSuccess();
         void pushSaveProcedure();
+        void showCancelDialog();
     }
 }

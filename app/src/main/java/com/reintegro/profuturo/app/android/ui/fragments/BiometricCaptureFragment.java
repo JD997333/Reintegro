@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.reintegro.profuturo.app.BuildConfig;
 import com.reintegro.profuturo.app.R;
+import com.reintegro.profuturo.app.android.ui.dialogs.SimpleAlertDialog;
 import com.reintegro.profuturo.app.android.widget.SnackBar;
 import com.reintegro.profuturo.app.api.factory.RetrofitDataProviderFactory;
 import com.reintegro.profuturo.app.contract.BiometricCaptureContract;
@@ -133,5 +134,20 @@ public class BiometricCaptureFragment extends NavigationAdapter.Fragment impleme
     public void pushSaveProcedure() {
         setBackEnabled(false);
         navigationDelegate.pushSaveProcedure();
+    }
+
+    @Override
+    public void showCancelDialog() {
+        SimpleAlertDialog simpleAlertDialog = new SimpleAlertDialog();
+        simpleAlertDialog.setCancelable(false);
+        simpleAlertDialog.setTitle(getString(R.string.cancel_message_title));
+        simpleAlertDialog.setMessage(getString(R.string.cancel_message_ask));
+        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1),(view) -> {
+            simpleAlertDialog.dismiss();
+            navigationDelegate.popToSearchClient();
+        });
+        simpleAlertDialog.setCloseButton((view) -> simpleAlertDialog.dismiss());
+        simpleAlertDialog.setNegativeButton(getString(R.string.cancel_1), (view) -> simpleAlertDialog.dismiss());
+        simpleAlertDialog.show(getFragmentManager(), null);
     }
 }

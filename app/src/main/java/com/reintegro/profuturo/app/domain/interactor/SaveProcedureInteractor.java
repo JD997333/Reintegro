@@ -8,11 +8,15 @@ import com.reintegro.profuturo.app.data.entity.ClientEntity;
 import com.reintegro.profuturo.app.data.entity.DocumentEntity;
 import com.reintegro.profuturo.app.data.factory.DataProviderFactory;
 import com.reintegro.profuturo.app.data.factory.RepositoryFactory;
+import com.reintegro.profuturo.app.data.provider.Provider;
+import com.reintegro.profuturo.app.data.repository.AgentRepository;
 import com.reintegro.profuturo.app.data.repository.ClientRepository;
 import com.reintegro.profuturo.app.data.repository.DocumentRepository;
+import com.reintegro.profuturo.app.data.repository.ProcedureRepository;
 import com.reintegro.profuturo.app.domain.converter.ClientConverter;
 import com.reintegro.profuturo.app.domain.converter.DocumentConverter;
 import com.reintegro.profuturo.app.util.Constants;
+import com.reintegro.profuturo.app.vo.CoexistenceResult;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -93,7 +97,44 @@ public class SaveProcedureInteractor extends InteractorBase<SaveProcedureContrac
 
     @Override
     public void markNciCoexistence() {
-        presenter.onMarkNciCoexistenceSuccess();
+        Single
+            .create((SingleEmitter<CoexistenceResult> emitter) -> {
+                ClientRepository clientRepository = repositoryFactory.createClientRepository();
+                ProcedureRepository procedureRepository = repositoryFactory.createProcedureRepository();
+                AgentRepository agentRepository = repositoryFactory.createAgentRepository();
+
+                Provider<CoexistenceResult> markCoexistenceProvider;
+                markCoexistenceProvider = dataProviderFactory.createMarkNciCoexistenceProvider(clientRepository.getSelected(), agentRepository.getFirst(), procedureRepository.getFirst());
+                markCoexistenceProvider.subscribe(new Provider.Subscriber<CoexistenceResult>() {
+                    @Override
+                    public void onError(Throwable exception) {
+                        emitter.onError(exception);
+                    }
+
+                    @Override
+                    public void onSuccess(CoexistenceResult result) {
+                        emitter.onSuccess(result);
+                    }
+                });
+            })
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.computation())
+            .subscribe(new SingleObserver<CoexistenceResult>() {
+                @Override
+                public void onSubscribe(@NonNull Disposable d) {
+
+                }
+
+                @Override
+                public void onSuccess(@NonNull CoexistenceResult coexistenceResult) {
+                    presenter.onMarkNciCoexistenceSuccess(coexistenceResult);
+                }
+
+                @Override
+                public void onError(@NonNull Throwable e) {
+                    presenter.onMarkNciCoexistenceError();
+                }
+            });
     }
 
     @Override
@@ -103,12 +144,86 @@ public class SaveProcedureInteractor extends InteractorBase<SaveProcedureContrac
 
     @Override
     public void startBpmInstance() {
-        presenter.onStartBpmInstanceSuccess();
+        Completable
+            .create((CompletableEmitter emitter) -> {
+                ProcedureRepository procedureRepository = repositoryFactory.createProcedureRepository();
+
+                Provider<Boolean> startBpmInstanceProvider;
+                startBpmInstanceProvider = dataProviderFactory.createStartBpmInstanceProvider(procedureRepository.getFirst());
+                startBpmInstanceProvider.subscribe(new Provider.Subscriber<Boolean>() {
+                    @Override
+                    public void onError(Throwable exception) {
+                        emitter.onError(exception);
+                    }
+
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        emitter.onComplete();
+                    }
+                });
+            })
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.computation())
+            .subscribe(new CompletableObserver() {
+                @Override
+                public void onSubscribe(@NonNull Disposable d) {
+
+                }
+
+                @Override
+                public void onComplete() {
+                    presenter.onStartBpmInstanceSuccess();
+                }
+
+                @Override
+                public void onError(@NonNull Throwable e) {
+                    presenter.onStartBpmInstanceError();
+                }
+            });
     }
 
     @Override
     public void uploadImagesFilenet() {
-        presenter.onUploadImageFilenetSuccess();
+        Completable
+            .create((CompletableEmitter emitter) -> {
+                ProcedureRepository procedureRepository = repositoryFactory.createProcedureRepository();
+                DocumentRepository documentRepository = repositoryFactory.createDocumentRepository();
+
+                List<DocumentEntity> documents = documentRepository.getCaptured();
+
+                Provider<Boolean> uploadImagesFilenetProvider;
+                uploadImagesFilenetProvider = dataProviderFactory.createUploadFilesToFileNetProvider(procedureRepository.getFirst(), documents);
+                uploadImagesFilenetProvider.subscribe(new Provider.Subscriber<Boolean>() {
+                    @Override
+                    public void onError(Throwable exception) {
+                        emitter.onError(exception);
+                    }
+
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        emitter.onComplete();
+                    }
+                });
+
+            })
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.computation())
+            .subscribe(new CompletableObserver() {
+                @Override
+                public void onSubscribe(@NonNull Disposable d) {
+
+                }
+
+                @Override
+                public void onComplete() {
+                    presenter.onUploadImageFilenetSuccess();
+                }
+
+                @Override
+                public void onError(@NonNull Throwable e) {
+                    presenter.onUploadImageFilenetError();
+                }
+            });
     }
 
     @Override
@@ -118,7 +233,43 @@ public class SaveProcedureInteractor extends InteractorBase<SaveProcedureContrac
 
     @Override
     public void closeBinnacle() {
-        presenter.onCloseBinnacleSuccess();
+        Completable
+            .create((CompletableEmitter emitter) ->{
+                ProcedureRepository procedureRepository = repositoryFactory.createProcedureRepository();
+                AgentRepository agentRepository = repositoryFactory.createAgentRepository();
+
+                Provider<Boolean> insertBinnacleProvider;
+                insertBinnacleProvider = dataProviderFactory.createInsertBinnacleProvider(agentRepository.getFirst(), procedureRepository.getFirst());
+                insertBinnacleProvider.subscribe(new Provider.Subscriber<Boolean>() {
+                    @Override
+                    public void onError(Throwable exception) {
+                        emitter.onError(exception);
+                    }
+
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        emitter.onComplete();
+                    }
+                });
+            })
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.computation())
+            .subscribe(new CompletableObserver() {
+                @Override
+                public void onSubscribe(@NonNull Disposable d) {
+
+                }
+
+                @Override
+                public void onComplete() {
+                    presenter.onCloseBinnacleSuccess();
+                }
+
+                @Override
+                public void onError(@NonNull Throwable e) {
+                    presenter.onCloseBinnacleError();
+                }
+            });
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.reintegro.profuturo.app.base.ContractBase;
 import com.reintegro.profuturo.app.domain.dto.ClientDto;
 import com.reintegro.profuturo.app.domain.dto.DocumentDto;
 import com.reintegro.profuturo.app.domain.dto.NotificationChannelDto;
+import com.reintegro.profuturo.app.vo.CoexistenceResult;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public interface SaveProcedureContract {
         void onGetDocumentsSuccess(List<DocumentDto> documents);
         void onNotificationChannelSelected(NotificationChannelDto notificationChannel);
         void onNotificationChannelModified(NotificationChannelDto notificationChannelDto);
-        void onMarkNciCoexistenceSuccess();
+        void onMarkNciCoexistenceSuccess(CoexistenceResult result);
         void onMarkNciCoexistenceError();
         void onSendEmailSuccess();
         void onSendEmailError();
@@ -70,5 +71,6 @@ public interface SaveProcedureContract {
         void showCellPhoneError();
         void showEmailError();
         void showSaveProcedureSuccess();
+        void showNoCoexistenceDialog(String msg);
     }
 }

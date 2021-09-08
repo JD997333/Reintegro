@@ -160,6 +160,7 @@ public class SaveProcedureFragment extends NavigationAdapter.Fragment implements
 
         viewDataBinding.documentsRecyclerView.setAdapter(adapter);
         viewDataBinding.documentsRecyclerView.setEnabled(false);
+        viewDataBinding.documentsRecyclerView.setActivated(false);
     }
 
     @Override
@@ -250,6 +251,19 @@ public class SaveProcedureFragment extends NavigationAdapter.Fragment implements
             navigationDelegate.popToGreeting();
         });
         simpleAlertDialog.setTitle(getString(R.string.save_procedure_1));
+        simpleAlertDialog.show(getFragmentManager(), null);
+    }
+
+    @Override
+    public void showNoCoexistenceDialog(String msg) {
+        SimpleAlertDialog simpleAlertDialog = new SimpleAlertDialog();
+        simpleAlertDialog.setCancelable(false);
+        simpleAlertDialog.setTitle(getString(R.string.no_coexistence_title));
+        simpleAlertDialog.setMessage(getString(R.string.no_coexistence_message) + " " + msg);
+        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1),(view) -> {
+            simpleAlertDialog.dismiss();
+            viewDataBinding.finishProcedureButton.setEnabled(false);
+        });
         simpleAlertDialog.show(getFragmentManager(), null);
     }
 }

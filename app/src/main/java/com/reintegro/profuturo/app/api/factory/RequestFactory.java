@@ -13,11 +13,13 @@ import com.reintegro.profuturo.app.api.vo.GetRepaymentSolicitudeDocRequest;
 import com.reintegro.profuturo.app.api.vo.GetVoluntarySealRequest;
 import com.reintegro.profuturo.app.api.vo.InsertClientRequest;
 import com.reintegro.profuturo.app.api.vo.InsertInitialRulingRequest;
+import com.reintegro.profuturo.app.api.vo.InsertProcessBinnacleRequest;
 import com.reintegro.profuturo.app.api.vo.MarkNciCoexistenceRequest;
 import com.reintegro.profuturo.app.api.vo.SaveInitialCaptureRequest;
 import com.reintegro.profuturo.app.api.vo.SaveLoginRequest;
 import com.reintegro.profuturo.app.api.vo.SaveVoluntarySealRequest;
 import com.reintegro.profuturo.app.api.vo.UpdatePaperworkRequest;
+import com.reintegro.profuturo.app.api.vo.SendEmailRequest;
 import com.reintegro.profuturo.app.api.vo.UploadFilesToFileNetRequest;
 import com.reintegro.profuturo.app.api.vo.ValCoexistenceNCIRequest;
 import com.reintegro.profuturo.app.api.vo.ValidateAuthFolioRequest;
@@ -25,6 +27,7 @@ import com.reintegro.profuturo.app.data.entity.AgentEntity;
 import com.reintegro.profuturo.app.data.entity.ClientEntity;
 import com.reintegro.profuturo.app.data.entity.DocumentEntity;
 import com.reintegro.profuturo.app.data.entity.FingerPrintEntity;
+import com.reintegro.profuturo.app.data.entity.NotificationChannelEntity;
 import com.reintegro.profuturo.app.data.entity.ProcedureEntity;
 import com.reintegro.profuturo.app.data.entity.RepaymentEntity;
 import com.reintegro.profuturo.app.util.Base64Utils;
@@ -298,18 +301,19 @@ public class RequestFactory {
     }
 
 
-    public InsertInitialRulingRequest createInsertInitialRulingRequest(ClientEntity clientEntity, ProcedureEntity procedureEntity, RepaymentEntity repaymentEntity){
-        InsertInitialRulingRequest.Iniciar iniciar = new InsertInitialRulingRequest.Iniciar();
-     /*   iniciar.setFolio();
-        iniciar.setFolioBitacora();
-        iniciar.setIdTipoTramite();
-        iniciar.setNombreTipoTramite();
-        iniciar.setIdProceso();
-        iniciar.setNombreProceso();
-*/
-        InsertInitialRulingRequest request = new InsertInitialRulingRequest();
+    public InsertInitialRulingRequest createInsertInitialRulingRequest(ProcedureEntity procedureEntity){
+        InsertInitialRulingRequest.Iniciar startReq = new InsertInitialRulingRequest.Iniciar();
 
-        request.setIniciar(iniciar);
+        startReq.setFolio(procedureEntity.getProcedureFolio());
+        startReq.setFolioBitacora(procedureEntity.getBinnacleFolio());
+        startReq.setIdTipoTramite(procedureEntity.getIdSubProcess().toString());
+        startReq.setNombreTipoTramite(Constants.SUB_PROCESS_NAME);
+        startReq.setIdProceso(procedureEntity.getIdProcess().toString());
+        startReq.setNombreProceso(Constants.PROCESS_NAME);
+
+        InsertInitialRulingRequest request = new InsertInitialRulingRequest();
+        request.setIniciar(startReq);
+
         return request;
     }
 
@@ -499,4 +503,23 @@ public class RequestFactory {
         request.setActualizarTramite(updatePaperwork);
         return request;
     }
+    public SendEmailRequest createSendEmailRequest(AgentEntity agentEntity, ClientEntity clientEntity, ProcedureEntity procedureEntity, List<DocumentEntity> documents, NotificationChannelEntity notificationChannel){
+        SendEmailRequest request = new SendEmailRequest();
+
+        return request;
+    }
+
+    public InsertProcessBinnacleRequest createInsertBinnacleRequest(AgentEntity agentEntity, ProcedureEntity procedureEntity){
+        InsertProcessBinnacleRequest request = new InsertProcessBinnacleRequest();
+        request.setFolio(procedureEntity.getBinnacleFolio());
+        request.setIdEstatus(Constants.BINNACLE_STATUS_CLOSED);
+        request.setIdEtapa(Constants.ID_STAGE_RECEPTION);
+        request.setIdResultado(Constants.ID_RESULT_BINNACLE);
+        request.setIdSubetapa(Constants.ID_SUB_STAGE_CAPTURE);
+        request.setIdSubproceso(Constants.ID_SUB_PROCESS);
+        request.setUsuario(agentEntity.getAgentCode());
+
+        return request;
+    }
+
 }

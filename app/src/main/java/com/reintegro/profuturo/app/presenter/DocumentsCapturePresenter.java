@@ -81,7 +81,7 @@ public class DocumentsCapturePresenter
 
     @Override
     public void onClickCancel() {
-        view.popToGreeting();
+        view.showCancelDialog();
     }
 
     @Override
