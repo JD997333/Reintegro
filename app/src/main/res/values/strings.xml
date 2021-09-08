@@ -140,6 +140,7 @@
     <string name="biometric_engine_failed">El motor biométrico falló</string>
     <string name="recommended_fingers_error">Ocurrió un error en el servicio consultar huellas recomendadas</string>
     <string name="need_push_calculate">Es necesario presionar el botón CALCULAR</string>
+    <string name="get_documents_error">Ocurrió un error en el servicio obtenerDocumentosObligatorios</string>
 
     <string name="initial_capture_header">Captura inicial</string>
     <string name="initial_capture_title">Eventos de retiro por desempleo</string>

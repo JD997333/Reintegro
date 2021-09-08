@@ -291,15 +291,13 @@ public class RetrofitDataProviderFactory extends DataProviderFactory {
     }
 
     @Override
-    public Provider<Boolean> createUpdatePaperwork(ClientEntity clientEntity, ProcedureEntity procedureEntity, RepaymentEntity repaymentEntity) {
+    public Provider<Boolean> createUpdateProcedureProvider(AgentEntity agentEntity, ProcedureEntity procedureEntity) {
         return new RetrofitWebServiceDataProvider<>(
-            Api.getClient().updatePaperwork(requestFactory.createUpdatePaperwork(clientEntity, procedureEntity, repaymentEntity)),
+            Api.getClient().updateProcedure(requestFactory.createUpdateProcedureRequest(agentEntity, procedureEntity)),
             new UpdatePaperworkResponseConverter(),
             new UpdatePaperworkResponseValidator()
-
-
-
-
+        );
+    }
 
     @Override
     public Provider<Boolean> createSendEmailProvider(AgentEntity agentEntity, ClientEntity clientEntity, ProcedureEntity procedureEntity, List<DocumentEntity> documents, NotificationChannelEntity notificationChannel) {

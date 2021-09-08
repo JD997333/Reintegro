@@ -126,8 +126,8 @@ public class BiometricCaptureFragment extends NavigationAdapter.Fragment impleme
     }
 
     @Override
-    public void showSaveVoluntarySealSuccess() {
-        SnackBar.show(getView(), "Sello de voluntad guardado exitosamente");
+    public void showReadFingerPrintsError() {
+        SnackBar.show(getView(), getString(R.string.biometric_engine_failed));
     }
 
     @Override

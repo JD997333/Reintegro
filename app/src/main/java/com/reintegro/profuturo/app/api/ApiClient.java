@@ -174,7 +174,7 @@ public interface ApiClient {
 
     @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
     @POST(Constants.URL_BASE + BuildConfig.PORT_3 + Constants.URN_UPDATE_PAPERWORK)
-    Call<UpdatePaperworkResponse> updatePaperwork(@Body UpdatePaperworkRequest request);
+    Call<UpdatePaperworkResponse> updateProcedure(@Body UpdatePaperworkRequest request);
     
     @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
     @POST(Constants.URL_BASE + BuildConfig.PORT_2 + Constants.URN_SEND_EMAIL)

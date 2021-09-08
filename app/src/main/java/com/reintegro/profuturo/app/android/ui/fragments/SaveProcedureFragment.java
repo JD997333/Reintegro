@@ -266,4 +266,16 @@ public class SaveProcedureFragment extends NavigationAdapter.Fragment implements
         });
         simpleAlertDialog.show(getFragmentManager(), null);
     }
+
+    @Override
+    public void showSaveProcedureError() {
+        SimpleAlertDialog simpleAlertDialog;
+        simpleAlertDialog = new SimpleAlertDialog();
+        simpleAlertDialog.setCancelable(false);
+        simpleAlertDialog.setMessage(getString(R.string.save_procedure_error_1));
+        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1), (view) -> simpleAlertDialog.dismiss());
+        simpleAlertDialog.setTitle(getString(R.string.notice_1));
+        simpleAlertDialog.show(getFragmentManager(), null);
+    }
+
 }

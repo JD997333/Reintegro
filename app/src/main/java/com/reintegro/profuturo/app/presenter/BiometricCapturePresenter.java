@@ -58,7 +58,8 @@ public class BiometricCapturePresenter extends PresenterBase<BiometricCaptureCon
 
     @Override
     public void onReadFingerPrintError() {
-
+        view.showReadFingerPrintsError();
+        view.dismissLoading();
     }
 
     @Override

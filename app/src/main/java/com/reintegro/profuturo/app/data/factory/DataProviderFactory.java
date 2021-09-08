@@ -42,8 +42,7 @@ public abstract class DataProviderFactory {
     public abstract Provider<Boolean> createSaveVoluntarySealProvider(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity);
     public abstract Provider<CoexistenceResult> createMarkNciCoexistenceProvider(ClientEntity clientEntity, AgentEntity agentEntity, ProcedureEntity procedureEntity);
     public abstract Provider<Boolean> createUploadFilesToFileNetProvider(ProcedureEntity procedureEntity, List<DocumentEntity> documents);
-    public abstract Provider<Boolean> createUpdatePaperwork(ClientEntity clientEntity, ProcedureEntity procedureEntity, RepaymentEntity repaymentEntity);
-
+    public abstract Provider<Boolean> createUpdateProcedureProvider(AgentEntity agentEntity, ProcedureEntity procedureEntity);
     public abstract Provider<Boolean> createSendEmailProvider(AgentEntity agentEntity, ClientEntity clientEntity, ProcedureEntity procedureEntity, List<DocumentEntity> documents, NotificationChannelEntity notificationChannel);
     public abstract Provider<Boolean> createInsertBinnacleProvider(AgentEntity agentEntity, ProcedureEntity procedureEntity);
 

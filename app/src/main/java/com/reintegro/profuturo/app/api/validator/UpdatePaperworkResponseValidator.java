@@ -12,6 +12,15 @@ public class UpdatePaperworkResponseValidator extends ResponseValidator<UpdatePa
         if (response == null) {
             return false;
         }
+        if (response.getActualizarTramiteResponse() == null){
+            return false;
+        }
+        if (response.getActualizarTramiteResponse().getSuccess() == null){
+            return false;
+        }
+        if (response.getActualizarTramiteResponse().getSuccess().isEmpty()){
+            return false;
+        }
 
         return TypeUtils.getBooleanValueOrDefault(response.getActualizarTramiteResponse().getSuccess());
     }

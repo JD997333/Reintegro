@@ -229,6 +229,46 @@ public class SaveProcedureInteractor extends InteractorBase<SaveProcedureContrac
     @Override
     public void updateProcedure() {
         presenter.onUpdateProcedureSuccess();
+        /*
+        Completable
+            .create((CompletableEmitter emitter) -> {
+                AgentRepository agentRepository = repositoryFactory.createAgentRepository();
+                ProcedureRepository procedureRepository = repositoryFactory.createProcedureRepository();
+
+                Provider<Boolean> updateProcedureProvider;
+                updateProcedureProvider = dataProviderFactory.createUpdateProcedureProvider(agentRepository.getFirst(), procedureRepository.getFirst());
+                updateProcedureProvider.subscribe(new Provider.Subscriber<Boolean>() {
+                    @Override
+                    public void onError(Throwable exception) {
+                        emitter.onError(exception);
+                    }
+
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        emitter.onComplete();
+                    }
+                });
+
+            })
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.computation())
+            .subscribe(new CompletableObserver() {
+                @Override
+                public void onSubscribe(@NonNull Disposable d) {
+
+                }
+
+                @Override
+                public void onComplete() {
+                    presenter.onUpdateProcedureSuccess();
+                }
+
+                @Override
+                public void onError(@NonNull Throwable e) {
+                    presenter.onUpdateProcedureError();
+                }
+            });
+         */
     }
 
     @Override

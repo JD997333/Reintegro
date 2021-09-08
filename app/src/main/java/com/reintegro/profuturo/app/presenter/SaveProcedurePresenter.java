@@ -120,7 +120,8 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
 
     @Override
     public void onMarkNciCoexistenceError() {
-
+        view.showSaveProcedureError();
+        view.dismissLoading();
     }
 
     @Override
@@ -131,7 +132,8 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
 
     @Override
     public void onSendEmailError() {
-
+        view.showSaveProcedureError();
+        view.dismissLoading();
     }
 
     @Override
@@ -142,7 +144,8 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
 
     @Override
     public void onStartBpmInstanceError() {
-
+        view.showSaveProcedureError();
+        view.dismissLoading();
     }
 
     @Override
@@ -153,7 +156,8 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
 
     @Override
     public void onUploadImageFilenetError() {
-
+        view.showSaveProcedureError();
+        view.dismissLoading();
     }
 
     @Override
@@ -164,7 +168,8 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
 
     @Override
     public void onUpdateProcedureError() {
-
+        view.showSaveProcedureError();
+        view.dismissLoading();
     }
 
     @Override
@@ -175,7 +180,8 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
 
     @Override
     public void onCloseBinnacleError() {
-
+        view.showSaveProcedureError();
+        view.dismissLoading();
     }
 
     @Override

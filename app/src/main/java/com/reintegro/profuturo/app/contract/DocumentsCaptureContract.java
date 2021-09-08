@@ -26,7 +26,6 @@ public interface DocumentsCaptureContract {
         void onClickTakeDocumentPhoto(int position);
         void onClickSignDocument(int position);
         void onGetClientDataSuccess(ClientDto clientDto);
-        void onGetClientDataError();
         void onGetDocumentsSuccess(List<DocumentDto> documents);
         void onGetDocumentsError();
         void onTakeDocumentPhotoReady();
@@ -70,5 +69,6 @@ public interface DocumentsCaptureContract {
         void showUpdatedDocumentsList(List<DocumentDto> documents);
         void showSignatureNeededError();
         void showCancelDialog();
+        void showGetDocumentsError();
     }
 }

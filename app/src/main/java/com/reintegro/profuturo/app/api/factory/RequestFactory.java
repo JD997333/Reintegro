@@ -466,40 +466,18 @@ public class RequestFactory {
         return uploadFilesToFileNetRequest;
     }
 
-    public UpdatePaperworkRequest createUpdatePaperwork(ClientEntity clientEntity, ProcedureEntity procedureEntity, RepaymentEntity repaymentEntity){
+    public UpdatePaperworkRequest createUpdateProcedureRequest(AgentEntity agentEntity, ProcedureEntity procedureEntity){
         UpdatePaperworkRequest request = new UpdatePaperworkRequest();
 
         UpdatePaperworkRequest.ActualizarTramite updatePaperwork = new UpdatePaperworkRequest.ActualizarTramite();
+        updatePaperwork.setFolio(procedureEntity.getBinnacleFolio());
+        updatePaperwork.setFolioTramite(procedureEntity.getProcedureFolio());
+        updatePaperwork.setIdEstatusTramite(Constants.STATUS_SUB_STAGE_CAPTURED.toString());
+        updatePaperwork.setFechEstatus(DateUtils.getFormatedTodayDate(Constants.DATE_FORMAT_2));
+        updatePaperwork.setSelloVol(procedureEntity.getVoluntarySeal());
+        updatePaperwork.setIdEstatusSello(procedureEntity.getIdStatusVoluntarySeal());
+        updatePaperwork.setUsuAct(agentEntity.getAgentCode());
 
-       /* updatePaperwork.setFolio();
-        updatePaperwork.setFolioTramite();
-        updatePaperwork.setFechTramite();
-        updatePaperwork.setIdTipoTramite();
-        updatePaperwork.setIdEstatusTramite();
-        updatePaperwork.setNumCuenta();
-        updatePaperwork.setCurp();
-        updatePaperwork.setNss();
-        updatePaperwork.setIdTipoSolicitante();
-        updatePaperwork.setCurpSol();
-        updatePaperwork.setFolioAutentificacion();
-        updatePaperwork.setIdValImporte();
-        updatePaperwork.setFechEstatus();
-        updatePaperwork.setIdMotivoRechazo();
-        updatePaperwork.setMontoSemana();
-        updatePaperwork.setSemMaxReitegrar();
-        updatePaperwork.setSemSolReintegrar();
-        updatePaperwork.setSemPrevReintegrados();
-        updatePaperwork.setFechSolTRD();
-        updatePaperwork.setMontoPagDRT();
-        updatePaperwork.setIdSucAsignada();
-        updatePaperwork.setCurpagenteServ();
-        updatePaperwork.setNumAsesor();
-        updatePaperwork.setCanal();
-        updatePaperwork.setSelloVol();
-        updatePaperwork.setIdEstatusSello();
-        updatePaperwork.setUsuAct();
-        updatePaperwork.setFehAct();
-*/
         request.setActualizarTramite(updatePaperwork);
         return request;
     }

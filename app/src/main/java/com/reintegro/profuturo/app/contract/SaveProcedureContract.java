@@ -72,5 +72,6 @@ public interface SaveProcedureContract {
         void showEmailError();
         void showSaveProcedureSuccess();
         void showNoCoexistenceDialog(String msg);
+        void showSaveProcedureError();
     }
 }

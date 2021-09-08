@@ -44,8 +44,8 @@ public interface BiometricCaptureContract {
         void showGetRecommendedFingersError();
         void showGetVoluntarySealError();
         void showSaveVoluntarySealError();
-        void showSaveVoluntarySealSuccess();
         void pushSaveProcedure();
         void showCancelDialog();
+        void showReadFingerPrintsError();
     }
 }

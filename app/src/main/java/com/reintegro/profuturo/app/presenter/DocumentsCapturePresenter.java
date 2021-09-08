@@ -28,11 +28,6 @@ public class DocumentsCapturePresenter
     }
 
     @Override
-    public void onGetClientDataError() {
-
-    }
-
-    @Override
     public void onGetDocumentsSuccess(List<DocumentDto> documents) {
         state.setDocuments(documents);
 
@@ -76,7 +71,8 @@ public class DocumentsCapturePresenter
 
     @Override
     public void onGetDocumentsError() {
-
+        view.showGetDocumentsError();
+        view.dismissLoading();
     }
 
     @Override

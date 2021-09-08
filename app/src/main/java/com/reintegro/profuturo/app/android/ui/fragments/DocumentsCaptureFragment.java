@@ -372,6 +372,11 @@ public class DocumentsCaptureFragment extends NavigationAdapter.Fragment impleme
     }
 
     @Override
+    public void showGetDocumentsError() {
+        SnackBar.show(getView(), getString(R.string.get_documents_error));
+    }
+
+    @Override
     public void pushBiometricCapture() {
         setBackEnabled(false);
         navigationDelegate.pushBiometricCapture();
