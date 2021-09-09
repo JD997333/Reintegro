@@ -106,7 +106,7 @@ public interface ApiClient {
     Call<SaveInitialCaptureResponse> saveInitialCapture(@Body SaveInitialCaptureRequest request);
 
     @Headers({Constants.HTTP_HEADER_AUTHORIZATION})
-    @POST(Constants.URL_BASE + BuildConfig.PORT_1 + Constants.URN_INSERT_CLIENT)
+    @POST(Constants.URL_BASE + BuildConfig.PORT_2 + Constants.URN_INSERT_CLIENT)
     Call<InsertClientResponse> insertClient(@Body InsertClientRequest request);
 
     @Headers({Constants.HTTP_HEADER_AUTHORIZATION})

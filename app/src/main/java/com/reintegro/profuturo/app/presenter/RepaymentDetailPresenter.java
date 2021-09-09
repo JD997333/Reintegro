@@ -100,7 +100,7 @@ public class RepaymentDetailPresenter
 
     @Override
     public void onInsertClientDataError() {
-        view.showInsertDataErrorMessage();
+        view.showInsertClientDataMsg();
         view.dismissLoading();
     }
 

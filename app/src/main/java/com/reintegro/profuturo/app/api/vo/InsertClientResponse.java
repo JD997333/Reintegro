@@ -19,13 +19,13 @@ public class InsertClientResponse {
 
     public static class InsertClient {
 
-        @SerializedName("Success")
+        @SerializedName("success")
         @Expose
         private Boolean success;
-        @SerializedName("Estatus")
+        @SerializedName("status")
         @Expose
         private Boolean status;
-        @SerializedName("mensaje")
+        @SerializedName("message")
         @Expose
         private String message;
 

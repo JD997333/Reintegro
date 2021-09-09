@@ -68,7 +68,7 @@ public class Constants {
     public static final String URN_GET_CLIENT_IMAGE = "/iib/identica/cliente/service/consultarImagencte/v1/obtenerImagenCte";
     public static final String URN_SAVE_LOGIN = "/iib/retiros/accesoRetiros/v1/guardarLogin";
     public static final String URN_SAVE_INITIAL_CAPTURE = "/iib/nci/ReintegroSemanas/CapturaInicial/v1/guardarCapturaInicial";
-    public static final String URN_INSERT_CLIENT = "/iib/api/Cliente/v1/insertarCliente";
+    public static final String URN_INSERT_CLIENT = "/iib/nci/api/ClienteBeneficios/v1/insertar";
     public static final String URN_SERVICE_OP360 = "/iib/nci/PortalServicios/OP360/v1/consultarTrabajador";
     public static final String URN_GET_APPLICANT_TYPES = "/iib/profuturo/parciales/solicitanteparciales/v1/tipoSolicitanteRules";
     public static final String URN_VAL_COEXISTENCE = "/iib/api/comun/matriz_convivencia/v1/ConsultaConvivenciaCompletaComunNCI";

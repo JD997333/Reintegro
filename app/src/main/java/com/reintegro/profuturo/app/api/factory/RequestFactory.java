@@ -142,9 +142,9 @@ public class RequestFactory {
         insertClient.setColony(clientEntity.getNeighborhood());
         insertClient.setCurp(clientEntity.getCurp());
         insertClient.setEmail(clientEntity.getPreferentialEmail());
-        insertClient.setExternalNum(0);
-        insertClient.setIdPersona(clientEntity.getPersonId());
-        insertClient.setAccountNumber(Long.parseLong(clientEntity.getAccountNumber()));
+        insertClient.setExternalNum("0");
+        insertClient.setIdPersona(String.valueOf(clientEntity.getPersonId()));
+        insertClient.setAccountNumber(clientEntity.getAccountNumber());
         insertClient.setInternalNum("");
         insertClient.setLastName(clientEntity.getFatherLastName());
         insertClient.setSurName(clientEntity.getMotherLastName());
@@ -155,7 +155,7 @@ public class RequestFactory {
         insertClient.setRfc(clientEntity.getRfc());
         insertClient.setState(clientEntity.getFederalEntity());
         insertClient.setStreet(clientEntity.getStreet());
-        insertClient.setTypeClient((int) clientEntity.getClientTypeIndicatorValue());
+        insertClient.setTypeClient(String.valueOf(clientEntity.getClientTypeIndicatorValue()));
         insertClient.setZipCode(String.valueOf(clientEntity.getPostalCode()));
         insertClient.setUsuCre(agentEntity.getAgentCode());
 

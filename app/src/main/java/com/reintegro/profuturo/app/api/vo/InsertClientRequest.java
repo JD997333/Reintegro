@@ -61,7 +61,7 @@ public class InsertClientRequest {
 
         @SerializedName("noExterior")
         @Expose
-        private Integer externalNum;
+        private String externalNum;
 
         @SerializedName("noInterior")
         @Expose
@@ -77,7 +77,7 @@ public class InsertClientRequest {
 
         @SerializedName("numCtaInvdual")
         @Expose
-        private Long accountNumber;
+        private String accountNumber;
 
         @SerializedName("rfcCte")
         @Expose
@@ -106,15 +106,15 @@ public class InsertClientRequest {
 
         @SerializedName("idPersona")
         @Expose
-        private Long idPersona;
+        private String idPersona;
 
         @SerializedName("tipoCliente")
         @Expose
-        private Integer typeClient;
+        private String typeClient;
 
-
-        public InsertClient() {
-        }
+        @SerializedName("genero")
+        @Expose
+        private String gender;
 
         public String getSurName() {
             return surName;
@@ -196,11 +196,11 @@ public class InsertClientRequest {
             this.state = state;
         }
 
-        public Integer getExternalNum() {
+        public String getExternalNum() {
             return externalNum;
         }
 
-        public void setExternalNum(Integer externalNum) {
+        public void setExternalNum(String externalNum) {
             this.externalNum = externalNum;
         }
 
@@ -228,11 +228,11 @@ public class InsertClientRequest {
             this.nss = nss;
         }
 
-        public Long getAccountNumber() {
+        public String getAccountNumber() {
             return accountNumber;
         }
 
-        public void setAccountNumber(Long accountNumber) {
+        public void setAccountNumber(String accountNumber) {
             this.accountNumber = accountNumber;
         }
 
@@ -284,20 +284,28 @@ public class InsertClientRequest {
             this.usuAct = usuAct;
         }
 
-        public Long getIdPersona() {
+        public String getIdPersona() {
             return idPersona;
         }
 
-        public void setIdPersona(Long idPersona) {
+        public void setIdPersona(String idPersona) {
             this.idPersona = idPersona;
         }
 
-        public Integer getTypeClient() {
+        public String getTypeClient() {
             return typeClient;
         }
 
-        public void setTypeClient(Integer typeClient) {
+        public void setTypeClient(String typeClient) {
             this.typeClient = typeClient;
+        }
+
+        public String getGender() {
+            return gender;
+        }
+
+        public void setGender(String gender) {
+            this.gender = gender;
         }
     }
 }
