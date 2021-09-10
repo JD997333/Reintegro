@@ -491,7 +491,7 @@ public class RequestFactory {
     public InsertProcessBinnacleRequest createInsertBinnacleRequest(AgentEntity agentEntity, ProcedureEntity procedureEntity){
         InsertProcessBinnacleRequest request = new InsertProcessBinnacleRequest();
         request.setFolio(procedureEntity.getBinnacleFolio());
-        request.setIdEstatus(Constants.BINNACLE_STATUS_CLOSED);
+        request.setIdEstatus(procedureEntity.getIdSubStage());
         request.setIdEtapa(Constants.ID_STAGE_RECEPTION);
         request.setIdResultado(Constants.ID_RESULT_BINNACLE);
         request.setIdSubetapa(Constants.ID_SUB_STAGE_CAPTURE);

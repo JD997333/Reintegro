@@ -6,6 +6,7 @@ import com.reintegro.profuturo.app.base.InteractorBase;
 import com.reintegro.profuturo.app.contract.SaveProcedureContract;
 import com.reintegro.profuturo.app.data.entity.ClientEntity;
 import com.reintegro.profuturo.app.data.entity.DocumentEntity;
+import com.reintegro.profuturo.app.data.entity.ProcedureEntity;
 import com.reintegro.profuturo.app.data.factory.DataProviderFactory;
 import com.reintegro.profuturo.app.data.factory.RepositoryFactory;
 import com.reintegro.profuturo.app.data.provider.Provider;
@@ -274,9 +275,11 @@ public class SaveProcedureInteractor extends InteractorBase<SaveProcedureContrac
             .create((CompletableEmitter emitter) ->{
                 ProcedureRepository procedureRepository = repositoryFactory.createProcedureRepository();
                 AgentRepository agentRepository = repositoryFactory.createAgentRepository();
+                ProcedureEntity procedureEntity = procedureRepository.getFirst();
+                procedureEntity.setIdSubStage(Constants.BINNACLE_STATUS_CLOSED);
 
                 Provider<Boolean> insertBinnacleProvider;
-                insertBinnacleProvider = dataProviderFactory.createInsertBinnacleProvider(agentRepository.getFirst(), procedureRepository.getFirst());
+                insertBinnacleProvider = dataProviderFactory.createInsertBinnacleProvider(agentRepository.getFirst(), procedureEntity);
                 insertBinnacleProvider.subscribe(new Provider.Subscriber<Boolean>() {
                     @Override
                     public void onError(Throwable exception) {
