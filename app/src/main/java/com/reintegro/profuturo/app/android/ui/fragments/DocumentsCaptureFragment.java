@@ -32,6 +32,7 @@ import com.reintegro.profuturo.app.api.factory.RetrofitDataProviderFactory;
 import com.reintegro.profuturo.app.contract.DocumentsCaptureContract;
 import com.reintegro.profuturo.app.database.factory.RealmRepositoryFactory;
 import com.reintegro.profuturo.app.databinding.FragmentDocumentsCaptureBinding;
+import com.reintegro.profuturo.app.domain.dto.ClientDto;
 import com.reintegro.profuturo.app.domain.dto.DocumentDto;
 import com.reintegro.profuturo.app.domain.interactor.DocumentsCaptureInteractor;
 import com.reintegro.profuturo.app.domain.state.DocumentsCaptureState;
@@ -49,6 +50,8 @@ public class DocumentsCaptureFragment extends NavigationAdapter.Fragment impleme
     private DocumentsCaptureContract.Presenter presenter;
     private DocumentsAdapter documentsAdapter;
     private ArrayAdapter<String> idTypesAdapter;
+    private ClientDto clientDto;
+    private int idApplicantType;
     private int selectedDocumentPosition;
     private String clientData;
     private Bitmap document;
@@ -186,6 +189,16 @@ public class DocumentsCaptureFragment extends NavigationAdapter.Fragment impleme
     public void showClientData(String clientData) {
         this.clientData = clientData;
         viewDataBinding.clientDataTextView.setText(clientData);
+    }
+
+    @Override
+    public void setClient(ClientDto clientDto) {
+        this.clientDto = clientDto;
+    }
+
+    @Override
+    public void setApplicantType(Integer idApplicantType) {
+        this.idApplicantType = idApplicantType;
     }
 
     @Override
@@ -377,9 +390,13 @@ public class DocumentsCaptureFragment extends NavigationAdapter.Fragment impleme
     }
 
     @Override
-    public void pushBiometricCapture() {
+    public void pushNextScreen() {
         setBackEnabled(false);
-        navigationDelegate.pushBiometricCapture();
+        if (idApplicantType == Constants.ID_OWNER_APPLICANT){
+            navigationDelegate.pushBiometricCapture();
+        }else {
+            navigationDelegate.pushSaveProcedure();
+        }
     }
 
     @Override

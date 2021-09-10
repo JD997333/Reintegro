@@ -4,6 +4,7 @@ import com.reintegro.profuturo.app.base.PresenterBase;
 import com.reintegro.profuturo.app.contract.DocumentsCaptureContract;
 import com.reintegro.profuturo.app.domain.dto.ClientDto;
 import com.reintegro.profuturo.app.domain.dto.DocumentDto;
+import com.reintegro.profuturo.app.domain.dto.ProcedureDto;
 import com.reintegro.profuturo.app.util.Constants;
 import com.reintegro.profuturo.app.util.DocumentUtils;
 import com.reintegro.profuturo.app.util.Utils;
@@ -19,12 +20,19 @@ public class DocumentsCapturePresenter
     public void resume() {
         view.showLoading();
         interactor.getClientData();
+        interactor.getProcedureInfo();
     }
 
     @Override
     public void onGetClientDataSuccess(ClientDto clientDto) {
         view.showClientData(clientDto.getFullName() + " • " + Utils.formatClientAccountNumber(clientDto.getAccountNumber()));
+        view.setClient(clientDto);
         interactor.getDocuments();
+    }
+
+    @Override
+    public void onGetProcedureInfoSuccess(ProcedureDto procedureDto) {
+        view.setApplicantType(procedureDto.getIdApplicantType());
     }
 
     @Override
@@ -177,7 +185,7 @@ public class DocumentsCapturePresenter
 
     @Override
     public void onSaveDocumentsSuccess() {
-        view.pushBiometricCapture();
+        view.pushNextScreen();
     }
 
     @Override

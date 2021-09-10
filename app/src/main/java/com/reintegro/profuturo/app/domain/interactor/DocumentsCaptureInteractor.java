@@ -18,6 +18,7 @@ import com.reintegro.profuturo.app.data.repository.ProcedureRepository;
 import com.reintegro.profuturo.app.data.repository.RepaymentEventRepository;
 import com.reintegro.profuturo.app.domain.converter.ClientConverter;
 import com.reintegro.profuturo.app.domain.converter.DocumentConverter;
+import com.reintegro.profuturo.app.domain.converter.ProcedureConverter;
 import com.reintegro.profuturo.app.domain.dto.DocumentDto;
 import com.reintegro.profuturo.app.util.Constants;
 import com.reintegro.profuturo.app.util.Utils;
@@ -71,6 +72,13 @@ public class DocumentsCaptureInteractor extends InteractorBase<DocumentsCaptureC
 
                 }
             });
+    }
+
+    @Override
+    public void getProcedureInfo() {
+        ProcedureRepository procedureRepository = repositoryFactory.createProcedureRepository();
+        ProcedureEntity procedureEntity = procedureRepository.getFirst();
+        presenter.onGetProcedureInfoSuccess(ProcedureConverter.convertFromEntity(procedureEntity));
     }
 
     @Override

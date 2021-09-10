@@ -3,6 +3,7 @@ package com.reintegro.profuturo.app.contract;
 import com.reintegro.profuturo.app.base.ContractBase;
 import com.reintegro.profuturo.app.domain.dto.ClientDto;
 import com.reintegro.profuturo.app.domain.dto.DocumentDto;
+import com.reintegro.profuturo.app.domain.dto.ProcedureDto;
 
 import java.io.File;
 import java.util.List;
@@ -15,6 +16,7 @@ public interface DocumentsCaptureContract {
         void buildSolicitudeDocument(DocumentDto documentDto);
         void validateRequiredDocuments(List<DocumentDto> documentDtos);
         void saveDocuments(List<DocumentDto> documentDtos);
+        void getProcedureInfo();
     }
 
     interface Presenter extends ContractBase.Presenter<Interactor, State, View>{
@@ -38,6 +40,7 @@ public interface DocumentsCaptureContract {
         void onBuildLetterDocumentSuccess(DocumentDto documentDto);
         void onBuildLetterDocumentError();
         void onIdTypeSelected(String idType);
+        void onGetProcedureInfoSuccess(ProcedureDto procedureDto);
     }
 
     interface State extends ContractBase.State{
@@ -65,10 +68,12 @@ public interface DocumentsCaptureContract {
         void showDocumentPdf(DocumentDto document);
         void showBuildDocumentError();
         void showRequiredDocumentsError();
-        void pushBiometricCapture();
+        void pushNextScreen();
         void showUpdatedDocumentsList(List<DocumentDto> documents);
         void showSignatureNeededError();
         void showCancelDialog();
         void showGetDocumentsError();
+        void setClient(ClientDto clientDto);
+        void setApplicantType(Integer idApplicantType);
     }
 }
