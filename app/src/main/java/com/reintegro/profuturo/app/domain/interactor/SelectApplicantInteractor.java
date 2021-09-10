@@ -223,7 +223,7 @@ public class SelectApplicantInteractor extends InteractorBase<SelectApplicantCon
 
                 @Override
                 public void onError(@Nonnull Throwable e) {
-                    presenter.onValidateIndicatorsError();
+                    presenter.onValCoexistenceNciError();
                 }
             });
     }
