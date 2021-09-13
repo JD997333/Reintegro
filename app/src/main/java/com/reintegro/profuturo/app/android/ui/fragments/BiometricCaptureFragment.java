@@ -39,7 +39,7 @@ public class BiometricCaptureFragment extends NavigationAdapter.Fragment impleme
         presenter.onCaptureClick();
     };
 
-    private final View.OnClickListener cancelClickListener = (view) ->{
+    private final View.OnClickListener cancelClickListener = (view) -> {
         presenter.onCancelCLick();
     };
 
@@ -75,10 +75,10 @@ public class BiometricCaptureFragment extends NavigationAdapter.Fragment impleme
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == BIOMETRIC_CAPTURE_CODE){
-            if (Activity.RESULT_OK == resultCode){
+        if (requestCode == BIOMETRIC_CAPTURE_CODE) {
+            if (Activity.RESULT_OK == resultCode) {
                 presenter.onBiometricEngineResult();
-            }else {
+            } else {
                 SnackBar.show(getView(), getString(R.string.biometric_engine_failed));
             }
         }
@@ -142,12 +142,24 @@ public class BiometricCaptureFragment extends NavigationAdapter.Fragment impleme
         simpleAlertDialog.setCancelable(false);
         simpleAlertDialog.setTitle(getString(R.string.cancel_message_title));
         simpleAlertDialog.setMessage(getString(R.string.cancel_message_ask));
-        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1),(view) -> {
+        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1), (view) -> {
             simpleAlertDialog.dismiss();
-            navigationDelegate.popToSearchClient();
+            presenter.onCloseBinnacle();
         });
         simpleAlertDialog.setCloseButton((view) -> simpleAlertDialog.dismiss());
         simpleAlertDialog.setNegativeButton(getString(R.string.cancel_1), (view) -> simpleAlertDialog.dismiss());
         simpleAlertDialog.show(getFragmentManager(), null);
+    }
+
+    @Override
+    public void pushSearchClientScreen() {
+
+        navigationDelegate.popToSearchClient();
+
+    }
+
+    @Override
+    public void showBinnacleError(){
+        SnackBar.show(getView(), getString(R.string.binnacle_error_message));
     }
 }

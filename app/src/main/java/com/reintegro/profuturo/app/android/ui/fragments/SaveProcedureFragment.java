@@ -37,15 +37,15 @@ public class SaveProcedureFragment extends NavigationAdapter.Fragment implements
     private String cellPhone;
     private String email;
 
-    private View.OnClickListener cancelOnClickListener = (view) ->{
+    private View.OnClickListener cancelOnClickListener = (view) -> {
         presenter.onClickCancel();
     };
 
-    private View.OnClickListener saveProcedureOnClickListener = (v) ->{
+    private View.OnClickListener saveProcedureOnClickListener = (v) -> {
         presenter.onClickSaveProcedure();
     };
 
-    private View.OnClickListener modifyNotificationOnClickListener = (view) ->{
+    private View.OnClickListener modifyNotificationOnClickListener = (view) -> {
         presenter.onClickModifyNotification();
     };
 
@@ -195,13 +195,19 @@ public class SaveProcedureFragment extends NavigationAdapter.Fragment implements
         simpleAlertDialog.setCancelable(false);
         simpleAlertDialog.setTitle(getString(R.string.cancel_message_title));
         simpleAlertDialog.setMessage(getString(R.string.cancel_message_ask));
-        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1),(view) -> {
+        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1), (view) -> {
             simpleAlertDialog.dismiss();
-            navigationDelegate.popToSearchClient();
+            presenter.oncloseCancelBinnacle();
+
         });
         simpleAlertDialog.setCloseButton((view) -> simpleAlertDialog.dismiss());
         simpleAlertDialog.setNegativeButton(getString(R.string.cancel_1), (view) -> simpleAlertDialog.dismiss());
         simpleAlertDialog.show(getFragmentManager(), null);
+    }
+
+    @Override
+    public void pushSearchClientScreen() {
+        navigationDelegate.popToSearchClient();
     }
 
     @Override
@@ -210,7 +216,7 @@ public class SaveProcedureFragment extends NavigationAdapter.Fragment implements
         simpleAlertDialog.setCancelable(false);
         simpleAlertDialog.setTitle(getString(R.string.save_procedure_title));
         simpleAlertDialog.setMessage(getString(R.string.confirm_save_procedure));
-        simpleAlertDialog.setPositiveButton(getString(R.string.yes),(view) -> {
+        simpleAlertDialog.setPositiveButton(getString(R.string.yes), (view) -> {
             simpleAlertDialog.dismiss();
             presenter.onClickConfirmSaveProcedure();
         });
@@ -260,7 +266,7 @@ public class SaveProcedureFragment extends NavigationAdapter.Fragment implements
         simpleAlertDialog.setCancelable(false);
         simpleAlertDialog.setTitle(getString(R.string.no_coexistence_title));
         simpleAlertDialog.setMessage(getString(R.string.no_coexistence_message) + " " + msg);
-        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1),(view) -> {
+        simpleAlertDialog.setPositiveButton(getString(R.string.accept_1), (view) -> {
             simpleAlertDialog.dismiss();
             viewDataBinding.finishProcedureButton.setEnabled(false);
         });
@@ -278,4 +284,8 @@ public class SaveProcedureFragment extends NavigationAdapter.Fragment implements
         simpleAlertDialog.show(getFragmentManager(), null);
     }
 
+    @Override
+    public void showBinnacleError(){
+        SnackBar.show(getView(), getString(R.string.binnacle_error_message));
+    }
 }

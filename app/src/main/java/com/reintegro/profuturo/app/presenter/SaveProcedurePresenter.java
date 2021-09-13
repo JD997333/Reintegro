@@ -76,11 +76,11 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
 
     @Override
     public void onClickConfirmSaveProcedure() {
-        if (state.getNotificationChannel().getSelectedNotificationChannel() == Constants.NOTIFICATION_CHANNEL_UNSELECTED){
+        if (state.getNotificationChannel().getSelectedNotificationChannel() == Constants.NOTIFICATION_CHANNEL_UNSELECTED) {
             view.showUnselectedNotificationError();
-        }else {
+        } else {
             view.showLoading();
-            switch (state.getCurrentStep()){
+            switch (state.getCurrentStep()) {
                 case SaveProcedureState.STEP_MARK_NCI_COEXISTENCE:
                     interactor.markNciCoexistence();
                     break;
@@ -105,14 +105,14 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
 
     @Override
     public void onMarkNciCoexistenceSuccess(CoexistenceResult result) {
-        if (result.isCoexistenceSuccess()){
+        if (result.isCoexistenceSuccess()) {
             state.setCurrentStep(SaveProcedureState.STEP_SEND_EMAIL);
-            if (state.getNotificationChannel().getSelectedNotificationChannel() != Constants.NOTIFICATION_CHANNEL_NO_NOTIFY){
+            if (state.getNotificationChannel().getSelectedNotificationChannel() != Constants.NOTIFICATION_CHANNEL_NO_NOTIFY) {
                 interactor.sendEmail();
-            }else {
+            } else {
                 onSendEmailSuccess();
             }
-        }else {
+        } else {
             view.showNoCoexistenceDialog(result.getCoexistenceMessage());
             view.dismissLoading();
         }
@@ -183,6 +183,22 @@ public class SaveProcedurePresenter extends PresenterBase<SaveProcedureContract.
         view.showSaveProcedureError();
         view.dismissLoading();
     }
+
+    @Override
+    public void onCancelCloseBinnacleSuccess() {
+        view.pushSearchClientScreen();
+    }
+
+    @Override
+    public void onCancelCloseBinnacleError() {
+        view.showBinnacleError();
+    }
+
+    @Override
+    public void oncloseCancelBinnacle() {
+        interactor.closeCancelBinnacle();
+    }
+
 
     @Override
     public void onValidateCellPhoneSuccess() {

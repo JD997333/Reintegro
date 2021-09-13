@@ -18,6 +18,7 @@ public interface SaveProcedureContract {
         void uploadImagesFilenet();
         void updateProcedure();
         void closeBinnacle();
+        void closeCancelBinnacle();
         void validateCellPhone(String cellPhone);
         void validateEmail(String email);
     }
@@ -43,6 +44,9 @@ public interface SaveProcedureContract {
         void onUpdateProcedureError();
         void onCloseBinnacleSuccess();
         void onCloseBinnacleError();
+        void onCancelCloseBinnacleSuccess();
+        void onCancelCloseBinnacleError();
+        void oncloseCancelBinnacle();
         void onValidateCellPhoneSuccess();
         void onValidateCellPhoneError();
         void onValidateEmailSuccess();
@@ -70,8 +74,10 @@ public interface SaveProcedureContract {
         void setSmsRadioButtonCheck(boolean checked);
         void showCellPhoneError();
         void showEmailError();
+        void pushSearchClientScreen();
         void showSaveProcedureSuccess();
         void showNoCoexistenceDialog(String msg);
         void showSaveProcedureError();
+        void showBinnacleError();
     }
 }

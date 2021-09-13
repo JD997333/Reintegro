@@ -406,11 +406,24 @@ public class DocumentsCaptureFragment extends NavigationAdapter.Fragment impleme
         simpleAlertDialog.setTitle(getString(R.string.cancel_message_title));
         simpleAlertDialog.setMessage(getString(R.string.cancel_message_ask));
         simpleAlertDialog.setPositiveButton(getString(R.string.accept_1),(view) -> {
+
             simpleAlertDialog.dismiss();
-            navigationDelegate.popToSearchClient();
+            presenter.onCloseBinnacle();
         });
         simpleAlertDialog.setCloseButton((view) -> simpleAlertDialog.dismiss());
         simpleAlertDialog.setNegativeButton(getString(R.string.cancel_1), (view) -> simpleAlertDialog.dismiss());
         simpleAlertDialog.show(getFragmentManager(), null);
+    }
+
+    @Override
+    public void pushSearchClientScreen() {
+
+        navigationDelegate.popToSearchClient();
+
+    }
+
+    @Override
+    public void showBinnacleError(){
+        SnackBar.show(getView(), getString(R.string.binnacle_error_message));
     }
 }

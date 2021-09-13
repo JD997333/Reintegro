@@ -36,6 +36,21 @@ public class DocumentsCapturePresenter
     }
 
     @Override
+    public void onCloseBinnacle() {
+        interactor.closeBinnacle();
+    }
+
+    @Override
+    public void onCloseBinnacleSuccess() {
+        view.pushSearchClientScreen();
+    }
+
+    @Override
+    public void onCloseBinnacleError() {
+        view.showBinnacleError();
+    }
+
+    @Override
     public void onGetDocumentsSuccess(List<DocumentDto> documents) {
         state.setDocuments(documents);
 
