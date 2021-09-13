@@ -52,26 +52,28 @@ public class SelectApplicantPresenter
 
         if (clientDto.getBiometricIndicatorValue() == Constants.BIOMETRIC_INDICATOR_STATUS_EXIST){
             view.showBiometricIndicatorTrue();
+            state.setBiometricIndicatorEnabled(true);
         }else {
             view.showBiometricIndicatorFalse();
+            state.setBiometricIndicatorEnabled(false);
         }
 
         if (clientDto.getIdentificationIndicatorValue() == Constants.IDENTIFICATION_INDICATOR_STATUS_ACTIVE){
             view.showIdentificationIndicatorTrue();
+            state.setExpedientIndicatorEnabled(true);
         }else {
             view.showIdentificationIndicatorFalse();
+            state.setExpedientIndicatorEnabled(false);
         }
 
-        if (clientDto.getBiometricIndicatorValue() == Constants.BIOMETRIC_INDICATOR_STATUS_EXIST
-            && clientDto.getIdentificationIndicatorValue() == Constants.IDENTIFICATION_INDICATOR_STATUS_ACTIVE
-        ){
+        if (clientDto.getIdentificationIndicatorValue() == Constants.IDENTIFICATION_INDICATOR_STATUS_ACTIVE){
             view.setClientData(clientDto);
             view.setTitleMsgSuccess();
             interactor.getApplicantTypes();
         }else {
+            view.setClientData(clientDto);
             view.setTitleMsgError();
-            view.dismissLoading();
-            view.showNeedExpedientDialog(clientDto);
+            interactor.getApplicantTypes();
         }
     }
 
@@ -86,19 +88,20 @@ public class SelectApplicantPresenter
         applicantTypesN.add(new ApplicantType("",""));
         applicantTypesN.addAll(applicantTypes);
 
-        view.dismissLoading();
         view.showApplicantTypes(applicantTypes);
+        view.dismissLoading();
     }
 
     @Override
     public void onGetApplicantTypesError() {
-
+        view.showGetApplicantTypesError();
+        view.dismissLoading();
     }
 
     @Override
-    public void onNeedExpedientFromProcesar(ClientDto clientDto) {
+    public void onRetryGetApplicants() {
         view.showLoading();
-        interactor.getClientDataProcesar(clientDto);
+        interactor.getApplicantTypes();
     }
 
     @Override
@@ -114,7 +117,6 @@ public class SelectApplicantPresenter
         }
     }
 
-
     @Override
     public void onValCoexistenceRetry() {
         view.showLoading();
@@ -123,34 +125,48 @@ public class SelectApplicantPresenter
 
     @Override
     public void onConfirmButtonClicked(String applicantType, String applicantCurp, String authFolio) {
-        view.showLoading();
         if (applicantType != null && !applicantType.isEmpty()){
             interactor.updateProcedureData(applicantType, applicantCurp, authFolio);
         }else {
-            view.dismissLoading();
             view.showSelectApplicantNecesaryMsg();
         }
     }
 
     @Override
     public void onUpdateProcedureSuccess(ProcedureDto procedureDto) {
-        interactor.validateCurp(procedureDto);
+        if (procedureDto.getIdApplicantType().equals(Constants.ID_OWNER_APPLICANT)){
+            if (state.isBiometricIndicatorEnabled() && state.isExpedientIndicatorEnabled()){
+                view.showLoading();
+                interactor.validateCurp();
+            }else {
+                view.setTitleMsgError();
+                state.setIsOwnerApplicant(true);
+                view.showNeedExpedientDialog();
+            }
+        }else {
+            if (state.isExpedientIndicatorEnabled()){
+                view.showLoading();
+                interactor.validateCurp();
+            }else {
+                view.setTitleMsgError();
+                state.setIsOwnerApplicant(false);
+                view.showNeedExpedientDialog();
+            }
+        }
     }
 
     @Override
     public void onValidateCurpSuccess(ProcedureDto procedureDto) {
         if (!procedureDto.getIdApplicantType().equals(Constants.ID_OWNER_APPLICANT)){
             if (procedureDto.getAuthFolio() != null && !procedureDto.getAuthFolio().isEmpty()){
-                view.dismissLoading();
                 view.showConfirmDialog();
             }else {
                 view.showAuthenticationDialog();
-                view.dismissLoading();
             }
         }else {
-            view.dismissLoading();
             view.showConfirmDialog();
         }
+        view.dismissLoading();
     }
 
     @Override
@@ -160,38 +176,61 @@ public class SelectApplicantPresenter
     }
 
     @Override
+    public void onNeedExpedientFromProcesar() {
+        view.showLoading();
+        interactor.getClientDataProcesar();
+    }
+
+    @Override
     public void onGetClientDataProcesarSuccess(ClientDto clientDto) {
         if (clientDto.getBiometricIndicatorValue() == Constants.BIOMETRIC_INDICATOR_STATUS_EXIST){
             view.showBiometricIndicatorTrue();
+            state.setBiometricIndicatorEnabled(true);
         }else {
             view.showBiometricIndicatorFalse();
+            state.setBiometricIndicatorEnabled(false);
         }
 
         if (clientDto.getIdentificationIndicatorValue() == Constants.IDENTIFICATION_INDICATOR_STATUS_ACTIVE){
             view.showIdentificationIndicatorTrue();
+            state.setExpedientIndicatorEnabled(true);
         }else {
             view.showIdentificationIndicatorFalse();
+            state.setExpedientIndicatorEnabled(false);
         }
 
-        if (clientDto.getBiometricIndicatorValue() == Constants.BIOMETRIC_INDICATOR_STATUS_EXIST
-            && clientDto.getIdentificationIndicatorValue() == Constants.IDENTIFICATION_INDICATOR_STATUS_ACTIVE
-        ){
-            view.setClientData(clientDto);
-            view.setTitleMsgSuccess();
-            interactor.getApplicantTypes();
+        if (state.isOwnerApplicant()){
+            if (clientDto.getBiometricIndicatorValue() == Constants.BIOMETRIC_INDICATOR_STATUS_EXIST
+                && clientDto.getIdentificationIndicatorValue() == Constants.IDENTIFICATION_INDICATOR_STATUS_ACTIVE
+            ){
+                view.setClientData(clientDto);
+                view.setTitleMsgSuccess();
+                interactor.validateCurp();
+            }else {
+                view.setTitleMsgError();
+                view.setConfirmButtonDisabled();
+                view.showNoExpedientFoundMessage();
+                view.dismissLoading();
+            }
         }else {
-            view.setTitleMsgError();
-            view.dismissLoading();
-            view.setConfirmButtonDisabled();
-            view.showNoExpedientFoundMessage();
+            if (clientDto.getIdentificationIndicatorValue() == Constants.IDENTIFICATION_INDICATOR_STATUS_ACTIVE){
+                view.setClientData(clientDto);
+                view.setTitleMsgSuccess();
+                interactor.validateCurp();
+            }else {
+                view.setTitleMsgError();
+                view.setConfirmButtonDisabled();
+                view.showNoExpedientFoundMessage();
+                view.dismissLoading();
+            }
         }
     }
 
     @Override
     public void onGetClientDataProcesarError() {
-        view.dismissLoading();
         view.setConfirmButtonDisabled();
         view.showNoExpedientFoundMessage();
+        view.dismissLoading();
     }
 
     @Override
@@ -232,5 +271,3 @@ public class SelectApplicantPresenter
         view.dismissLoading();
     }
 }
-
-//Aqui se ejecutan las funciones

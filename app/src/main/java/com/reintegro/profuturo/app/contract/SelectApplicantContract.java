@@ -13,10 +13,10 @@ public interface SelectApplicantContract {
         void updateProcedureData(String applicantType, String applicantCurp, String authFolio);
         void getClientDataDB();
         void getApplicantTypes();
-        void getClientDataProcesar(ClientDto clientDto);
+        void getClientDataProcesar();
         void saveFirstProcedureData();
         void valCoexistenceNci();
-        void validateCurp(ProcedureDto procedureDto);
+        void validateCurp();
         void validateAuthFolio(String folio);
         void updateAuthFolioDB(String authFolio);
     }
@@ -28,7 +28,7 @@ public interface SelectApplicantContract {
         void onValidateIndicatorsError();
         void onGetApplicantTypesSuccess(List<ApplicantType> applicantTypes);
         void onGetApplicantTypesError();
-        void onNeedExpedientFromProcesar(ClientDto clientDto);
+        void onNeedExpedientFromProcesar();
         void onApplicantSelected(ApplicantType applicantType, ClientDto clientDto);
         void onSaveFirstProcedureData(ProcedureDto procedureDto);
         void onValCoexistenceNciSuccess(CoexistenceResult result);
@@ -43,10 +43,16 @@ public interface SelectApplicantContract {
         void onValidateAuthFolioError();
         void onConfirmAuthFolioDialog();
         void onUpdateAuthFolioDBSuccess();
+        void onRetryGetApplicants();
     }
 
     interface State extends ContractBase.State{
-
+        void setBiometricIndicatorEnabled(boolean enabled);
+        void setExpedientIndicatorEnabled(boolean enabled);
+        void setIsOwnerApplicant(boolean isOwnerApplicant);
+        boolean isBiometricIndicatorEnabled();
+        boolean isExpedientIndicatorEnabled();
+        boolean isOwnerApplicant();
     }
 
     interface View extends ContractBase.View{
@@ -57,7 +63,7 @@ public interface SelectApplicantContract {
         void showIdentificationIndicatorTrue();
         void showIdentificationIndicatorFalse();
         void showApplicantTypes(List<ApplicantType> applicantTypes);
-        void showNeedExpedientDialog(ClientDto clientDto);
+        void showNeedExpedientDialog();
         void setClientData(ClientDto clientDto);
         void showCurp(String curp);
         void showCurpTit(String curp);
@@ -75,6 +81,7 @@ public interface SelectApplicantContract {
         void showAuthFolioExpiredDialog();
         void showAuthFolioConfirmDialog();
         void showAuthFolioServiceErrorMsg();
+        void showGetApplicantTypesError();
     }
 }
 
