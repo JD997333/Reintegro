@@ -79,4 +79,19 @@ public class BiometricCapturePresenter extends PresenterBase<BiometricCaptureCon
         view.showSaveVoluntarySealError();
         view.dismissLoading();
     }
+
+    @Override
+    public void onCloseBinnacle() {
+        interactor.closeBinnacle();
+    }
+
+    @Override
+    public void onCloseBinnacleSuccess() {
+        view.pushSearchClientScreen();
+    }
+
+    @Override
+    public void onCloseBinnacleError() {
+        view.showBinnacleError();
+    }
 }

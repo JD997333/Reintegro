@@ -13,6 +13,7 @@ public interface BiometricCaptureContract {
         void getRecommendedFingers();
         void getClientData();
         void getAgentData();
+        void closeBinnacle();
         void readFingerPrints();
         void getVoluntarySeal(List<FingerPrintDto> fingerPrintDtoList);
         void saveVoluntarySeal(ProcedureDto procedureDto);
@@ -31,6 +32,9 @@ public interface BiometricCaptureContract {
         void onGetVoluntarySealError();
         void onSaveVoluntarySealSuccess();
         void onSaveVoluntarySealError();
+        void onCloseBinnacle();
+        void onCloseBinnacleSuccess();
+        void onCloseBinnacleError();
     }
 
     interface State extends ContractBase.State{
@@ -46,6 +50,8 @@ public interface BiometricCaptureContract {
         void showSaveVoluntarySealError();
         void pushSaveProcedure();
         void showCancelDialog();
+        void pushSearchClientScreen();
         void showReadFingerPrintsError();
+        void showBinnacleError();
     }
 }

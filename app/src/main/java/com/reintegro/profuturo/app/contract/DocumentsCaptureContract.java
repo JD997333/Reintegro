@@ -17,6 +17,7 @@ public interface DocumentsCaptureContract {
         void validateRequiredDocuments(List<DocumentDto> documentDtos);
         void saveDocuments(List<DocumentDto> documentDtos);
         void getProcedureInfo();
+        void closeBinnacle();
     }
 
     interface Presenter extends ContractBase.Presenter<Interactor, State, View>{
@@ -41,6 +42,10 @@ public interface DocumentsCaptureContract {
         void onBuildLetterDocumentError();
         void onIdTypeSelected(String idType);
         void onGetProcedureInfoSuccess(ProcedureDto procedureDto);
+        void onCloseBinnacle();
+        void onCloseBinnacleSuccess();
+        void onCloseBinnacleError();
+
     }
 
     interface State extends ContractBase.State{
@@ -69,11 +74,13 @@ public interface DocumentsCaptureContract {
         void showBuildDocumentError();
         void showRequiredDocumentsError();
         void pushNextScreen();
+        void pushSearchClientScreen();
         void showUpdatedDocumentsList(List<DocumentDto> documents);
         void showSignatureNeededError();
         void showCancelDialog();
         void showGetDocumentsError();
         void setClient(ClientDto clientDto);
         void setApplicantType(Integer idApplicantType);
+        void showBinnacleError();
     }
 }

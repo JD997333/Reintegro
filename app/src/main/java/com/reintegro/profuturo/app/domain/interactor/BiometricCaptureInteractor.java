@@ -269,4 +269,46 @@ public class BiometricCaptureInteractor extends InteractorBase<BiometricCaptureC
                 }
             });
     }
+    @Override
+    public void closeBinnacle() {
+        Completable
+            .create((CompletableEmitter emitter) ->{
+                ProcedureRepository procedureRepository = repositoryFactory.createProcedureRepository();
+                AgentRepository agentRepository = repositoryFactory.createAgentRepository();
+                ProcedureEntity procedureEntity = procedureRepository.getFirst();
+                procedureEntity.setIdSubStage(Constants.BINNACLE_STATUS_CANCELED);
+
+                Provider<Boolean> insertBinnacleProvider;
+                insertBinnacleProvider = dataProviderFactory.createInsertBinnacleProvider(agentRepository.getFirst(), procedureEntity);
+                insertBinnacleProvider.subscribe(new Provider.Subscriber<Boolean>() {
+                    @Override
+                    public void onError(Throwable exception) {
+                        emitter.onError(exception);
+                    }
+
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        emitter.onComplete();
+                    }
+                });
+            })
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.computation())
+            .subscribe(new CompletableObserver() {
+                @Override
+                public void onSubscribe(@NonNull Disposable d) {
+
+                }
+
+                @Override
+                public void onComplete() {
+                    presenter.onCloseBinnacleSuccess();
+                }
+
+                @Override
+                public void onError(@NonNull Throwable e) {
+                    presenter.onCloseBinnacleError();
+                }
+            });
+    }
 }

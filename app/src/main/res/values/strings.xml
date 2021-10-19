@@ -227,6 +227,7 @@
     <string name="select_identification_text">Selecciona tipo identificación oficial:</string>
     <string name="start_biometric">Iniciar captura de huella</string>
     <string name="end_procedure">Terminar solicitud</string>
+    <string name="binnacle_error_message">Ocurrió un error en el servicio bitácora procesos</string>
     <string name="get_applicant_error">Ocurrió un problema en el servicio obtenerTiposSolicitante</string>
 
 </resources>
