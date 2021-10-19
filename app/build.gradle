@@ -11,8 +11,8 @@ android {
         applicationId "com.reintegro.profuturo.app"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 9
-        versionName "0.0.9"
+        versionCode 10
+        versionName "0.0.10"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -48,7 +48,7 @@ android {
             initWith(debug)
             buildConfigField("String", "PORT_1", '":3021"')
             buildConfigField("String", "PORT_2", '":2092"')
-            buildConfigField("String", "PORT_3", '":2086"')
+            buildConfigField("String", "PORT_3", '":4022"')
             buildConfigField("String", "PORT_4", '":2143"')
             versionNameSuffix " - QA ProFuturo"
         }
