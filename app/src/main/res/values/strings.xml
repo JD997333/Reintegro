@@ -193,8 +193,6 @@
     <string name="confirm_save_procedure">¿Está seguro de guardar este trámite?</string>
     <string name="yes">SI</string>
     <string name="not">NO</string>
-
-    <!--    IRR Changes     -->
     <string name="select_applicant_header">Envio de consulta de retiros por desempleo</string>
     <string name="select_applicant_title">Posible capturar trámites, se cumplen las siguientes validaciones</string>
     <string name="button_confirm">Confirmar</string>
@@ -230,6 +228,7 @@
     <string name="start_biometric">Iniciar captura de huella</string>
     <string name="end_procedure">Terminar solicitud</string>
     <string name="binnacle_error_message">Ocurrió un error en el servicio bitácora procesos</string>
+    <string name="get_applicant_error">Ocurrió un problema en el servicio obtenerTiposSolicitante</string>
 
 </resources>
 <!--

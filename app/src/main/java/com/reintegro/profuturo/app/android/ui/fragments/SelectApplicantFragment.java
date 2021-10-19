@@ -26,6 +26,7 @@ import com.reintegro.profuturo.app.database.factory.RealmRepositoryFactory;
 import com.reintegro.profuturo.app.databinding.FragmentSelectApplicantBinding;
 import com.reintegro.profuturo.app.domain.dto.ClientDto;
 import com.reintegro.profuturo.app.domain.interactor.SelectApplicantInteractor;
+import com.reintegro.profuturo.app.domain.state.SelectApplicantState;
 import com.reintegro.profuturo.app.presenter.SelectApplicantPresenter;
 import com.reintegro.profuturo.app.ui.main.NavigationAdapter;
 import com.reintegro.profuturo.app.util.Constants;
@@ -66,6 +67,9 @@ public class SelectApplicantFragment extends NavigationAdapter.Fragment implemen
     private AdapterView.OnItemSelectedListener applicantsSelectedListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            if (applicantPosition != position){
+                viewDataBinding.confirmButton.setEnabled(true);
+            }
             applicantPosition = position;
             authFolio = "";
             if (position > 0){
@@ -112,6 +116,7 @@ public class SelectApplicantFragment extends NavigationAdapter.Fragment implemen
         interactor = new SelectApplicantInteractor(new RealmRepositoryFactory(), new RetrofitDataProviderFactory(getContext()));
         presenter = new SelectApplicantPresenter();
         presenter.setInteractor(interactor);
+        presenter.setState(new SelectApplicantState());
         presenter.setView(this);
         interactor.setPresenter(presenter);
 
@@ -194,14 +199,14 @@ public class SelectApplicantFragment extends NavigationAdapter.Fragment implemen
     }
 
     @Override
-    public void showNeedExpedientDialog(ClientDto clientDto) {
+    public void showNeedExpedientDialog() {
         SimpleAlertDialog simpleAlertDialog = new SimpleAlertDialog();
         simpleAlertDialog.setCancelable(false);
         simpleAlertDialog.setTitle(getString(R.string.request_procesar_title));
         simpleAlertDialog.setMessage(getString(R.string.request_procesar_message));
         simpleAlertDialog.setPositiveButton(getString(R.string.accept_1),(view) -> {
             simpleAlertDialog.dismiss();
-            presenter.onNeedExpedientFromProcesar(clientDto);
+            presenter.onNeedExpedientFromProcesar();
         });
         simpleAlertDialog.setCloseButton((view) -> simpleAlertDialog.dismiss());
         simpleAlertDialog.setNegativeButton(getString(R.string.cancel_1), (view) -> simpleAlertDialog.dismiss());
@@ -344,5 +349,19 @@ public class SelectApplicantFragment extends NavigationAdapter.Fragment implemen
     @Override
     public void showAuthFolioServiceErrorMsg() {
         SnackBar.show(getView(), getString(R.string.auth_folio_service_error));
+    }
+
+    @Override
+    public void showGetApplicantTypesError() {
+        SimpleAlertDialog simpleAlertDialog = new SimpleAlertDialog();
+        simpleAlertDialog.setCancelable(false);
+        simpleAlertDialog.setTitle(getString(R.string.notice_1));
+        simpleAlertDialog.setMessage(getString(R.string.get_applicant_error));
+        simpleAlertDialog.setPositiveButton(getString(R.string.retry),(view) -> {
+            simpleAlertDialog.dismiss();
+            presenter.onRetryGetApplicants();
+        });
+        simpleAlertDialog.setCloseButton((view) -> simpleAlertDialog.dismiss());
+        simpleAlertDialog.show(getFragmentManager(), null);
     }
 }

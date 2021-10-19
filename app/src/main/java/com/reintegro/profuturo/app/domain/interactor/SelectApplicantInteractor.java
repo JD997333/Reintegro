@@ -123,11 +123,14 @@ public class SelectApplicantInteractor extends InteractorBase<SelectApplicantCon
     }
 
     @Override
-    public void getClientDataProcesar(ClientDto clientDto) {
+    public void getClientDataProcesar() {
         Single
-            .create((SingleEmitter<HashMap<String, String>> emitter) -> {
+            .create((SingleEmitter<ClientEntity> emitter) -> {
+                ClientRepository clientRepository = repositoryFactory.createClientRepository();
+                ClientEntity clientEntity = clientRepository.getSelected();
+
                 Provider<HashMap<String, String>> getClientProcesarProvider;
-                getClientProcesarProvider = dataProviderFactory.getClientDataOP360(ClientConverter.convertFromDto(clientDto));
+                getClientProcesarProvider = dataProviderFactory.getClientDataOP360(clientEntity);
                 getClientProcesarProvider.subscribe(new Provider.Subscriber<HashMap<String, String>>() {
                     @Override
                     public void onError(Throwable exception) {
@@ -136,23 +139,23 @@ public class SelectApplicantInteractor extends InteractorBase<SelectApplicantCon
 
                     @Override
                     public void onSuccess(HashMap<String, String> result) {
-                        emitter.onSuccess(result);
+                        clientEntity.setBiometricIndicatorValue(Integer.parseInt(result.get(Constants.KEY_BIOMETRIC_STATUS)));
+                        clientEntity.setIdentificationIndicatorValue(Integer.parseInt(result.get(Constants.KEY_IDENTIFICATION_STATUS)));
+                        emitter.onSuccess(clientEntity);
                     }
                 });
             })
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.computation())
-            .subscribe(new SingleObserver<HashMap<String, String>>() {
+            .subscribe(new SingleObserver<ClientEntity>() {
                 @Override
                 public void onSubscribe(@NonNull Disposable d) {
 
                 }
 
                 @Override
-                public void onSuccess(@NonNull HashMap<String, String> result) {
-                    clientDto.setBiometricIndicatorValue(Integer.parseInt(result.get(Constants.KEY_BIOMETRIC_STATUS)));
-                    clientDto.setIdentificationIndicatorValue(Integer.parseInt(result.get(Constants.KEY_IDENTIFICATION_STATUS)));
-                    presenter.onGetClientDataProcesarSuccess(clientDto);
+                public void onSuccess(@NonNull ClientEntity clientEntity) {
+                    presenter.onGetClientDataProcesarSuccess(ClientConverter.convertFromEntity(clientEntity));
                 }
 
                 @Override
@@ -229,8 +232,11 @@ public class SelectApplicantInteractor extends InteractorBase<SelectApplicantCon
     }
 
     @Override
-    public void validateCurp(ProcedureDto procedureDto) {
-        String curp = procedureDto.getApplicantCurp();
+    public void validateCurp() {
+        ProcedureRepository procedureRepository = repositoryFactory.createProcedureRepository();
+        ProcedureEntity procedureEntity = procedureRepository.getFirst();
+
+        String curp = procedureEntity.getApplicantCurp();
 
         ClientRepository clientRepository = repositoryFactory.createClientRepository();
         ClientEntity clientEntity = clientRepository.getSelected();
@@ -238,11 +244,11 @@ public class SelectApplicantInteractor extends InteractorBase<SelectApplicantCon
         if (curp != null && !curp.isEmpty() && curp.length() == Constants.LENGTH_CURP){
             Pattern pattern = Pattern.compile(Constants.REGULAR_EXPRESSION_VALIDATE_CURP);
             if (pattern.matcher(curp).matches()){
-                if (procedureDto.getIdApplicantType().equals(Constants.ID_OWNER_APPLICANT)){
-                    presenter.onValidateCurpSuccess(procedureDto);
+                if (procedureEntity.getIdApplicantType().equals(Constants.ID_OWNER_APPLICANT)){
+                    presenter.onValidateCurpSuccess(ProcedureConverter.convertFromEntity(procedureEntity));
                 }else {
                     if (!curp.equals(clientEntity.getCurp())){
-                        presenter.onValidateCurpSuccess(procedureDto);
+                        presenter.onValidateCurpSuccess(ProcedureConverter.convertFromEntity(procedureEntity));
                     }else {
                         presenter.onValidateCurpError();
                     }
