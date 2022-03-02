@@ -23,10 +23,10 @@ public class Constants {
     public static final String SUB_PROCESS_NAME = "REINTEGRO DE SEMANAS";
     public static final String PROCESS_NAME = "RECAUDACION";
 
-    public static final String EXTRA_IMAGE_ENGINE_CLASS_NAME = "mx.com.profuturo.motor.CameraUI";
+    public static final String EXTRA_IMAGE_ENGINE_CLASS_NAME = "com.mx.profuturo.android.motor.imagenes.CameraUI";
     public static final String EXTRA_IMAGE_ENGINE_IS_CAMERA = "esCamara";
     public static final String EXTRA_IMAGE_ENGINE_NAME = "nombreDocumento";
-    public static final String EXTRA_IMAGE_ENGINE_PACKAGE_NAME = "mx.com.profuturo.motor";
+    public static final String EXTRA_IMAGE_ENGINE_PACKAGE_NAME = "com.mx.profuturo.android.motor.imagenes";
     public static final String EXTRA_IMAGE_ENGINE_PATH = "rutaDestino";
     public static final String EXTRA_IMAGE_ENGINE_RESULT = "rutaImagen";
 

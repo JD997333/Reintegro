@@ -9,7 +9,7 @@ public class UpdatePaperworkResponseValidator extends ResponseValidator<UpdatePa
 
     @Override
     public boolean validate(UpdatePaperworkResponse response) {
-        if (response == null) {
+         if (response == null) {
             return false;
         }
         if (response.getActualizarTramiteResponse() == null){
