@@ -99,6 +99,7 @@ public class BiometricCaptureFragment extends NavigationAdapter.Fragment impleme
         Intent biometricIntent = new Intent();
 
         biometricIntent.setComponent(new ComponentName(Constants.EXTRA_BIOMETRIC_PACKAGE_NAME, Constants.EXTRA_BIOMETRIC_CLASS_NAME));
+
         biometricIntent.putExtra(Constants.EXTRA_BIOMETRIC_AGENT_ID, agent.getAgentCode());
         biometricIntent.putExtra(Constants.EXTRA_BIOMETRIC_PACKAGE_TAG, BuildConfig.APPLICATION_ID);
         biometricIntent.putExtra(Constants.EXTRA_BIOMETRIC_OPERATION_TAG, Constants.EXTRA_BIOMETRIC_OP_FOUR_FINGERS);
